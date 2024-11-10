@@ -2,3 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+    overflow-x: hidden;
+}
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%; /* Full width */
+    height: 450px; 
+    
+  }
+  
+  
+  .carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%; /* Ensure the carousel fills the container */
+   
+  }
+  
+  .carousel-card {
+    min-width: 23%; /* Each card takes up 25% of the carousel's width */
+    flex-shrink: 0; /* Prevent cards from shrinking */
+    position: relative; /* Position for absolute children */
+    /* height: 500px;  */
+    height: 450px;
+    
+  }
+  
+  .carousel-card h2 {
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Add shadow for better visibility */
+  }
+  
+  .carousel-card img {
+    width: 100%; /* Ensure images cover the card */
+    height: 100%; /* Fill the height */
+    object-fit: cover; /* Ensure images are centered and cropped appropriately */
+  }
+  
+  /* Optional: Add some hover effects */
+  .carousel-card:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    transition: transform 0.3s ease; /* Smooth transition for the scale effect */
+  }

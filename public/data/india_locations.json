@@ -1,0 +1,1106 @@
+[
+  {
+    "state": "Maharashtra",
+    "cities": [
+      "Mumbai",
+      "Pune",
+      "Nashik",
+      "Aurangabad",
+      "Nagpur"
+    ],
+    "touristSpots": [
+      {
+        "Mumbai": [
+          "Gateway of India",
+          "Elephanta Caves",
+          "Marine Drive"
+        ]
+      },
+      {
+        "Pune": [
+          "Shaniwar Wada",
+          "Aga Khan Palace",
+          "Sinhagad Fort"
+        ]
+      },
+      {
+        "Nashik": [
+          "Sula Vineyards",
+          "Trimbakeshwar Temple",
+          "Pandavleni Caves"
+        ]
+      },
+      {
+        "Aurangabad": [
+          "Ajanta Caves",
+          "Ellora Caves",
+          "Bibi Ka Maqbara"
+        ]
+      },
+      {
+        "Nagpur": [
+          "Deekshabhoomi",
+          "Futala Lake",
+          "Ambazari Lake"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Rajasthan",
+    "cities": [
+      "Jaipur",
+      "Udaipur",
+      "Jodhpur",
+      "Jaisalmer",
+      "Pushkar"
+    ],
+    "touristSpots": [
+      {
+        "Jaipur": [
+          "Hawa Mahal",
+          "City Palace",
+          "Amer Fort",
+          "Jantar Mantar"
+        ]
+      },
+      {
+        "Udaipur": [
+          "City Palace",
+          "Lake Pichola",
+          "Jagdish Temple"
+        ]
+      },
+      {
+        "Jodhpur": [
+          "Mehrangarh Fort",
+          "Umaid Bhawan Palace",
+          "Mandore Gardens"
+        ]
+      },
+      {
+        "Jaisalmer": [
+          "Jaisalmer Fort",
+          "Sam Sand Dunes",
+          "Patwon Ki Haveli"
+        ]
+      },
+      {
+        "Pushkar": [
+          "Pushkar Lake",
+          "Brahma Temple",
+          "Savitri Temple"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Delhi",
+    "cities": [
+      "New Delhi"
+    ],
+    "touristSpots": [
+      {
+        "New Delhi": [
+          "Red Fort",
+          "India Gate",
+          "Qutub Minar",
+          "Lotus Temple",
+          "Akshardham"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Uttar Pradesh",
+    "cities": [
+      "Agra",
+      "Varanasi",
+      "Lucknow",
+      "Mathura",
+      "Kanpur"
+    ],
+    "touristSpots": [
+      {
+        "Agra": [
+          "Taj Mahal",
+          "Agra Fort",
+          "Fatehpur Sikri"
+        ]
+      },
+      {
+        "Varanasi": [
+          "Kashi Vishwanath Temple",
+          "Dashashwamedh Ghat",
+          "Sarnath"
+        ]
+      },
+      {
+        "Lucknow": [
+          "Bara Imambara",
+          "Chota Imambara",
+          "Rumi Darwaza"
+        ]
+      },
+      {
+        "Mathura": [
+          "Krishna Janmasthan Temple",
+          "Govardhan Hill",
+          "Dwarkadhish Temple"
+        ]
+      },
+      {
+        "Kanpur": [
+          "Allen Forest Zoo",
+          "Green Park Stadium"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Tamil Nadu",
+    "cities": [
+      "Chennai",
+      "Madurai",
+      "Coimbatore",
+      "Kanyakumari",
+      "Ooty"
+    ],
+    "touristSpots": [
+      {
+        "Chennai": [
+          "Marina Beach",
+          "Fort St. George",
+          "Kapaleeshwarar Temple"
+        ]
+      },
+      {
+        "Madurai": [
+          "Meenakshi Temple",
+          "Thirumalai Nayakar Mahal",
+          "Alagar Koyil"
+        ]
+      },
+      {
+        "Coimbatore": [
+          "Marudamalai Temple",
+          "VOC Park",
+          "Gass Forest Museum"
+        ]
+      },
+      {
+        "Kanyakumari": [
+          "Vivekananda Rock Memorial",
+          "Thiruvalluvar Statue",
+          "Kanyakumari Beach"
+        ]
+      },
+      {
+        "Ooty": [
+          "Botanical Gardens",
+          "Ooty Lake",
+          "Doddabetta Peak"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Karnataka",
+    "cities": [
+      "Bengaluru",
+      "Mysore",
+      "Hampi",
+      "Mangalore",
+      "Coorg"
+    ],
+    "touristSpots": [
+      {
+        "Bengaluru": [
+          "Bangalore Palace",
+          "Lalbagh Botanical Garden",
+          "Cubbon Park"
+        ]
+      },
+      {
+        "Mysore": [
+          "Mysore Palace",
+          "Chamundi Hills",
+          "Brindavan Gardens"
+        ]
+      },
+      {
+        "Hampi": [
+          "Virupaksha Temple",
+          "Vijaya Vittala Temple",
+          "Lotus Mahal"
+        ]
+      },
+      {
+        "Mangalore": [
+          "Kadri Manjunath Temple",
+          "Panambur Beach",
+          "Tannirbhavi Beach"
+        ]
+      },
+      {
+        "Coorg": [
+          "Abbey Falls",
+          "Dubare Elephant Camp",
+          "Raja's Seat"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "West Bengal",
+    "cities": [
+      "Kolkata",
+      "Darjeeling",
+      "Siliguri",
+      "Sundarbans"
+    ],
+    "touristSpots": [
+      {
+        "Kolkata": [
+          "Victoria Memorial",
+          "Howrah Bridge",
+          "Dakshineswar Kali Temple"
+        ]
+      },
+      {
+        "Darjeeling": [
+          "Tiger Hill",
+          "Batasia Loop",
+          "Peace Pagoda"
+        ]
+      },
+      {
+        "Siliguri": [
+          "Mahananda Wildlife Sanctuary",
+          "Coronation Bridge",
+          "ISKCON Temple"
+        ]
+      },
+      {
+        "Sundarbans": [
+          "Sundarbans National Park"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Gujarat",
+    "cities": [
+      "Ahmedabad",
+      "Vadodara",
+      "Dwarka",
+      "Gir",
+      "Surat"
+    ],
+    "touristSpots": [
+      {
+        "Ahmedabad": [
+          "Sabarmati Ashram",
+          "Kankaria Lake",
+          "Adalaj Stepwell"
+        ]
+      },
+      {
+        "Vadodara": [
+          "Laxmi Vilas Palace",
+          "Sayaji Gardens",
+          "Champaner-Pavagadh Archaeological Park"
+        ]
+      },
+      {
+        "Dwarka": [
+          "Dwarkadhish Temple",
+          "Nageshwar Jyotirlinga",
+          "Bet Dwarka"
+        ]
+      },
+      {
+        "Gir": [
+          "Gir National Park"
+        ]
+      },
+      {
+        "Surat": [
+          "Dumas Beach",
+          "Dutch Garden",
+          "Sarthana Nature Park"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Kerala",
+    "cities": [
+      "Kochi",
+      "Munnar",
+      "Alleppey",
+      "Kumarakom",
+      "Thiruvananthapuram"
+    ],
+    "touristSpots": [
+      {
+        "Kochi": [
+          "Fort Kochi",
+          "Mattancherry Palace",
+          "Cherai Beach"
+        ]
+      },
+      {
+        "Munnar": [
+          "Tea Gardens",
+          "Eravikulam National Park",
+          "Anamudi Peak"
+        ]
+      },
+      {
+        "Alleppey": [
+          "Backwaters",
+          "Alleppey Beach",
+          "Krishnapuram Palace"
+        ]
+      },
+      {
+        "Kumarakom": [
+          "Vembanad Lake",
+          "Kumarakom Bird Sanctuary"
+        ]
+      },
+      {
+        "Thiruvananthapuram": [
+          "Padmanabhaswamy Temple",
+          "Kovalam Beach",
+          "Poovar Island"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Andhra Pradesh",
+    "cities": [
+      "Visakhapatnam",
+      "Tirupati",
+      "Vijayawada",
+      "Amaravati"
+    ],
+    "touristSpots": [
+      {
+        "Visakhapatnam": [
+          "Rishikonda Beach",
+          "Borra Caves",
+          "INS Kurusura Submarine Museum"
+        ]
+      },
+      {
+        "Tirupati": [
+          "Tirumala Venkateswara Temple",
+          "Sri Kapileswara Swamy Temple"
+        ]
+      },
+      {
+        "Vijayawada": [
+          "Kanaka Durga Temple",
+          "Prakasam Barrage",
+          "Bhavani Island"
+        ]
+      },
+      {
+        "Amaravati": [
+          "Amaravati Stupa",
+          "Dhyana Buddha Statue"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Assam",
+    "cities": [
+      "Guwahati",
+      "Tezpur",
+      "Jorhat"
+    ],
+    "touristSpots": [
+      {
+        "Guwahati": [
+          "Kamakhya Temple",
+          "Umananda Temple",
+          "Assam State Zoo"
+        ]
+      },
+      {
+        "Tezpur": [
+          "Agnigarh Hill",
+          "Mahabhairav Temple"
+        ]
+      },
+      {
+        "Jorhat": [
+          "Majuli Island",
+          "Tocklai Tea Research Center"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Punjab",
+    "cities": [
+      "Amritsar",
+      "Chandigarh",
+      "Ludhiana"
+    ],
+    "touristSpots": [
+      {
+        "Amritsar": [
+          "Golden Temple",
+          "Jallianwala Bagh",
+          "Wagah Border"
+        ]
+      },
+      {
+        "Chandigarh": [
+          "Rock Garden",
+          "Sukhna Lake",
+          "Rose Garden"
+        ]
+      },
+      {
+        "Ludhiana": [
+          "Punjab Agricultural University Museum",
+          "Rakh Bagh Park"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Arunachal Pradesh",
+    "cities": [
+      "Itanagar",
+      "Tawang",
+      "Ziro",
+      "Bomdila"
+    ],
+    "touristSpots": [
+      {
+        "Itanagar": [
+          "Itanagar Wildlife Sanctuary",
+          "Gompa Buddhist Temple",
+          "Ita Fort"
+        ]
+      },
+      {
+        "Tawang": [
+          "Tawang Monastery",
+          "Sela Pass",
+          "Bum La Pass"
+        ]
+      },
+      {
+        "Ziro": [
+          "Ziro Valley",
+          "Talley Valley Wildlife Sanctuary"
+        ]
+      },
+      {
+        "Bomdila": [
+          "Bomdila Monastery",
+          "Bomdila View Point",
+          "Sessa Orchid Sanctuary"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Bihar",
+    "cities": [
+      "Patna",
+      "Bodh Gaya",
+      "Nalanda",
+      "Rajgir"
+    ],
+    "touristSpots": [
+      {
+        "Patna": [
+          "Golghar",
+          "Patna Museum",
+          "Mahavir Mandir"
+        ]
+      },
+      {
+        "Bodh Gaya": [
+          "Mahabodhi Temple",
+          "Great Buddha Statue",
+          "Bodhi Tree"
+        ]
+      },
+      {
+        "Nalanda": [
+          "Nalanda University Ruins",
+          "Nalanda Archaeological Museum"
+        ]
+      },
+      {
+        "Rajgir": [
+          "Vishwa Shanti Stupa",
+          "Hot Springs",
+          "Griddhakuta Peak"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Chhattisgarh",
+    "cities": [
+      "Raipur",
+      "Jagdalpur",
+      "Bilaspur"
+    ],
+    "touristSpots": [
+      {
+        "Raipur": [
+          "Mahant Ghasidas Museum",
+          "Vivekananda Sarovar",
+          "Nandan Van Zoo"
+        ]
+      },
+      {
+        "Jagdalpur": [
+          "Chitrakote Falls",
+          "Kanger Valley National Park",
+          "Tirathgarh Falls"
+        ]
+      },
+      {
+        "Bilaspur": [
+          "Achanakmar Wildlife Sanctuary",
+          "Khutaghat Dam"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Goa",
+    "cities": [
+      "Panaji",
+      "Vasco da Gama",
+      "Margao",
+      "Calangute"
+    ],
+    "touristSpots": [
+      {
+        "Panaji": [
+          "Basilica of Bom Jesus",
+          "Se Cathedral",
+          "Dona Paula"
+        ]
+      },
+      {
+        "Vasco da Gama": [
+          "Mormugao Fort",
+          "Japanese Garden"
+        ]
+      },
+      {
+        "Margao": [
+          "Colva Beach",
+          "Church of the Holy Spirit"
+        ]
+      },
+      {
+        "Calangute": [
+          "Calangute Beach",
+          "Baga Beach"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Haryana",
+    "cities": [
+      "Gurugram",
+      "Kurukshetra",
+      "Faridabad",
+      "Panchkula"
+    ],
+    "touristSpots": [
+      {
+        "Gurugram": [
+          "Kingdom of Dreams",
+          "Cyber Hub",
+          "Damdama Lake"
+        ]
+      },
+      {
+        "Kurukshetra": [
+          "Brahma Sarovar",
+          "Jyotisar",
+          "Sri Krishna Museum"
+        ]
+      },
+      {
+        "Faridabad": [
+          "Raja Nahar Singh Palace",
+          "Town Park"
+        ]
+      },
+      {
+        "Panchkula": [
+          "Pinjore Gardens",
+          "Mata Mansa Devi Temple"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Himachal Pradesh",
+    "cities": [
+      "Shimla",
+      "Manali",
+      "Dharamshala",
+      "Kullu"
+    ],
+    "touristSpots": [
+      {
+        "Shimla": [
+          "The Ridge",
+          "Mall Road",
+          "Jakhoo Temple"
+        ]
+      },
+      {
+        "Manali": [
+          "Solang Valley",
+          "Rohtang Pass",
+          "Hidimba Devi Temple"
+        ]
+      },
+      {
+        "Dharamshala": [
+          "Dalai Lama Temple",
+          "Bhagsu Falls",
+          "Kangra Fort"
+        ]
+      },
+      {
+        "Kullu": [
+          "Great Himalayan National Park",
+          "Bijli Mahadev Temple"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Jammu and Kashmir",
+    "cities": [
+      "Srinagar",
+      "Gulmarg",
+      "Pahalgam",
+      "Jammu"
+    ],
+    "touristSpots": [
+      {
+        "Srinagar": [
+          "Dal Lake",
+          "Mughal Gardens",
+          "Shankaracharya Temple"
+        ]
+      },
+      {
+        "Gulmarg": [
+          "Gulmarg Gondola",
+          "Apharwat Peak"
+        ]
+      },
+      {
+        "Pahalgam": [
+          "Betaab Valley",
+          "Aru Valley",
+          "Lidder River"
+        ]
+      },
+      {
+        "Jammu": [
+          "Vaishno Devi Temple",
+          "Raghunath Temple",
+          "Mubarak Mandi Palace"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Jharkhand",
+    "cities": [
+      "Ranchi",
+      "Jamshedpur",
+      "Dhanbad",
+      "Deoghar"
+    ],
+    "touristSpots": [
+      {
+        "Ranchi": [
+          "Dassam Falls",
+          "Rock Garden",
+          "Tagore Hill"
+        ]
+      },
+      {
+        "Jamshedpur": [
+          "Jubilee Park",
+          "Dimna Lake",
+          "Tata Steel Zoological Park"
+        ]
+      },
+      {
+        "Dhanbad": [
+          "Maithon Dam",
+          "Topchanchi Lake"
+        ]
+      },
+      {
+        "Deoghar": [
+          "Baidyanath Temple",
+          "Nandan Pahar",
+          "Trikut Hills"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Madhya Pradesh",
+    "cities": [
+      "Bhopal",
+      "Indore",
+      "Gwalior",
+      "Khajuraho",
+      "Jabalpur"
+    ],
+    "touristSpots": [
+      {
+        "Bhopal": [
+          "Sanchi Stupa",
+          "Upper Lake",
+          "Van Vihar National Park"
+        ]
+      },
+      {
+        "Indore": [
+          "Rajwada Palace",
+          "Lal Bagh Palace",
+          "Sarafa Bazaar"
+        ]
+      },
+      {
+        "Gwalior": [
+          "Gwalior Fort",
+          "Jai Vilas Palace",
+          "Sas Bahu Temple"
+        ]
+      },
+      {
+        "Khajuraho": [
+          "Khajuraho Temples",
+          "Raneh Falls"
+        ]
+      },
+      {
+        "Jabalpur": [
+          "Marble Rocks",
+          "Dhuandhar Falls",
+          "Madan Mahal Fort"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Manipur",
+    "cities": [
+      "Imphal",
+      "Bishnupur",
+      "Ukhrul"
+    ],
+    "touristSpots": [
+      {
+        "Imphal": [
+          "Loktak Lake",
+          "Kangla Fort",
+          "Ima Keithel Women's Market"
+        ]
+      },
+      {
+        "Bishnupur": [
+          "Keibul Lamjao National Park",
+          "Bishnu Temple"
+        ]
+      },
+      {
+        "Ukhrul": [
+          "Shirui Lily Sanctuary",
+          "Khayang Peak"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Meghalaya",
+    "cities": [
+      "Shillong",
+      "Cherrapunji",
+      "Mawlynnong"
+    ],
+    "touristSpots": [
+      {
+        "Shillong": [
+          "Umiam Lake",
+          "Elephant Falls",
+          "Shillong Peak"
+        ]
+      },
+      {
+        "Cherrapunji": [
+          "Nohkalikai Falls",
+          "Living Root Bridges",
+          "Mawsmai Caves"
+        ]
+      },
+      {
+        "Mawlynnong": [
+          "Cleanest Village in Asia",
+          "Sky View Tree House"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Mizoram",
+    "cities": [
+      "Aizawl",
+      "Lunglei",
+      "Champhai"
+    ],
+    "touristSpots": [
+      {
+        "Aizawl": [
+          "Durtlang Hills",
+          "Solomon's Temple",
+          "Reiek"
+        ]
+      },
+      {
+        "Lunglei": [
+          "Serlui B Dam",
+          "Khawnglung Wildlife Sanctuary"
+        ]
+      },
+      {
+        "Champhai": [
+          "Rih Dil Lake",
+          "Lengteng Wildlife Sanctuary"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Nagaland",
+    "cities": [
+      "Kohima",
+      "Dimapur",
+      "Mokokchung"
+    ],
+    "touristSpots": [
+      {
+        "Kohima": [
+          "Kohima War Cemetery",
+          "Dzukou Valley",
+          "Kisama Heritage Village"
+        ]
+      },
+      {
+        "Dimapur": [
+          "Kachari Ruins",
+          "Nagaland Zoological Park"
+        ]
+      },
+      {
+        "Mokokchung": [
+          "Longkhum Village",
+          "Ungma Village"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Odisha",
+    "cities": [
+      "Bhubaneswar",
+      "Puri",
+      "Konark",
+      "Cuttack"
+    ],
+    "touristSpots": [
+      {
+        "Bhubaneswar": [
+          "Lingaraj Temple",
+          "Udayagiri and Khandagiri Caves",
+          "Dhauli"
+        ]
+      },
+      {
+        "Puri": [
+          "Jagannath Temple",
+          "Puri Beach",
+          "Chilika Lake"
+        ]
+      },
+      {
+        "Konark": [
+          "Konark Sun Temple",
+          "Ramachandi Beach"
+        ]
+      },
+      {
+        "Cuttack": [
+          "Barabati Fort",
+          "Netaji Birthplace Museum",
+          "Dhabaleswar Island"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Sikkim",
+    "cities": [
+      "Gangtok",
+      "Pelling",
+      "Yuksom"
+    ],
+    "touristSpots": [
+      {
+        "Gangtok": [
+          "MG Marg",
+          "Tsomgo Lake",
+          "Rumtek Monastery"
+        ]
+      },
+      {
+        "Pelling": [
+          "Pemayangtse Monastery",
+          "Khangchendzonga Waterfalls"
+        ]
+      },
+      {
+        "Yuksom": [
+          "Dubdi Monastery",
+          "Norbugang Park"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Telangana",
+    "cities": [
+      "Hyderabad",
+      "Warangal",
+      "Nizamabad"
+    ],
+    "touristSpots": [
+      {
+        "Hyderabad": [
+          "Charminar",
+          "Golconda Fort",
+          "Hussain Sagar Lake"
+        ]
+      },
+      {
+        "Warangal": [
+          "Warangal Fort",
+          "Thousand Pillar Temple",
+          "Bhadrakali Temple"
+        ]
+      },
+      {
+        "Nizamabad": [
+          "Nizam Sagar Dam",
+          "Ali Sagar Deer Park"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Tripura",
+    "cities": [
+      "Agartala",
+      "Udaipur",
+      "Unakoti"
+    ],
+    "touristSpots": [
+      {
+        "Agartala": [
+          "Ujjayanta Palace",
+          "Neermahal Palace",
+          "Tripura Sundari Temple"
+        ]
+      },
+      {
+        "Udaipur": [
+          "Sepahijala Wildlife Sanctuary",
+          "Bhuvaneswari Temple"
+        ]
+      },
+      {
+        "Unakoti": [
+          "Unakoti Hill Carvings"
+        ]
+      }
+    ]
+  },
+  {
+    "state": "Uttarakhand",
+    "cities": [
+      "Dehradun",
+      "Haridwar",
+      "Rishikesh",
+      "Nainital",
+      "Mussoorie"
+    ],
+    "touristSpots": [
+      {
+        "Dehradun": [
+          "Robber's Cave",
+          "Sahastradhara",
+          "Forest Research Institute"
+        ]
+      },
+      {
+        "Haridwar": [
+          "Har Ki Pauri",
+          "Mansa Devi Temple",
+          "Chandi Devi Temple"
+        ]
+      },
+      {
+        "Rishikesh": [
+          "Triveni Ghat",
+          "Ram Jhula",
+          "Laxman Jhula"
+        ]
+      },
+      {
+        "Nainital": [
+          "Naini Lake",
+          "Snow View Point",
+          "Naina Devi Temple"
+        ]
+      },
+      {
+        "Mussoorie": [
+          "Kempty Falls",
+          "Gun Hill",
+          "Mall Road"
+        ]
+      }
+    ]
+  }
+]
