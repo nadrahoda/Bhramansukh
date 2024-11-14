@@ -1,0 +1,46 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model State {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  cities   City[]
+  packages Package[]
+}
+
+model City {
+  id        Int       @id @default(autoincrement())
+  name      String
+  state     State     @relation(fields: [stateId], references: [id])
+  stateId   Int
+  touristSpots TouristSpot[]
+  packages  Package[]
+}
+
+model TouristSpot {
+  id      Int      @id @default(autoincrement())
+  name    String
+  city    City     @relation(fields: [cityId], references: [id])
+  cityId  Int
+  packages Package[]
+}
+
+model Package {
+  id            Int         @id @default(autoincrement())
+  name          String
+  description   String
+  price         Float
+  state         State       @relation(fields: [stateId], references: [id])
+  stateId       Int
+  city          City?       @relation(fields: [cityId], references: [id])
+  cityId        Int?
+  touristSpot   TouristSpot? @relation(fields: [touristSpotId], references: [id])
+  touristSpotId Int?
+  createdAt     DateTime    @default(now())
+}

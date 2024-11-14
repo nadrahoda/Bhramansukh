@@ -1,19 +1,57 @@
-// app/components/Hero.tsx
-'use client';
+"use client";
+// types.ts
+export interface TourPackage {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  stateId: number;
+  cityId: number;
+  touristSpotId: number | null;
+  createdAt: string;
+  state: {
+    id: number;
+    name: string;
+  };
+  city: {
+    id: number;
+    name: string;
+    stateId: number;
+  };
+  touristSpot: {
+    id: number;
+    name: string;
+    cityId: number;
+  } | null;
+}
 
-import React, { useState, useEffect, useRef } from 'react';
-import { FaLocationDot } from 'react-icons/fa6';
-import Link from 'next/link';
-import indiaLocations from '../public/data/india_locations.json';
-
+import React, { useState, useEffect, useRef } from "react";
+import { FaLocationDot } from "react-icons/fa6";
+import Link from "next/link";
+import indiaLocations from "../public/data/india_locations.json";
 const Hero = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [inputValue, setInputValue] = useState<string>('');
-  const [displayedText, setDisplayedText] = useState<string>('');
-
-  const fullText = 'Welcome to भ्रMan Sukh';
-
+  const [inputValue, setInputValue] = useState<string>("");
+  const [displayedText, setDisplayedText] = useState<string>("");
+  const fullText = "Welcome to भ्रMan Sukh";
+  const [tourPackages, setTourPackages] = useState<TourPackage[]>();
+  const [loading, setLoading] = useState(false);
+  const handleExploreClick = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `/api/searchPackages?searchTerm=${inputValue}`
+      );
+      const data = await response.json();
+      console.log("data", data);
+      setLoading(false);
+      setTourPackages(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setLoading(false);
+    }
+  };
   useEffect(() => {
     let index = 0;
     const timer = setInterval(() => {
@@ -27,14 +65,14 @@ const Hero = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const dayNightOptions = ['5D/4N', '6D/5N', '10D/9N', 'Not decided'];
+  const dayNightOptions = ["5D/4N", "6D/5N", "10D/9N", "Not decided"];
   const monthYearOptions = [
-    'December 2024',
-    'January 2025',
-    'February 2025',
-    'March 2025',
-    'April 2025',
-    'May 2025'
+    "December 2024",
+    "January 2025",
+    "February 2025",
+    "March 2025",
+    "April 2025",
+    "May 2025",
   ];
 
   useEffect(() => {
@@ -115,6 +153,7 @@ const Hero = () => {
               autoComplete="off"
               className="pl-10 pr-3 py-2 border border-gray-300 rounded-lg w-full text-black text-sm"
             />
+
             {suggestions.length > 0 && (
               <div className="absolute z-10 bg-white border border-gray-300 rounded-lg mt-10 w-full max-h-60 overflow-y-auto">
                 {suggestions.map((suggestion, index) => (
@@ -134,8 +173,14 @@ const Hero = () => {
           </div>
 
           {/* Day/Night Dropdown */}
-          <select required defaultValue="" className="w-1/5 bg-white text-gray-800 text-sm px-4 py-2 rounded-lg border border-gray-300">
-            <option value="" disabled >Duration</option>
+          <select
+            required
+            defaultValue=""
+            className="w-1/5 bg-white text-gray-800 text-sm px-4 py-2 rounded-lg border border-gray-300"
+          >
+            <option value="" disabled>
+              Duration
+            </option>
             {dayNightOptions.map((option, index) => (
               <option key={index} value={option}>
                 {option}
@@ -144,8 +189,14 @@ const Hero = () => {
           </select>
 
           {/* Month/Year Dropdown */}
-          <select required defaultValue="" className="w-1/5 bg-white text-gray-800 text-sm px-4 py-2 rounded-lg border border-gray-300">
-            <option value="" disabled >Select Month</option>
+          <select
+            required
+            defaultValue=""
+            className="w-1/5 bg-white text-gray-800 text-sm px-4 py-2 rounded-lg border border-gray-300"
+          >
+            <option value="" disabled>
+              Select Month
+            </option>
             {monthYearOptions.map((option, index) => (
               <option key={index} value={option}>
                 {option}
@@ -153,12 +204,38 @@ const Hero = () => {
             ))}
           </select>
 
-          <Link
-            href={`/results/${inputValue || 'Maharashtra'}`}
+          <button
+            onClick={async () => {
+              handleExploreClick();
+            }}
             className="w-1/5 bg-blue-600 text-white rounded-lg px-4 py-2 text-sm h-full flex items-center justify-center w-1/5"
           >
             Explore
-          </Link>
+          </button>
+        </div>
+        <div className="space-y-4 bg-red-300 	">
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <div className="p-4 grid grid-cols-3">
+              {tourPackages?.map((pkg) => (
+                <Link
+                  key={pkg.id}
+                  href={`/package-details/${encodeURIComponent(pkg.id)}`}
+                >
+                  <div className="p-4 border rounded-md">
+                    <h2 className="text-xl font-bold">{pkg.name}</h2>
+                    <p>{pkg.description}</p>
+                    <p>Price: ₹{pkg.price.toFixed(2)}</p>
+                    <p>
+                      Location: {pkg.city.name}, {pkg.state.name}
+                    </p>
+                    {pkg.touristSpot && <p>Spot: {pkg.touristSpot.name}</p>}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -166,6 +243,3 @@ const Hero = () => {
 };
 
 export default Hero;
-
-
-
