@@ -1,29 +1,5 @@
 "use client";
 // types.ts
-export interface TourPackage {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  stateId: number;
-  cityId: number;
-  touristSpotId: number | null;
-  createdAt: string;
-  state: {
-    id: number;
-    name: string;
-  };
-  city: {
-    id: number;
-    name: string;
-    stateId: number;
-  };
-  touristSpot: {
-    id: number;
-    name: string;
-    cityId: number;
-  } | null;
-}
 
 import React, { useState, useEffect, useRef } from "react";
 import { FaLocationDot } from "react-icons/fa6";
@@ -35,23 +11,8 @@ const Hero = () => {
   const [inputValue, setInputValue] = useState<string>("");
   const [displayedText, setDisplayedText] = useState<string>("");
   const fullText = "Welcome to भ्रMan Sukh";
-  const [tourPackages, setTourPackages] = useState<TourPackage[]>();
   const [loading, setLoading] = useState(false);
-  const handleExploreClick = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(
-        `/api/searchPackages?searchTerm=${inputValue}`
-      );
-      const data = await response.json();
-      console.log("data", data);
-      setLoading(false);
-      setTourPackages(data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      setLoading(false);
-    }
-  };
+
   useEffect(() => {
     let index = 0;
     const timer = setInterval(() => {
@@ -204,38 +165,12 @@ const Hero = () => {
             ))}
           </select>
 
-          <button
-            onClick={async () => {
-              handleExploreClick();
-            }}
+          <Link
+            href={`/packages/${encodeURIComponent(inputValue)}`}
             className="w-1/5 bg-blue-600 text-white rounded-lg px-4 py-2 text-sm h-full flex items-center justify-center w-1/5"
           >
             Explore
-          </button>
-        </div>
-        <div className="space-y-4 bg-red-300 	">
-          {loading ? (
-            <div>Loading...</div>
-          ) : (
-            <div className="p-4 grid grid-cols-3">
-              {tourPackages?.map((pkg) => (
-                <Link
-                  key={pkg.id}
-                  href={`/package-details/${encodeURIComponent(pkg.id)}`}
-                >
-                  <div className="p-4 border rounded-md">
-                    <h2 className="text-xl font-bold">{pkg.name}</h2>
-                    <p>{pkg.description}</p>
-                    <p>Price: ₹{pkg.price.toFixed(2)}</p>
-                    <p>
-                      Location: {pkg.city.name}, {pkg.state.name}
-                    </p>
-                    {pkg.touristSpot && <p>Spot: {pkg.touristSpot.name}</p>}
-                  </div>
-                </Link>
-              ))}
-            </div>
-          )}
+          </Link>
         </div>
       </div>
     </div>
