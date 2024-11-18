@@ -1,18 +1,62 @@
 "use client";
 // types.ts
-
+export interface TourPackage {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  stateId: number;
+  cityId: number;
+  touristSpotId: number | null;
+  createdAt: string;
+  state: {
+    id: number;
+    name: string;
+  };
+  city: {
+    id: number;
+    name: string;
+    stateId: number;
+  };
+  touristSpot: {
+    id: number;
+    name: string;
+    cityId: number;
+  } | null;
+}
 import React, { useState, useEffect, useRef } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import Link from "next/link";
 import indiaLocations from "../public/data/india_locations.json";
-const Hero = () => {
+const Hero = ({
+  search,
+  setSearch,
+}: {
+  search: boolean;
+  setSearch: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
   const [displayedText, setDisplayedText] = useState<string>("");
   const fullText = "Welcome to भ्रMan Sukh";
-  const [loading, setLoading] = useState(false);
-
+  const [loading, setLoading] = useState<boolean | null>(null);
+  const [tourPackages, setTourPackages] = useState<TourPackage[]>();
+  const handleExploreClick = async (cityname: string) => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `/api/searchPackages?searchTerm=${cityname}`
+      );
+      const data = await response.json();
+      console.log("data", data);
+      setLoading(false);
+      setTourPackages(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setLoading(false);
+    }
+  };
   useEffect(() => {
     let index = 0;
     const timer = setInterval(() => {
@@ -86,94 +130,128 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden hero">
-      <video
-        ref={videoRef}
-        autoPlay
-        muted
-        loop
-        className="absolute top-0 left-0 w-full h-full object-cover"
-      >
-        <source src="/assets/hero.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      <div className="absolute inset-0 bg-black opacity-50"></div>
-      <div className="relative z-10 flex flex-col mt-48 items-center h-full text-white text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">{displayedText}</h1>
+    <>
+      <div className="relative w-full h-screen overflow-hidden hero">
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          className="absolute top-0 left-0 w-full h-full object-cover"
+        >
+          <source src="/assets/hero.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="relative z-10 flex flex-col mt-48 items-center h-full text-white text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            {displayedText}
+          </h1>
 
-        <div className="flex justify-center items-center mt-4 w-11/12 md:w-4/6 space-x-2 bg-gray-200 p-3 rounded-xl">
-          <div className="relative flex w-1/2">
-            <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
-              <FaLocationDot className="text-blue-500 mr-2" size={18} />
-            </span>
-            <input
-              type="text"
-              placeholder="Search your destination"
-              value={inputValue}
-              onChange={handleInputChange}
-              autoComplete="off"
-              className="pl-10 pr-3 py-2 border border-gray-300 rounded-lg w-full text-black text-sm"
-            />
+          <div className="flex justify-center items-center mt-4 w-11/12 md:w-4/6 space-x-2 bg-gray-200 p-3 rounded-xl">
+            <div className="relative flex w-1/2">
+              <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+                <FaLocationDot className="text-blue-500 mr-2" size={18} />
+              </span>
+              <input
+                type="text"
+                placeholder="Search your destination"
+                value={inputValue}
+                onChange={handleInputChange}
+                autoComplete="off"
+                className="pl-10 pr-3 py-2 border border-gray-300 rounded-lg w-full text-black text-sm"
+              />
 
-            {suggestions.length > 0 && (
-              <div className="absolute z-10 bg-white border border-gray-300 rounded-lg mt-10 w-full max-h-60 overflow-y-auto">
-                {suggestions.map((suggestion, index) => (
-                  <div
-                    key={index}
-                    onClick={() => handleSuggestionClick(suggestion)}
-                    className="p-2 hover:bg-gray-200 cursor-pointer text-black flex items-center pl-2"
-                  >
-                    <FaLocationDot className="text-gray-400 mr-2" size={16} />
-                    <span className="whitespace-normal text-sm">
-                      {suggestion}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            )}
+              {suggestions.length > 0 && (
+                <div className="absolute z-10 bg-white border border-gray-300 rounded-lg mt-10 w-full max-h-60 overflow-y-auto">
+                  {suggestions.map((suggestion, index) => (
+                    <div
+                      key={index}
+                      onClick={() => handleSuggestionClick(suggestion)}
+                      className="p-2 hover:bg-gray-200 cursor-pointer text-black flex items-center pl-2"
+                    >
+                      <FaLocationDot className="text-gray-400 mr-2" size={16} />
+                      <span className="whitespace-normal text-sm">
+                        {suggestion}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Day/Night Dropdown */}
+            <select
+              required
+              defaultValue=""
+              className="w-1/5 bg-white text-gray-800 text-sm px-4 py-2 rounded-lg border border-gray-300"
+            >
+              <option value="" disabled>
+                Duration
+              </option>
+              {dayNightOptions.map((option, index) => (
+                <option key={index} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+
+            {/* Month/Year Dropdown */}
+            <select
+              required
+              defaultValue=""
+              className="w-1/5 bg-white text-gray-800 text-sm px-4 py-2 rounded-lg border border-gray-300"
+            >
+              <option value="" disabled>
+                Select Month
+              </option>
+              {monthYearOptions.map((option, index) => (
+                <option key={index} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+
+            <button
+              onClick={() => {
+                handleExploreClick(inputValue.split(",")[0].trim());
+                setSearch(true);
+              }}
+              className="w-1/5 bg-blue-600 text-white rounded-lg px-4 py-2 text-sm h-full flex items-center justify-center w-1/5"
+            >
+              Explore
+            </button>
           </div>
-
-          {/* Day/Night Dropdown */}
-          <select
-            required
-            defaultValue=""
-            className="w-1/5 bg-white text-gray-800 text-sm px-4 py-2 rounded-lg border border-gray-300"
-          >
-            <option value="" disabled>
-              Duration
-            </option>
-            {dayNightOptions.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-
-          {/* Month/Year Dropdown */}
-          <select
-            required
-            defaultValue=""
-            className="w-1/5 bg-white text-gray-800 text-sm px-4 py-2 rounded-lg border border-gray-300"
-          >
-            <option value="" disabled>
-              Select Month
-            </option>
-            {monthYearOptions.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-
-          <Link
-            href={`/packages/${encodeURIComponent(inputValue)}`}
-            className="w-1/5 bg-blue-600 text-white rounded-lg px-4 py-2 text-sm h-full flex items-center justify-center w-1/5"
-          >
-            Explore
-          </Link>
         </div>
       </div>
-    </div>
+      <div>
+        {" "}
+        <div className="">
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <div className="p-4  grid grid-cols-3">
+              {tourPackages?.map((pkg) => (
+                <Link
+                  key={pkg.id}
+                  href={`/package-details/${encodeURIComponent(pkg.id)}`}
+                >
+                  <div className="p-4 border rounded-md">
+                    <h2 className="text-xl font-bold">{pkg?.name}</h2>
+                    <p>{pkg?.description}</p>
+                    <p>Price: ₹{pkg?.price.toFixed(2)}</p>
+                    <p>
+                      Location: {pkg?.city?.name}, {pkg?.state?.name}
+                    </p>
+                    {pkg?.touristSpot && <p>Spot: {pkg?.touristSpot?.name}</p>}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </>
   );
 };
 

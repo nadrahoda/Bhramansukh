@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import indiaData from "../public/data/india_locations.json"; // Make sure to place the JSON file correctly
 
 const prisma = new PrismaClient();
 
@@ -9,57 +10,36 @@ async function main() {
   await prisma.city.deleteMany({});
   await prisma.state.deleteMany({});
 
-  // Seed states, cities, tourist spots, and packages
-  const data = [
-    {
-      state: "Maharashtra",
-      cities: ["Mumbai", "Pune", "Nashik", "Aurangabad", "Nagpur"],
-      touristSpots: {
-        Mumbai: ["Gateway of India", "Elephanta Caves", "Marine Drive"],
-        Pune: ["Shaniwar Wada", "Aga Khan Palace", "Sinhagad Fort"],
-        Nashik: ["Sula Vineyards", "Trimbakeshwar Temple", "Pandavleni Caves"],
-        Aurangabad: ["Ajanta Caves", "Ellora Caves", "Bibi Ka Maqbara"],
-        Nagpur: ["Deekshabhoomi", "Futala Lake", "Ambazari Lake"]
-      }
-    },
-    {
-      state: "Rajasthan",
-      cities: ["Jaipur", "Udaipur", "Jodhpur", "Jaisalmer", "Pushkar"],
-      touristSpots: {
-        Jaipur: ["Hawa Mahal", "City Palace", "Amer Fort", "Jantar Mantar"],
-        Udaipur: ["City Palace", "Lake Pichola", "Jagdish Temple"],
-        Jodhpur: ["Mehrangarh Fort", "Umaid Bhawan Palace", "Mandore Gardens"],
-        Jaisalmer: ["Jaisalmer Fort", "Sam Sand Dunes", "Patwon Ki Haveli"],
-        Pushkar: ["Pushkar Lake", "Brahma Temple", "Savitri Temple"]
-      }
-    },
-    // Add other states similarly...
-  ];
+  console.log("Seeding started!");
 
-  for (const stateData of data) {
+  for (const stateData of indiaData) {
     // Create state
     const state = await prisma.state.create({
-      data: { name: stateData.state }
+      data: { name: stateData.state },
     });
 
-    // Create cities and tourist spots for the state
+    // Iterate over each city
     for (const cityName of stateData.cities) {
       const city = await prisma.city.create({
         data: {
           name: cityName,
-          state: { connect: { id: state.id } }
-        }
+          state: { connect: { id: state.id } },
+        },
       });
 
+      // Find the corresponding tourist spots for the city
+      const citySpots = stateData.touristSpots.find(
+        (spot) => Object.keys(spot)[0] === cityName
+      );
+
       // Create tourist spots for the city
-      const spots = stateData.touristSpots[cityName];
-      if (spots) {
-        for (const spotName of spots) {
+      if (citySpots && citySpots[cityName]) {
+        for (const spotName of citySpots[cityName]) {
           const touristSpot = await prisma.touristSpot.create({
             data: {
               name: spotName,
-              city: { connect: { id: city.id } }
-            }
+              city: { connect: { id: city.id } },
+            },
           });
 
           // Create packages for each tourist spot
@@ -70,32 +50,32 @@ async function main() {
               price: parseFloat((Math.random() * 5000 + 5000).toFixed(2)), // Random price between 5000 - 10000
               state: { connect: { id: state.id } },
               city: { connect: { id: city.id } },
-              touristSpot: { connect: { id: touristSpot.id } }
-            }
+              touristSpot: { connect: { id: touristSpot.id } },
+            },
           });
         }
       }
-      
-      // Create packages for each city
+
+      // Create a city-level package
       await prisma.package.create({
         data: {
           name: `${cityName} City Tour`,
           description: `Explore the beautiful city of ${cityName} in ${stateData.state}.`,
           price: parseFloat((Math.random() * 5000 + 7000).toFixed(2)), // Random price between 7000 - 12000
           state: { connect: { id: state.id } },
-          city: { connect: { id: city.id } }
-        }
+          city: { connect: { id: city.id } },
+        },
       });
     }
 
-    // Create packages for each state
+    // Create a state-level package
     await prisma.package.create({
       data: {
         name: `${stateData.state} State Tour`,
         description: `Discover the cultural heritage of ${stateData.state} with this exclusive package.`,
         price: parseFloat((Math.random() * 10000 + 10000).toFixed(2)), // Random price between 10000 - 20000
-        state: { connect: { id: state.id } }
-      }
+        state: { connect: { id: state.id } },
+      },
     });
   }
 
@@ -109,4 +89,5 @@ main()
   })
   .finally(async () => {
     await prisma.$disconnect();
+    console.log("Seeding ended");
   });
