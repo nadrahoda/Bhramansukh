@@ -43,4 +43,9 @@ model Package {
   touristSpot   TouristSpot? @relation(fields: [touristSpotId], references: [id])
   touristSpotId Int?
   createdAt     DateTime    @default(now())
+  image         String?
+  stars         Float?      @default(4)              // Default value
+  sightseeing   Boolean     @default(true)          // Default value
+  meals         Boolean     @default(true)          // Default value
+  duration      String?
 }

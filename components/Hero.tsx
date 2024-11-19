@@ -9,6 +9,11 @@ export interface TourPackage {
   cityId: number
   touristSpotId: number | null
   createdAt: string
+  image?: string
+  duration?: string
+  meals: boolean
+  stars: number
+  sightseeing: boolean
   state: {
     id: number
     name: string
@@ -26,6 +31,8 @@ export interface TourPackage {
 }
 import React, { useState, useEffect, useRef } from 'react'
 import { FaLocationDot } from 'react-icons/fa6'
+import { FaRegBuilding, FaBinoculars } from 'react-icons/fa'
+import { GiMeal } from 'react-icons/gi'
 import Link from 'next/link'
 import indiaLocations from '../public/data/india_locations.json'
 const Hero = ({
@@ -334,7 +341,7 @@ const Hero = ({
           </div>
 
           {/* Right Section */}
-          <div className='w-4/5 px-4 pb-10'>
+          <div className='w-3/5 px-4 pb-10 pl-16'>
             {loading ? (
               <div>Searching...</div>
             ) : (
@@ -343,30 +350,106 @@ const Hero = ({
                   <h1 className='text-2xl font-bold pb-4'>
                     Showing{' '}
                     <span className='text-blue-500 italic'>
-                      {tourPackages[0]?.city?.name},{' '}
-                      {tourPackages[0]?.state?.name}
+                    {inputValue.toLowerCase().includes(tourPackages[0]?.state?.name.toLowerCase()) && !inputValue.toLowerCase().includes(tourPackages[0]?.city?.name?.toLowerCase())
+        ? tourPackages[0]?.state?.name
+        : `${tourPackages[0]?.city?.name}, ${tourPackages[0]?.state?.name}`}
                     </span>{' '}
                     Tour Packages
                   </h1>
                 )}
 
                 {tourPackages?.map(pkg => (
-                  <Link
-                    key={pkg.id}
-                    href={`/package-details/${encodeURIComponent(pkg.id)}`}
-                  >
-                    <div className='p-4 border rounded-md bg-white text-black'>
-                      <h2 className='text-xl font-bold'>{pkg?.name}</h2>
-                      <p>{pkg?.description}</p>
-                      <p>Price: ₹{pkg?.price.toFixed(2)}</p>
-                      <p>
-                        Location: {pkg?.city?.name}, {pkg?.state?.name}
-                      </p>
-                      {pkg?.touristSpot && (
-                        <p>Spot: {pkg?.touristSpot?.name}</p>
+                  
+                    <div key={pkg.id} className='p-4 border border-gray-700 rounded-xl bg-gray-700 text-white flex h-64 space-x-4'>
+                      {pkg?.image && (
+                        <div className='w-1/4 h-full mb-4'>
+                          <img
+                            src={pkg.image}
+                            alt={pkg.name}
+                            className='rounded-md object-cover w-full h-full'
+                          />
+                        </div>
                       )}
+                      <div className='w-3/4'>
+                        <div>
+                          <h2 className='text-xl font-bold'>{pkg?.name}</h2>
+                          <div className='flex space-x-2 font-semibold text-sm mt-1'>
+                            <p className='text-blue-500'>{pkg?.duration} </p>
+                            <div className='border-l border-white'></div>
+                            <p className='text-gray-400 '>Customizable</p>
+                          </div>
+                        </div>
+                        <div className='mt-8 '>
+                          <p className='text-base '>Starting from:</p>
+                          <p className='text-blue-500 font-bold text-2xl tracking-wide'>
+                            ₹{pkg?.price.toFixed(2)}/-{' '}
+                            <span className='text-gray-400 text-xs italic tracking-normal'>
+                              Per Person
+                            </span>
+                          </p>
+                          <p className='text-gray-500'></p>
+                          <p className='text-base text-gray-300'>
+                            {pkg?.city?.name}, {pkg?.state?.name}
+                          </p>
+                          <div className='flex justify-between items-center'>
+                            <div className='flex items-center space-x-4 mt-5'>
+                              <div className='flex items-center flex-col space-y-1'>
+                                <span className='text-white'>
+                                  <FaRegBuilding />
+                                </span>
+                                <span className='text-xs font-light'>
+                                  Upto {pkg?.stars} stars
+                                </span>
+                              </div>
+                              <div>
+                                {pkg?.sightseeing ? (
+                                  <div className='flex flex-col items-center space-y-1'>
+                                    <span className='text-white'>
+                                      <FaBinoculars />
+                                    </span>
+                                    <span className='text-xs font-light '>
+                                      Sightseeing
+                                    </span>
+                                  </div>
+                                ) : (
+                                  <span className='text-gray-400'>
+                                    No Sightseeing
+                                  </span>
+                                )}
+                              </div>
+                              <div>
+                                {pkg?.meals ? (
+                                  <div className='flex flex-col items-center space-y-1'>
+                                    <span className='text-white'>
+                                      <GiMeal />
+                                    </span>
+                                    <span className='text-xs font-light '>
+                                      Meals
+                                    </span>
+                                  </div>
+                                ) : (
+                                  <span className='text-gray-400'>
+                                    No Meals
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+                            <div className='flex items-center space-x-3 mt-3'>
+                            <Link
+                
+                    href={`/package-details/${encodeURIComponent(pkg.id)}`}
+                  className='bg-blue-500 text-xs py-2 px-3 rounded-lg font-semibold'>
+                                View Details
+                              </Link>
+                              <button className='bg-gray-400 text-xs py-2 px-3 rounded-lg font-semibold'>
+                                Customize Plan
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </Link>
+            
                 ))}
               </div>
             )}
