@@ -101,16 +101,18 @@ const FilterTrips: React.FC = () => {
   ]
 
   const options = [
-    'Sale of The Season',
-    'X-mas & New Year Trips',
-    'Upcoming Trips',
-    'Best Sellers',
-    'Backpacking Trips',
-    'New Launches',
-    'Himalayan Treks',
-    'Weekend Getaways',
-    'International Community Trips',
-    'All Girls Trips'
+    'Strangers Unite',
+    'Therapy Travels',
+    'Exposure Camps',
+    'Seasonal Packages',
+    'Adventure',
+    'Family',
+    'Nature',
+    'Honeymoon',
+    'Wildlife',
+    'Friends',
+    'Water Activities',
+    'Religious',
   ]
 
   // Filter cards based on selected option

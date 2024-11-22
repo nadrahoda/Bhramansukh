@@ -11,6 +11,7 @@ import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import { useState } from "react";
+import StrangersUnite from "@/components/StrangersUnite";
 
 export default function Home() {
   const [search, setSearch] = useState<boolean>(false);
@@ -21,6 +22,7 @@ export default function Home() {
       {!search && (
         <>
           <FilterTrips />
+          <StrangersUnite/>
           <TreksCarousel />
           <StatesCarousel />
           <Testimonial />

@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaChevronDown, FaChevronUp, FaArrowRight } from 'react-icons/fa';
 
 // Define the structure for a question
 interface Question {
@@ -91,13 +91,13 @@ const FAQ: React.FC = () => {
   const displayedQuestions = showMore ? questions : questions.slice(0, 5);
 
   return (
-    <div className='w-full mx-auto p-6 bg-gray-800 text-white shadow-lg'>
-      <h2 className='text-gray-400 text-lg uppercase tracking-widest'>FAQ</h2>
-      <h4 className='text-white text-4xl font-bold tracking-wide'>
+    <div className='w-full mx-auto p-6 bg-gray-900 text-white shadow-lg'>
+      <h2 className='text-gray-400 text-lg uppercase tracking-widest text-center'>FAQ</h2>
+      <h4 className='text-white text-4xl font-bold tracking-wide text-center'>
         Have Any Doubts
       </h4>
 
-      <div className='space-y-4'>
+      <div className='space-y-4 p-8 shadow-xl'>
         {displayedQuestions.map((item, index) => (
           <div key={item.id}>
             {/* Question with bottom border */}
@@ -124,9 +124,9 @@ const FAQ: React.FC = () => {
         {!showMore && (
           <button
             onClick={toggleViewMore}
-            className='mt-4 py-2 px-4 text-sm font-semibold bg-blue-600 text-white rounded-full hover:bg-blue-500 inline-block mx-auto'
+            className='mt-4 py-2 px-4 text-sm font-semibold bg-blue-600 text-white rounded-full hover:bg-blue-500 inline-flex flex items-center '
           >
-            View More
+            View More 
           </button>
         )}
 

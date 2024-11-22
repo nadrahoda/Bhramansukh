@@ -66,7 +66,7 @@ const StatesCarousel: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-900 py-10">
+    <div className="bg-gray-800 py-10">
       <div className="flex flex-col items-center justify-center">
         <h3 className="text-gray-400 text-lg uppercase flex tracking-widest">Destinations</h3>
         <h1 className="text-white text-4xl font-semibold flex tracking-wide">Find the Perfect Escape</h1>

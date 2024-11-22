@@ -3,6 +3,16 @@ import indiaData from "../public/data/india_locations.json"; // Make sure to pla
 
 const prisma = new PrismaClient();
 
+interface TouristSpotsMap {
+  [key: string]: string[]; // This type defines that each city name maps to an array of tourist spots.
+}
+
+interface StateData {
+  state: string;
+  cities: string[];
+  touristSpots: TouristSpotsMap[]; // An array of maps where each map represents city-tourist spot mapping
+}
+
 async function main() {
   // Clear existing data
   await prisma.package.deleteMany({});
@@ -12,11 +22,14 @@ async function main() {
 
   console.log("Seeding started!");
 
-  for (const stateData of indiaData) {
+  const statesData = indiaData as StateData[];
+
+  for (const stateData of statesData) {
     // Create state
     const state = await prisma.state.create({
       data: { name: stateData.state },
     });
+    
 
     // Iterate over each city
     for (const cityName of stateData.cities) {

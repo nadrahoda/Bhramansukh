@@ -31,6 +31,7 @@ export interface TourPackage {
 }
 import React, { useState, useEffect, useRef } from 'react'
 import { FaLocationDot } from 'react-icons/fa6'
+import { IoLocationOutline } from "react-icons/io5";
 import { FaRegBuilding, FaBinoculars } from 'react-icons/fa'
 import { GiMeal } from 'react-icons/gi'
 import Link from 'next/link'
@@ -47,8 +48,11 @@ const Hero = ({
   const [inputValue, setInputValue] = useState<string>('')
   const [displayedText, setDisplayedText] = useState<string>('')
   const fullText = 'Welcome to भ्रMan Sukh'
+  const [currentPage, setCurrentPage]= useState(1)
+  const itemsPerPage = 4
   const [loading, setLoading] = useState<boolean | null>(null)
   const [tourPackages, setTourPackages] = useState<TourPackage[]>()
+  
   const [categories] = useState<string[]>([
     'Honeymoon',
     'Family',
@@ -70,6 +74,19 @@ const Hero = ({
     '60,000 - 80,000',
     'Above 80,000'
   ])
+
+  const totalPages = tourPackages ? Math.ceil(tourPackages.length/itemsPerPage):0
+  // Calculate packages to display for the current page
+  const displayedPackages = tourPackages?.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  )
+
+  const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page)
+    }
+  }
   const handleExploreClick = async (cityname: string) => {
     setLoading(true)
     try {
@@ -228,7 +245,7 @@ const Hero = ({
             <select
               required
               defaultValue=''
-              className='w-1/5 bg-white text-gray-800 text-sm px-4 py-2 rounded-lg border border-gray-300'
+              className='w-1/5 bg-white text-gray-800 text-sm px-4 py-2 rounded-lg border border-gray-300 '
             >
               <option value='' disabled>
                 Duration
@@ -347,18 +364,16 @@ const Hero = ({
             ) : (
               <div className='flex flex-col space-y-4'>
                 {tourPackages && tourPackages?.length > 0 && (
+                  <>
+                  
+            
                   <h1 className='text-2xl font-bold pb-4'>
-                    Showing{' '}
-                    <span className='text-blue-500 italic'>
-                    {inputValue.toLowerCase().includes(tourPackages[0]?.state?.name.toLowerCase()) && !inputValue.toLowerCase().includes(tourPackages[0]?.city?.name?.toLowerCase())
-        ? tourPackages[0]?.state?.name
-        : `${tourPackages[0]?.city?.name}, ${tourPackages[0]?.state?.name}`}
-                    </span>{' '}
-                    Tour Packages
-                  </h1>
-                )}
+                      Showing Results for <span className='italic text-blue-500'>{inputValue}</span>
+                    </h1>
 
-                {tourPackages?.map(pkg => (
+                
+
+                {displayedPackages?.map(pkg => (
                   
                     <div key={pkg.id} className='p-4 border border-gray-700 rounded-xl bg-gray-700 text-white flex h-64 space-x-4'>
                       {pkg?.image && (
@@ -382,14 +397,15 @@ const Hero = ({
                         <div className='mt-8 '>
                           <p className='text-base '>Starting from:</p>
                           <p className='text-blue-500 font-bold text-2xl tracking-wide'>
-                            ₹{pkg?.price.toFixed(2)}/-{' '}
+                            ₹{pkg?.price}/-{' '}
                             <span className='text-gray-400 text-xs italic tracking-normal'>
                               Per Person
                             </span>
                           </p>
-                          <p className='text-gray-500'></p>
-                          <p className='text-base text-gray-300'>
-                            {pkg?.city?.name}, {pkg?.state?.name}
+                         
+                          <p className='text-xs text-white bg-white bg-opacity-20 rounded-full py-1 px-2 border border-white  items-center block inline-flex font-semibold mt-1'>
+                            <span className='mr-1'><IoLocationOutline/></span>
+                            {pkg?.city?.name} {pkg?.state?.name}
                           </p>
                           <div className='flex justify-between items-center'>
                             <div className='flex items-center space-x-4 mt-5'>
@@ -451,6 +467,45 @@ const Hero = ({
                     </div>
             
                 ))}
+
+                {/* Pagination Controls */}
+                <div className='flex items-center justify-center space-x-4 mt-6'>
+                      <button
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        className={`px-4 py-2 ${
+                          currentPage === 1 ? 'bg-gray-500' : 'bg-blue-600'
+                        } text-white rounded`}
+                      >
+                        Previous
+                      </button>
+
+                      {[...Array(totalPages)].map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => handlePageChange(index + 1)}
+                          className={`px-4 py-2 ${
+                            currentPage === index + 1
+                              ? 'bg-blue-800'
+                              : 'bg-blue-600'
+                          } text-white rounded`}
+                        >
+                          {index + 1}
+                        </button>
+                      ))}
+
+                      <button
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                        className={`px-4 py-2 ${
+                          currentPage === totalPages ? 'bg-gray-500' : 'bg-blue-600'
+                        } text-white rounded`}
+                      >
+                        Next
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
             )}
           </div>
