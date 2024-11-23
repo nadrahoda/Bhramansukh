@@ -36,6 +36,7 @@ import { FaRegBuilding, FaBinoculars } from 'react-icons/fa'
 import { GiMeal } from 'react-icons/gi'
 import Link from 'next/link'
 import indiaLocations from '../public/data/india_locations.json'
+import Image from 'next/image'
 const Hero = ({
   search,
   setSearch
@@ -378,7 +379,7 @@ const Hero = ({
                     <div key={pkg.id} className='p-4 border border-gray-700 rounded-xl bg-gray-700 text-white flex h-64 space-x-4'>
                       {pkg?.image && (
                         <div className='w-1/4 h-full mb-4'>
-                          <img
+                          <Image
                             src={pkg.image}
                             alt={pkg.name}
                             className='rounded-md object-cover w-full h-full'

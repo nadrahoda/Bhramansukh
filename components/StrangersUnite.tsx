@@ -1,7 +1,7 @@
 // components/StrangersUnite.tsx
 import React, { useState, useEffect, useRef } from 'react'
 import { FaCheckCircle } from 'react-icons/fa'
-
+import Image from 'next/image'
 const StrangersUnite = () => {
   const [currentImage, setCurrentImage] = useState<number>(1)
   const [currentEscape, setCurrentEscape] = useState<number>(0)
@@ -148,10 +148,12 @@ const StrangersUnite = () => {
           <h3 className='text-2xl font-semibold text-white text-center'>
             Upcoming Trending Escapes
           </h3>
-          <img
+          <Image
             src={escapes[currentEscape].image}
             alt='Trending Escape'
             className='w-full h-72 rounded-lg object-cover mt-4'
+            width={400}
+            height={400}
           />
           <div
             className=' mt-4 text-white text-center italic'
