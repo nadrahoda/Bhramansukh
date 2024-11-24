@@ -10,6 +10,7 @@ import {
   FaArrowRight
 } from 'react-icons/fa'
 import logo from '../public/assets/logo.png' // Logo placed in 'public/assets'
+import CustomizeTripForm from './CustomizeTripForm'
 
 const Navbar: React.FC = () => {
   const [dropdowns, setDropdowns] = useState({
@@ -18,6 +19,7 @@ const Navbar: React.FC = () => {
     themes: false
   })
 
+  const [isFormOpen, setIsFormOpen] = useState(false)
   
 
   const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({
@@ -42,6 +44,21 @@ const Navbar: React.FC = () => {
     }
   }, [dropdowns])
 
+
+  // Disable scrolling when the form is open
+  useEffect(() => {
+    if (isFormOpen) {
+      document.body.classList.add('no-scroll')
+    } else {
+      document.body.classList.remove('no-scroll')
+    }
+
+    return () => {
+      document.body.classList.remove('no-scroll')
+    }
+  }, [isFormOpen])
+
+
   const toggleDropdown = (name: keyof typeof dropdowns) => {
     setDropdowns(prev => ({
       ...prev,
@@ -49,8 +66,12 @@ const Navbar: React.FC = () => {
     }))
   }
 
+  const handleOpenForm = () => setIsFormOpen(true)
+  const handleCloseForm = () => setIsFormOpen(false)
+
   return (
-    <nav className='w-full text-white p-2 bg-black'>
+    <div className={isFormOpen ? 'relative overflow-hidden': ''}>
+    <nav className={`w-full text-white p-2 bg-black ${isFormOpen ? 'blur-sm': ''}`}>
       <div className='container mx-auto flex items-center justify-between'>
         {/* Logo Section */}
         <div className='text-2xl font-semibold'>
@@ -375,17 +396,20 @@ const Navbar: React.FC = () => {
               ))}
 
               {/* Plan My Holiday */}
-              <Link
-                href='/plan-holiday'
+              <button
+                onClick={handleOpenForm}
                 className='bg-blue-600 px-4 py-2 rounded hover:bg-blue-700'
               >
                 Customize My Trip
-              </Link>
+              </button>
             </div>
           </div>
         </div>
       </div>
     </nav>
+     {/* Modal Form */}
+     {isFormOpen && <CustomizeTripForm onClose={handleCloseForm} destination={''} />}
+    </div>
   )
 }
 

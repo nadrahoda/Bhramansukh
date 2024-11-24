@@ -50,10 +50,12 @@ const Contact: React.FC = () => {
         <div className="lg:w-1/3 flex flex-col space-y-6 mt-4 items-center justify-center">
           <h3 className="text-2xl font-semibold text-white">Get In Touch</h3>
 
-          <p className="text-lg text-gray-300">For any queries, feel free to contact us:</p>
+          {/* <p className="text-lg text-gray-300">For any queries, feel free to contact us:</p> */}
 
           <div className="space-y-8 w-[70%] shadow-xl py-4 rounded-xl">
+
             <div className='flex flex-col items-center justify-center'>
+                  <p className="text-base font-bold py-6  text-blue-500">For any queries:</p>
               <h4 className="font-semibold text-lg text-gray-400"><MdPhoneIphone/></h4>
               <p className="text-gray-300">+91 1234567890</p>
             </div>

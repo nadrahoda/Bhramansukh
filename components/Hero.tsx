@@ -37,6 +37,7 @@ import { GiMeal } from 'react-icons/gi'
 import Link from 'next/link'
 import indiaLocations from '../public/data/india_locations.json'
 import Image from 'next/image'
+
 const Hero = ({
   search,
   setSearch
@@ -383,6 +384,8 @@ const Hero = ({
                             src={pkg.image}
                             alt={pkg.name}
                             className='rounded-md object-cover w-full h-full'
+                            width={200}
+                            height={200}
                           />
                         </div>
                       )}

@@ -84,3 +84,7 @@ input[type="number"] {
     transform: translateY(0);
   }
 }
+
+.no-scroll {
+  overflow: hidden;
+}
