@@ -1,5 +1,5 @@
 // components/FilterTrips.tsx
-"use client"
+'use client'
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { FaArrowRightLong, FaClock } from 'react-icons/fa6'
@@ -28,7 +28,8 @@ type CardData = {
 }
 
 const FilterTrips: React.FC = () => {
-  const [selectedOption, setSelectedOption] = useState<string>('Sale of The Season')
+  const [selectedOption, setSelectedOption] =
+    useState<string>('Sale of The Season')
 
   const cardsData: CardData[] = [
     {
@@ -112,24 +113,31 @@ const FilterTrips: React.FC = () => {
     'Wildlife',
     'Friends',
     'Water Activities',
-    'Religious',
+    'Religious'
   ]
 
   // Filter cards based on selected option
-  const filteredCards = cardsData.filter(card => card.category === selectedOption).slice(0, 5)
+  const filteredCards = cardsData
+    .filter(card => card.category === selectedOption)
+    .slice(0, 5)
 
   const handleOptionChange = (option: string) => {
     setSelectedOption(option)
   }
 
   return (
-    <div className='flex bg-gray-900 py-20'>
+    <div className='hidden md:flex bg-gray-900 py-20 '>
       {/* Left section (1/4) */}
       <div className='w-1/4 p-8 border-r bg-white rounded-2xl'>
-        <h2 className='text-2xl font-semibold mb-4 text-left'>Select from our tours</h2>
+        <h2 className='text-2xl font-semibold mb-4 text-left'>
+          Select from our tours
+        </h2>
         <div>
           {options.map(option => (
-            <label key={option} className='flex items-center mb-5 cursor-pointer text-sm'>
+            <label
+              key={option}
+              className='flex items-center mb-5 cursor-pointer text-sm'
+            >
               <input
                 type='radio'
                 name='filter'
@@ -152,15 +160,29 @@ const FilterTrips: React.FC = () => {
                     viewBox='0 0 24 24'
                     xmlns='http://www.w3.org/2000/svg'
                   >
-                    <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M5 13l4 4L19 7' />
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth='2'
+                      d='M5 13l4 4L19 7'
+                    />
                   </svg>
                 )}
               </span>
-              <span className={selectedOption === option ? 'text-black font-semibold' : 'text-gray-600'}>
+              <span
+                className={
+                  selectedOption === option
+                    ? 'text-black font-semibold'
+                    : 'text-gray-600'
+                }
+              >
                 {option}
               </span>
               {selectedOption === option && (
-                <Link href='/view-all' className='text-blue-500 ml-2 text-xs flex items-center'>
+                <Link
+                  href='/view-all'
+                  className='text-blue-500 ml-2 text-xs flex items-center'
+                >
                   View All <FaArrowRightLong className='ml-1' size={12} />
                 </Link>
               )}
@@ -195,16 +217,21 @@ const FilterTrips: React.FC = () => {
                         <FaClock className='mr-1' /> {card.duration}
                       </span>
                       <div className='mt-14 pl-6 flex flex-col items-start'>
-                        <h3 className='text-xl font-semibold text-left'>{card.title}</h3>
+                        <h3 className='text-xl font-semibold text-left'>
+                          {card.title}
+                        </h3>
                         <p className='px-2 py-1 text-left mt-6 rounded-full flex items-center border border-white inline-block text-xs'>
-                          <IoLocationSharp size={16} className='mr-1' /> {card.location}
+                          <IoLocationSharp size={16} className='mr-1' />{' '}
+                          {card.location}
                         </p>
                       </div>
 
                       <div className='flex justify-between w-full px-6 mt-10'>
                         <span className='font-semibold text-lg flex items-center'>
                           <span className='text-base'> Starting Cost: </span>
-                          <span className='italic flex items-center ml-2 font-bold text-xl'>{card.price}</span>
+                          <span className='italic flex items-center ml-2 font-bold text-xl'>
+                            {card.price}
+                          </span>
                         </span>
                         <button className='bg-blue-500 text-white text-xs px-3 py-1 rounded-full transition-transform duration-200 transform hover:scale-105 text-center font-bold'>
                           More Details
@@ -249,16 +276,21 @@ const FilterTrips: React.FC = () => {
                         <FaClock className='mr-1' /> {card.duration}
                       </span>
                       <div className='mt-14 pl-6 flex flex-col items-start'>
-                        <h3 className='text-xl font-semibold text-left'>{card.title}</h3>
+                        <h3 className='text-xl font-semibold text-left'>
+                          {card.title}
+                        </h3>
                         <p className='px-2 py-1 text-left mt-6 rounded-full flex items-center border border-white inline-block text-xs'>
-                          <IoLocationSharp size={16} className='mr-1' /> {card.location}
+                          <IoLocationSharp size={16} className='mr-1' />{' '}
+                          {card.location}
                         </p>
                       </div>
 
                       <div className='flex justify-between w-full px-6 mt-10'>
                         <span className='font-semibold text-lg flex items-center'>
                           <span className='text-base'> Starting Cost: </span>
-                          <span className='italic flex items-center ml-2 font-bold text-xl'>{card.price}</span>
+                          <span className='italic flex items-center ml-2 font-bold text-xl'>
+                            {card.price}
+                          </span>
                         </span>
                         <button className='bg-blue-500 text-white text-xs px-3 py-1 rounded-full transition-transform duration-200 transform hover:scale-105 text-center font-bold'>
                           More Details
@@ -270,7 +302,9 @@ const FilterTrips: React.FC = () => {
               </div>
             </>
           ) : (
-            <p className='text-center text-gray-300'>No cards found for the selected option.</p>
+            <p className='text-center text-gray-300'>
+              No cards found for the selected option.
+            </p>
           )}
         </div>
       </div>

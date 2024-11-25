@@ -2,59 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    overflow-x: hidden;
+body {
+  overflow-x: hidden;
 }
 .carousel-container {
-    position: relative;
-    overflow: hidden;
-    width: 100%; /* Full width */
-    height: 450px; 
-    
-  }
-  
-  
-  .carousel {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    width: 100%; /* Ensure the carousel fills the container */
-   
-  }
-  
-  .carousel-card {
-    min-width: 23%; /* Each card takes up 25% of the carousel's width */
-    flex-shrink: 0; /* Prevent cards from shrinking */
-    position: relative; /* Position for absolute children */
-    /* height: 500px;  */
-    height: 450px;
-    
-  }
-  
-  .carousel-card h2 {
-    color: white;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Add shadow for better visibility */
-  }
-  
-  .carousel-card img {
-    width: 100%; /* Ensure images cover the card */
-    height: 100%; /* Fill the height */
-    object-fit: cover; /* Ensure images are centered and cropped appropriately */
-  }
-  
-  /* Optional: Add some hover effects */
-  .carousel-card:hover {
-    transform: scale(1.05); /* Slight zoom effect on hover */
-    transition: transform 0.3s ease; /* Smooth transition for the scale effect */
-  }
+  position: relative;
+  overflow: hidden;
+  width: 100%; /* Full width */
+  height: 450px;
+}
 
-  /* Hide the number input arrows */
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
+.carousel {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%; /* Ensure the carousel fills the container */
+}
+
+.carousel-card {
+  min-width: 23%; /* Each card takes up 25% of the carousel's width */
+  flex-shrink: 0; /* Prevent cards from shrinking */
+  position: relative; /* Position for absolute children */
+  /* height: 500px;  */
+  height: 450px;
+}
+
+.carousel-card h2 {
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Add shadow for better visibility */
+}
+
+.carousel-card img {
+  width: 100%; /* Ensure images cover the card */
+  height: 100%; /* Fill the height */
+  object-fit: cover; /* Ensure images are centered and cropped appropriately */
+}
+
+/* Optional: Add some hover effects */
+.carousel-card:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
+  transition: transform 0.3s ease; /* Smooth transition for the scale effect */
+}
+
+/* Hide the number input arrows */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-input[type="number"] {
+input[type='number'] {
   -moz-appearance: textfield;
 }
 
@@ -87,4 +83,27 @@ input[type="number"] {
 
 .no-scroll {
   overflow: hidden;
+}
+
+/* Mobile Carousel Container */
+.mobile-carousel-container {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory; /* Enable snapping behavior */
+  scroll-behavior: smooth; /* Smooth scroll between cards */
+  -webkit-overflow-scrolling: touch; /* Better touch scrolling */
+  gap: 16px; /* Optional: Adjust spacing between cards */
+  padding: 0 16px; /* Optional: Add padding */
+}
+
+.mobile-carousel-card {
+  flex: 0 0 100%; /* Each card takes up 100% of the viewport width */
+  scroll-snap-align: center; /* Snap each card to the center of the container */
+  position: relative;
+  height: 450px; /* Adjust height as needed */
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

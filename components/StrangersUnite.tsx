@@ -67,11 +67,11 @@ const StrangersUnite = () => {
   }, [])
 
   return (
-    <div className='flex space-x-8 bg-gray-800 py-10 px-28'>
+    <div className='flex md:flex-row flex-col  md:space-x-8 bg-gray-800 py-10 px-6 md:px-28'>
       {/* Left Section */}
-      <div className='w-3/5 flex  justify-center flex-col'>
+      <div className='w-full md:w-3/5 flex  justify-center flex-col'>
         <h2 className='text-3xl text-white font-bold'>Strangers Unite Trip</h2>
-        <div ref={sectionRef} className='overflow-hidden mt-4'>
+        <div ref={sectionRef} className='overflow-hidden mt-4 hidden md:block'>
           <p className='animated-text space-x-1 text-blue-500 font-semibold'>
             {letters.map((letter, index) => (
               <span
@@ -84,12 +84,13 @@ const StrangersUnite = () => {
             ))}
           </p>
         </div>
+        <p className='text-base italic mt-2 text-blue-400 md:hidden'>{text}</p>
 
         <h3 className='text-lg font-semibold mt-8 text-white'>
           Why Choose a Strangers Unite Trip?
         </h3>
         <ul className='list-disc list-inside mt-4 text-white flex flex-col space-y-4 '>
-          <li className='flex text-sm w-[60%]'>
+          <li className='flex text-sm w-full md:w-[60%]'>
             <FaCheckCircle className='text-blue-500 mr-4 mt-1 flex-none h-auto' />{' '}
             {/* Icon spans both lines */}
             <div className='flex flex-col'>
@@ -99,28 +100,28 @@ const StrangersUnite = () => {
               </span>
             </div>
           </li>
-          <li className='flex text-sm w-[60%]'>
+          <li className='flex text-sm md:w-[60%]'>
             <FaCheckCircle className='text-blue-500 mr-4 mt-1 flex-none h-auto' />
             <div className='flex flex-col'>
               <strong>No Drama, Just Karma:</strong>
               <span>We handle the details - just show up and vibe!</span>
             </div>
           </li>
-          <li className='flex text-sm w-[60%]'>
+          <li className='flex text-sm md:w-[60%]'>
             <FaCheckCircle className='text-blue-500 mr-4 mt-1 flex-none h-auto' />
             <div className='flex flex-col'>
               <strong>Squad Goals Redefined:</strong>
               <span>Epic moments from bonfire karaoke to beach games.</span>
             </div>
           </li>
-          <li className='flex text-sm w-[60%]'>
+          <li className='flex text-sm md:w-[60%]'>
             <FaCheckCircle className='text-blue-500 mr-4 mt-1 flex-none h-auto' />
             <div className='flex flex-col'>
               <strong>Big Experiences, Small Budgets:</strong>
               <span>Luxury travel without the luxury price tag.</span>
             </div>
           </li>
-          <li className='flex text-sm w-[60%]'>
+          <li className='flex text-sm md:w-[60%]'>
             <FaCheckCircle className='text-blue-500 mr-4 mt-1 flex-none h-auto' />
             <div className='flex flex-col'>
               <strong>Trending Destinations:</strong>
@@ -140,7 +141,7 @@ const StrangersUnite = () => {
       </div>
 
       {/* Right Section */}
-      <div className='w-2/5 flex flex-col items-center justify-center'>
+      <div className=' md:w-2/5 w-full flex flex-col items-center justify-center'>
         <div
           className='bg-gray-700 shadow-xl  mt-8 p-4 rounded-xl'
           style={{ width: '100%', maxWidth: '500px', minHeight: '400px' }} // Set consistent width and height
