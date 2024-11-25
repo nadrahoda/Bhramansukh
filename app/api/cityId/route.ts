@@ -29,6 +29,12 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: "Package not found" }, { status: 404 });
     }
 
+    // Ensure the `itinerary` field is parsed properly
+    const parsedItinerary =
+      typeof packageDetails.itinerary === "string"
+        ? JSON.parse(packageDetails.itinerary)
+        : packageDetails.itinerary;
+
     // Fetch similar packages based on the cityId
     const similarPackages = await prisma.package.findMany({
       where: {
@@ -44,8 +50,12 @@ export async function GET(request: Request) {
       take: 5, // Limit the number of similar packages
     });
 
+    // Add parsed itinerary to the package details
     return NextResponse.json({
-      packageDetails,
+      packageDetails: {
+        ...packageDetails,
+        itinerary: parsedItinerary,
+      },
       similarPackages,
     });
   } catch (error) {
