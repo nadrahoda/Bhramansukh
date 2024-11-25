@@ -48,4 +48,5 @@ model Package {
   sightseeing   Boolean     @default(true)          // Default value
   meals         Boolean     @default(true)          // Default value
   duration      String?
+ itinerary      Json?
 }

@@ -46,6 +46,7 @@ const Hero = ({
   setSearch: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null)
+  const packagesRef = useRef<HTMLDivElement>(null);
   const [suggestions, setSuggestions] = useState<string[]>([])
   const [inputValue, setInputValue] = useState<string>('')
   const [displayedText, setDisplayedText] = useState<string>('')
@@ -88,6 +89,7 @@ const Hero = ({
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page)
     }
+    packagesRef.current?.scrollIntoView({ behavior: 'smooth' });
   }
   const handleExploreClick = async (cityname: string) => {
     setLoading(true)
@@ -361,6 +363,7 @@ const Hero = ({
 
           {/* Right Section */}
           <div className='w-3/5 px-4 pb-10 pl-16'>
+          <div ref={packagesRef} >
             {loading ? (
               <div>Searching...</div>
             ) : (
@@ -368,7 +371,7 @@ const Hero = ({
                 {tourPackages && tourPackages?.length > 0 && (
                   <>
                   
-            
+
                   <h1 className='text-2xl font-bold pb-4'>
                       Showing Results for <span className='italic text-blue-500'>{inputValue}</span>
                     </h1>
@@ -512,6 +515,7 @@ const Hero = ({
                 )}
               </div>
             )}
+            </div>
           </div>
         </div>
       )}
