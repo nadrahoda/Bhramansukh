@@ -14,7 +14,7 @@ const WhyChooseUs: React.FC = () => {
   return (
     <div className='flex md:flex-row flex-col gap-8 p-8 bg-gray-800 text-white py-24'>
       {/* Left Section with Images */}
-      <div className='w-full order-2 md:w-2/6 grid grid-cols-2 md:gap-4 gap-2'>
+      <div className='w-full md:order-1 order-2 md:w-2/6 grid grid-cols-2 md:gap-4 gap-2'>
         {/* First Column with 2 Images */}
         <div className='grid grid-rows-2 md:gap-3 gap-2'>
           <Image
@@ -60,7 +60,7 @@ const WhyChooseUs: React.FC = () => {
       </div>
 
       {/* Right Section with Text */}
-      <div className='w-full md:w-4/6 flex flex-col items-start'>
+      <div className='w-full md:order-2 order-1 md:w-4/6 flex flex-col items-start'>
         <h2 className='text-gray-400 text-lg uppercase tracking-widest'>
           Why Choose Us
         </h2>
@@ -70,7 +70,7 @@ const WhyChooseUs: React.FC = () => {
         <p className='italic text-lg md:mt-10 mt-3'>
           "Every destination has a story; make it yours."
         </p>
-        <p className='text-sm md:text-lg text-left md:mt-10 mt-3 text-balance text-gray-300'>
+        <p className='hidden md:flex text-sm md:text-lg text-left md:mt-10 mt-3 text-balance text-gray-300'>
           Our team is dedicated to providing you with outstanding travel
           experiences that combine comfort, adventure, and cultural exploration.
           From hand-picked destinations to personalized services, we ensure
@@ -83,6 +83,9 @@ const WhyChooseUs: React.FC = () => {
           support, and a commitment to making your travel dreams a reality. Let
           us handle the details so you can immerse yourself in the journey and
           focus on creating unforgettable memories.
+        </p>
+        <p className='md:hidden flex text-sm md:text-lg text-left md:mt-10 mt-3 text-balance text-gray-300'>
+      Our team provide exceptional travel experiences blending comfort, adventure, and cultural exploration. With expert-crafted itineraries, personalized service, and an extensive network, we ensure seamless planning, great prices, and exclusive journeys. Trust us to make your travel dreams a reality—immerse yourself, and create unforgettable memories!
         </p>
 
         {/* Icon Section */}

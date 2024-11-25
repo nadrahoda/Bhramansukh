@@ -38,7 +38,7 @@ const Carousel: React.FC = () => {
 
   return (
     <>
-      <div className='bg-gray-900 py-10 md:flex hidden'>
+      <div className='bg-gray-900 py-10 md:flex flex-col hidden'>
         <div className='flex flex-col pl-6'>
           <h3 className='text-gray-400 text-lg uppercase flex flex-start tracking-widest'>
             Category
