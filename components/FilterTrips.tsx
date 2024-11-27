@@ -6,12 +6,12 @@ import { FaArrowRightLong, FaClock } from 'react-icons/fa6'
 import { IoLocationSharp } from 'react-icons/io5'
 import Image, { StaticImageData } from 'next/image'
 
-import cardImage1 from '../public/assets/image1.jpg'
-import cardImage6 from '../public/assets/image6.jpg'
-import cardImage7 from '../public/assets/image7.jpg'
-import cardImage9 from '../public/assets/image9.jpg'
-import cardImage10 from '../public/assets/image10.jpg'
-import cardImage11 from '../public/assets/image11.jpg'
+import cardImage1 from '../public/assets/rishikesh.jpeg'
+import cardImage6 from '../public/assets/manali.jpeg'
+import cardImage7 from '../public/assets/goaunite.jpg'
+import cardImage9 from '../public/assets/coorg.jpeg'
+import cardImage10 from '../public/assets/kerala1.jpeg'
+import cardImage11 from '../public/assets/dharamshala.jpeg'
 import cardImage12 from '../public/assets/image12.jpg'
 import cardImage13 from '../public/assets/image13.jpg'
 import salebanner from '../public/assets/sale.jpg'
@@ -29,76 +29,125 @@ type CardData = {
 
 const FilterTrips: React.FC = () => {
   const [selectedOption, setSelectedOption] =
-    useState<string>('Sale of The Season')
+    useState<string>('Strangers Unite')
 
   const cardsData: CardData[] = [
     {
       id: 1,
-      category: 'Sale of The Season',
-      title: 'Vizag and Araku Valley Tour',
-      location: 'Visakhapatnam',
-      duration: '4D/3N',
-      price: '₹ 10,000',
-      image: cardImage10
+      category: 'Strangers Unite',
+      title: 'Rishikesh - Adventure and Spiritual Retreat',
+      location: 'Rishikesh',
+      duration: '3D/2N',
+      price: '₹ 9,500',
+      image: cardImage1
     },
     {
       id: 2,
-      category: 'Sale of The Season',
-      title: 'Quick Escape to Tawang',
-      location: 'Assam',
+      category: 'Strangers Unite',
+      title: 'Manali - Snow Adventures and Scenic Views',
+      location: 'Manali',
       duration: '4D/3N',
-      price: '₹ 15,000',
-      image: cardImage11
-    },
-    { id: 3, category: 'Sale of The Season', image: salebanner },
-    {
-      id: 4,
-      category: 'Sale of The Season',
-      title: 'Assam Cultural Experience',
-      location: 'Guwahati',
-      duration: '4D/3N',
-      price: '₹ 15,000',
-      image: cardImage12
-    },
-    {
-      id: 5,
-      category: 'Sale of The Season',
-      title: 'Bodh Gaya Spiritual Retreat',
-      location: 'Gaya',
-      duration: '3D/2N',
-      price: '₹ 8,000',
-      image: cardImage13
-    },
-    {
-      id: 6,
-      category: 'X-mas & New Year Trips',
-      title: 'Card 6',
+      price: '₹ 11,000',
       image: cardImage6
     },
+    { id: 3, category: 'Strangers Unite', image: salebanner },
     {
-      id: 7,
-      category: 'X-mas & New Year Trips',
-      title: 'Card 7',
+      id: 4,
+      category: 'Strangers Unite',
+      title: 'Goa - Fun and Beach Activities',
+      location: 'Goa',
+      duration: '3D/2N',
+      price: '₹ 7,500',
       image: cardImage7
     },
     {
+      id: 5,
+      category: 'Strangers Unite',
+      title: 'Coorg - Coffee Plantations and Scenic Trails',
+      location: 'Coorg',
+      duration: '3D/2N',
+      price: '₹ 7,300',
+      image: cardImage9
+    },
+    {
+      id: 6,
+      category: 'Therapy Travels',
+      title: 'Kerala - Ayurvedic Wellness and Backwater Escape',
+      location: 'Kerala',
+      duration: '4D/3N',
+      price: '₹ 15,000',
+      image: cardImage10
+     
+    },
+    {
+      id: 7,
+      category: 'Therapy Travels',
+      title: 'Coorg - Nature Healing and Wellness Retreat',
+      location: 'Coorg',
+      duration: '3D/2N',
+      price: '₹ 9,000',
+      image: cardImage9
+    },
+    {
       id: 8,
-      category: 'X-mas & New Year Trips',
-      title: 'Card 8',
+      category: 'Therapy Travels',
       image: salebanner
     },
     {
       id: 9,
-      category: 'X-mas & New Year Trips',
-      title: 'Card 9',
-      image: cardImage9
+      category: 'Therapy Travels',
+      title: 'Rishikesh - Spiritual Healing and Yoga Retreat',
+      location: 'Rishikesh',
+      duration: '3D/2N',
+      price: '₹ 10,500',
+      image: cardImage1
     },
     {
       id: 10,
-      category: 'X-mas & New Year Trips',
-      title: 'Card 10',
+      category: 'Therapy Travels',
+      title: 'Dharamshala - Himalayan Meditation and Healing Escape',
+      location: 'Dharamshala',
+      duration: '3D/2N',
+      price: '₹ 11,500',
+      image: cardImage11
+    },
+    {
+      id: 11,
+      category: 'Exposure Camps',
+      title: 'Jodhpur - Adventure and Leadership Exposure Camp',
+      location: 'Jodhpur',
+      duration: '3D/2N',
+      price: '₹ 9,500',
       image: cardImage1
-    }
+    },
+    {
+      id: 12,
+      category: 'Exposure Camps',
+      title: 'Darjeeling - Adventure and Cultural Exposure Camp',
+      location: 'Darjeeling',
+      duration: '4D/3N',
+      price: '₹ 12,500',
+      image: cardImage6
+    },
+    { id: 13, category: 'Exposure Camps', image: salebanner },
+    {
+      id: 14,
+      category: 'Exposure Camps',
+      title: 'Udaipur - Nature and Team-building Exposure Camp',
+      location: 'Udaipur',
+      duration: '3D/2N',
+      price: '₹ 8,500',
+      image: cardImage7
+    },
+    {
+      id: 15,
+      category: 'Exposure Camps',
+      title: 'Hampi - Cultural and Ecotourism Exposure Camp',
+      location: 'Hampi',
+      duration: '4D/3N',
+      price: '₹ 13,000',
+      image: cardImage9
+    },
   ]
 
   const options = [
