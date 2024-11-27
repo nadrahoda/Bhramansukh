@@ -3,102 +3,83 @@ import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa'
 import Image from 'next/image'
 import logo from '../public/assets/logo.png'
 import { FaPhone } from 'react-icons/fa6'
+import { FaPhoneVolume } from "react-icons/fa6";
+import { MdMail } from "react-icons/md";
 
 const Footer: React.FC = () => {
   return (
-    <footer className='bg-gray-900 text-white pt-10'>
-      <div className='max-w-screen-xl mx-auto px-6 grid grid-cols-1 md:grid-cols-5 gap-8'>
-        {/* First Column - Logo and Social Icons */}
-        <div className='flex flex-col justify-center space-y-4'>
-          <div className='flex items-center justify-center space-x-3'>
-            <Image src={logo} alt='Logo' className='w-28' />
+    <footer className="bg-gray-900 text-gray-300 py-8">
+    {/* Main Links Section */}
+    <div className="max-w-7xl mx-auto px-4">
+      <div className="flex flex-col md:flex-row justify-between items-start space-y-6 md:space-y-0">
+        {/* Links */}
+        <div className="flex flex-col justify-between w-full md:w-2/3 space-y-4">
+          <div className="flex flex-wrap space-x-4 text-sm">
+            <p className="font-semibold">About Us</p>
+            <p className="font-semibold">Team</p>
+            <p className="font-semibold">We're Hiring</p>
+            <p className="font-semibold">Testimonial</p>
+            <p className="font-semibold">Blog</p>
+            <p className="font-semibold">Travelogues</p>
+            <p className="font-semibold">Terms & Conditions</p>
+            <p className="font-semibold">Privacy Policy</p>
           </div>
-          <div className='flex space-x-4 items-center justify-center pl-2'>
-            <a href='/' className='text-xl'>
-              <FaFacebook />
-            </a>
-            <a href='/' className='text-xl'>
-              <FaTwitter />
-            </a>
-            <a href='/' className='text-xl'>
-              <FaInstagram />
-            </a>
-            <a href='/' className='text-xl'>
-              <FaLinkedin />
-            </a>
+
+          <div className="flex space-x-8 text-sm">
+            <p className="font-semibold">Travel Agent? Join Us</p>
+            <p className="font-semibold">FAQ</p>
+            <p className="font-semibold">Contact Us</p>
           </div>
         </div>
 
-        {/* Second Column - Company Links */}
-        <div className='flex flex-col space-y-3  items-center'>
-          <h4 className='text-xl font-semibold'>Company</h4>
-          <a href='/' className='text-gray-400 hover:text-white'>
-            About Us
-          </a>
-          <a href='/' className='text-gray-400 hover:text-white'>
-            Contact Us
-          </a>
-          <a href='/' className='text-gray-400 hover:text-white'>
-            Our Blogs
-          </a>
-          <a href='/' className='text-gray-400 hover:text-white'>
-            Career With Us
-          </a>
-          <a href='/' className='text-gray-400 hover:text-white'>
-            Payment Policy
-          </a>
-        </div>
-
-        {/* Third Column - Group Tours */}
-        <div className='hidden md:flex flex-col space-y-3  items-center'>
-          <h4 className='text-xl font-semibold'>Group Tours</h4>
-          <a href='/' className='text-gray-400 hover:text-white'>
-            Trekking
-          </a>
-          <a href='/' className='text-gray-400 hover:text-white'>
-            Biking Trips
-          </a>
-          <a href='/' className='text-gray-400 hover:text-white'>
-            Upcoming Trips
-          </a>
-          <a href='/' className='text-gray-400 hover:text-white'>
-            Backpacking Trips
-          </a>
-          <a href='/' className='text-gray-400 hover:text-white'>
-            Weekend Getaways
-          </a>
-        </div>
-
-        {/* Fourth Column - Customized Trips */}
-        <div className='hidden md:flex flex-col space-y-3 items-center '>
-          <h4 className='text-xl font-semibold'>Customized Trips</h4>
-          <a href='/' className='text-gray-400 hover:text-white'>
-            Corporate Tours
-          </a>
-          <a href='/' className='text-gray-400 hover:text-white'>
-            Domestic Tours
-          </a>
-          <a href='/' className='text-gray-400 hover:text-white'>
-            International Getaways
-          </a>
-        </div>
-
-        {/* Fifth Column - Contact Us */}
-        <div className='flex flex-col space-y-3 items-center '>
-          <h4 className='text-xl font-semibold'>Contact Us</h4>
-
-          <p className='text-gray-400'>+91 9953786506</p>
-          <p className='text-gray-400'>sales@bhramansukh.in</p>
-          <p className='text-gray-400 text-center'>
-            Aman Vihar, Haroon Nagar Sector 2, Phulwari Sharif, Patna
+        {/* Contact Info */}
+        <div className="text-left flex flex-col space-y-2 items-start">
+          <p className="font-semibold flex items-center">
+            <FaPhoneVolume className="mr-3" /> Contact: +1-234-567-890
+          </p>
+          <p className="font-semibold flex items-center">
+            <MdMail className="mr-3" /> info@travelcompany.com
           </p>
         </div>
       </div>
+    </div>
 
-      <div className='text-center mt-8 text-white py-1 bg-blue-500'>
-        <p>&copy; 2024 Bhramansukh. All rights reserved.</p>
+   
+
+    {/* Three Columns - First Section */}
+    <div className="max-w-7xl mx-auto mt-8 px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div>
+        <h4 className="text-xl font-semibold text-white mb-2">Corporate Office:</h4>
+        <p className="text-sm w-2/3">
+          Aman Vihar, Haroon Nagar Sector-2, Phulwari Sharif, Patna 801505
+        </p>
       </div>
-    </footer>
+      <div>
+        <h4 className="text-lg font-semibold text-white mb-2">Connect with us on:</h4>
+        <div className="text-sm flex space-x-5 pl-2">
+          <FaFacebook size={20} />
+          <FaTwitter size={20} />
+          <FaInstagram size={20} />
+          <FaLinkedin size={20} />
+        </div>
+      </div>
+    </div>
+
+    {/* Three Columns - Second Section */}
+    <div className="max-w-7xl mx-auto mt-8 px-4 grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+      <div className="w-1/3">
+        <Image src={logo} alt="Logo" width={192} height={96} className="w-36 pl-2" />
+      </div>
+      <div className="w-1/3 text-nowrap">
+        <h4 className="text-lg text-center font-semibold text-white mb-2">
+          Made with ❤️ in India
+        </h4>
+      </div>
+      <div className="w-1/3 text-right text-nowrap">
+        <p className="text-sm">All rights reserved © 2024</p>
+      </div>
+    </div>
+  </footer>
   )
 }
 
