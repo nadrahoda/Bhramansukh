@@ -49,4 +49,7 @@ model Package {
   meals         Boolean     @default(true)          // Default value
   duration      String?
  itinerary      Json?
+ startingCity  String?
+ endingCity    String?
+ nearby        String?
 }

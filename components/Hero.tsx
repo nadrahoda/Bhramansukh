@@ -13,6 +13,8 @@ export interface TourPackage {
   meals: boolean
   stars: number
   sightseeing: boolean
+  startingCity: string
+  endingCity: string
   state: {
     id: number
     name: string
@@ -29,7 +31,7 @@ export interface TourPackage {
   } | null
 }
 import React, { useState, useEffect, useRef } from 'react'
-import { FaLocationDot } from 'react-icons/fa6'
+import { FaArrowLeftLong, FaLocationDot } from 'react-icons/fa6'
 import { IoLocationOutline } from 'react-icons/io5'
 import { FaRegBuilding, FaBinoculars } from 'react-icons/fa'
 import { GiMeal } from 'react-icons/gi'
@@ -285,6 +287,7 @@ const Hero = ({
             autoPlay
             muted
             loop
+            playsInline
             className='absolute top-0 left-0 w-full h-full object-cover'
           >
             <source src='/assets/hero.mp4' type='video/mp4' />
@@ -392,13 +395,20 @@ const Hero = ({
       {/* Searched Section */}
       {search && (
         <div className='flex bg-gray-900 text-white h-auto'>
-          <div className='w-1/5 p-4 border-r border-gray-700 pl-10 pt-6'>
-            <h2 className='text-lg font-bold mb-4'>Categories</h2>
-            <form className='grid grid-cols-2 gap-x-4 gap-y-2'>
+          <div className='w-1/5 p-4 border-r border-gray-700 pl-10 '>
+          {/* Back Button */}
+      <button
+        onClick={() => setSearch(false)}
+        className='text-white px-4 py-2 rounded-lg mb-4 font-semibold inline-flex items-center underline'
+      >
+    <FaArrowLeftLong className='mr-2 bg-blue-500 rounded-full w-8 p-2 h-8  text-white' size={12} color='white'/>    Back to Home
+      </button>
+            <h2 className='text-lg font-bold mb-4 text-blue-500'>Categories</h2>
+            <form className='grid grid-cols-2 gap-x-4 gap-y-2 '>
               {categories.map((category, index) => (
                 <label
                   key={index}
-                  className='flex items-center space-x-2 text-sm'
+                  className='flex items-center space-x-2 text-sm '
                 >
                   <input
                     type='checkbox'
@@ -413,7 +423,7 @@ const Hero = ({
             </form>
 
             {/* Duration Filter */}
-            <h2 className='text-lg font-bold mb-4'>
+            <h2 className='text-lg font-bold mb-4 mt-6 text-blue-500'>
               Duration <span className='font-light text-sm'>(in Days)</span>
             </h2>
             <form className='grid grid-cols-2 gap-x-4 gap-y-2'>
@@ -435,7 +445,7 @@ const Hero = ({
             </form>
 
             {/* Budget Filter */}
-            <h2 className='text-lg font-bold mb-4'>
+            <h2 className='text-lg font-bold mb-4 mt-6 text-blue-500'>
               Budget <span className='font-light text-sm'>(in ₹)</span>
             </h2>
             <form className='grid grid-cols-1 gap-x-4 gap-y-3'>
@@ -501,7 +511,7 @@ const Hero = ({
                             <span className='mr-1'>
                               <IoLocationOutline />
                             </span>
-                            {pkg?.city?.name} {pkg?.state?.name}
+                            {pkg?.startingCity} to {pkg?.endingCity}
                           </p>
                           <div className='flex justify-between items-center'>
                             <div className='flex items-center space-x-4 mt-5'>

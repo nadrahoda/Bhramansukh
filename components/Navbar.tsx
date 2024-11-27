@@ -85,13 +85,13 @@ const Navbar: React.FC = () => {
           {/* Logo Section */}
           <div className='text-2xl font-semibold '>
             <Link href='/'>
-              <Image
-                src={logo}
-                alt='Logo'
-                width={96}
-                height={48}
-                className='w-16'
-              />
+            <Image
+  src={logo}
+  alt="Logo"
+  width={192}
+  height={96}
+  className="w-36 pl-2"
+/>
             </Link>
           </div>
 
@@ -105,7 +105,7 @@ const Navbar: React.FC = () => {
           <div className='hidden md:flex flex-col'>
             {/* First Row */}
             <div className='flex justify-end'>
-              <div className='flex space-x-6 mb-2 text-xs'>
+              <div className='flex space-x-6 mb-1 text-xs'>
                 <a
                   href='tel:+911234567890'
                   className='hover:text-gray-400 flex items-center'
@@ -139,8 +139,8 @@ const Navbar: React.FC = () => {
             </div>
 
             {/* Second Row */}
-            <div className='flex'>
-              <div className='flex space-x-6 mt-2 items-center'>
+            <div className='flex mb-1'>
+              <div className='flex space-x-6 mt-2  items-center'>
                 {[
                   { name: 'themes', label: 'Holiday Themes' },
                   { name: 'holiday', label: 'Holiday Packages' }

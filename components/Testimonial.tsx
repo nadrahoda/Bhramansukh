@@ -99,7 +99,7 @@ const Testimonial: React.FC = () => {
       </div>
 
       {/* Testimonials Section */}
-      <div className='relative w-full md:mt-28 mt-10 overflow-hidden'>
+      <div className='relative w-full md:mt-14 mt-10 overflow-hidden'>
         <div
           className='flex gap-8 transition-transform duration-500'
           style={{
@@ -123,11 +123,11 @@ const Testimonial: React.FC = () => {
                   height={96}
                 />
               </div>
-              <RiDoubleQuotesL size={30} color='red' className=' mb-2 mt-2 ' />
+              <RiDoubleQuotesL size={30} color='red' className='  ' />
               <p className='text-gray-800 mb-6 font-normal text-black text-pretty text-sm flex text-left'>
                 {testimonial.content}
               </p>
-              <h3 className='text-red-500 text-xl font-bold italic absolute bottom-2 right-2 transform -translate-x-1/2 text-center'>
+              <h3 className='text-red-500 text-xl font-bold italic absolute bottom-3 right-0 transform -translate-x-1/2 text-center'>
                 {' '}
                 - {testimonial.name}
               </h3>
