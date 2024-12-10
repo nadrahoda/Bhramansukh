@@ -23,6 +23,33 @@ const Navbar: React.FC = () => {
     themes: false
   })
 
+  const [dropdownAlignment, setDropdownAlignment] = useState<'left' | 'right'>('right');
+  const holidayDropdownRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleDropdownAlignment = () => {
+      const dropdown = holidayDropdownRef.current;
+
+      if (dropdown) {
+        const rect = dropdown.getBoundingClientRect();
+
+        if (rect.right > window.innerWidth) {
+          setDropdownAlignment('left');
+        } else {
+          setDropdownAlignment('right');
+        }
+      }
+    };
+
+    window.addEventListener('resize', handleDropdownAlignment);
+    handleDropdownAlignment(); // Check alignment initially
+
+    return () => {
+      window.removeEventListener('resize', handleDropdownAlignment);
+    };
+  }, []);
+
+
   const [isFormOpen, setIsFormOpen] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -107,11 +134,11 @@ const Navbar: React.FC = () => {
             <div className='flex justify-end'>
               <div className='flex space-x-6 mb-1 text-xs'>
                 <a
-                  href='tel:+911234567890'
+                  href='tel:+919953786506'
                   className='hover:text-gray-400 flex items-center'
                 >
                   <FaPhoneAlt className='mr-2' />
-                  +91 1234567890
+                  +91 9953786506
                 </a>
                 <button className='hover:text-gray-400 flex items-center'>
                   <FaUserPlus className='mr-2' />
@@ -170,7 +197,9 @@ const Navbar: React.FC = () => {
                       )}
                     </div>
                     {dropdowns[item.name as keyof typeof dropdowns] && (
-                      <div className='absolute left-0 mt-4 bg-white border border-gray-300 font-medium text-sm rounded shadow-lg z-50 w-[500px] h-[400px]'>
+                      <div className={`absolute ${
+                        dropdownAlignment === 'right' ? 'right-0' : 'left-0'
+                      } mt-4 bg-white border border-gray-300 font-medium text-sm rounded shadow-lg z-50 w-[500px] h-[400px]`}>
                         {item.name === 'themes' ? (
                           <div className='p-8 grid grid-cols-2 pt-8  gap-y-4  '>
                             <div>
@@ -366,7 +395,7 @@ const Navbar: React.FC = () => {
               </div>
 
               <div className='flex ml-6 space-x-6 mt-2 items-center'>
-                {[{ name: 'guides', label: 'Destination Guides' }].map(item => (
+                {/* {[{ name: 'guides', label: 'Destination Guides' }].map(item => (
                   <div
                     key={item.name}
                     className={`relative ${
@@ -415,7 +444,7 @@ const Navbar: React.FC = () => {
                       </div>
                     )}
                   </div>
-                ))}
+                ))} */}
 
                 {/* Plan My Holiday */}
                 <button

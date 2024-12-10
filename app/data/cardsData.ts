@@ -22,6 +22,7 @@ export const cardsData = [
         month: 'Nov-Dec',
         duration: '4N/3D',
         price: '₹8000',
+       
         rating: 4.5
     },
     {

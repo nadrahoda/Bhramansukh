@@ -38,7 +38,7 @@ import { GiMeal } from 'react-icons/gi'
 import Link from 'next/link'
 import indiaLocations from '../public/data/india_locations.json'
 import Image from 'next/image'
-
+import CustomizeTripForm from './CustomizeTripForm'
 const Hero = ({
   search,
   setSearch
@@ -56,6 +56,15 @@ const Hero = ({
   const itemsPerPage = 4
   const [loading, setLoading] = useState<boolean | null>(null)
   const [tourPackages, setTourPackages] = useState<TourPackage[]>()
+  const [showForm, setShowForm] = useState(false);
+
+  const handleOpenForm = () => {
+    setShowForm(true);
+  };
+
+  const handleCloseForm = () => {
+    setShowForm(false);
+  };
   const extractDays = (duration: string): number => {
     // Regular expression to match the number before "Days" or "Nights"
     const match = duration.match(/^(\d+)\s*(Days|Day)/i)
@@ -565,7 +574,7 @@ const Hero = ({
                               >
                                 View Details
                               </Link>
-                              <button className='bg-gray-400 text-xs py-2 px-3 rounded-lg font-semibold'>
+                              <button onClick={handleOpenForm} className='bg-gray-400 text-xs py-2 px-3 rounded-lg font-semibold'>
                                 Customize Plan
                               </button>
                             </div>
@@ -574,6 +583,8 @@ const Hero = ({
                       </div>
                     </div>
                   ))}
+
+
                   {/* Pagination Controls */}
                   <div className='flex items-center justify-center space-x-4 mt-6'>
                     <button
@@ -618,6 +629,7 @@ const Hero = ({
           </div>
         </div>
       )}
+      {showForm && <CustomizeTripForm onClose={handleCloseForm} destination={''} />}
     </>
   )
 }

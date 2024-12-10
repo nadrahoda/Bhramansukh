@@ -95,7 +95,7 @@ export default function PackageDetails() {
   return (
     <>
       <Navbar />
-      <div className="bg-gray-900 text-white min-h-screen pt-8">
+      <div className="bg-gray-900 text-white pt-8">
         <div className="flex justify-between mx-12 rounded-xl  p-8 bg-gray-800 ">
          
             <div className="">
@@ -146,41 +146,67 @@ export default function PackageDetails() {
               )}
             </div>
             </div>
-              
-              <div className="mt-8 p-6">
-                {packageDetails.itinerary ? (
-                  <div>
-                    <h2 className="text-xl font-semibold mt-8 mb-4">
-                      Itinerary
-                    </h2>
-                    {Object.keys(packageDetails.itinerary).map((dayKey) => {
-                      const day = packageDetails.itinerary?.[dayKey]; // Use optional chaining
-                      return day ? (
-                        <div key={dayKey} className="mb-4">
-                          <h3 className="font-bold">{day?.title}</h3>
-                          <ul className="list-disc pl-5">
-                            {day.activities.map((activity, index) => (
-                              <li key={index} className="mb-2">
-                                <strong>{activity.time}:</strong>{" "}
-                                {activity.description}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ) : null; 
-                    })}
+            <div className="mt-8 mx-12">
+  {packageDetails.itinerary ? (
+    <div>
+      <h2 className="text-3xl font-semibold mt-5 mb-8 text-blue-500">Itinerary</h2>
+
+      {/* Wrapper for the vertical line and content */}
+      <div className="relative">
+        {/* Continuous Vertical Line */}
+        <div className="absolute left-6 top-0 bottom-0 w-px bg-transparent border-l border-gray-300 border-dashed"></div>
+
+
+        {Object.keys(packageDetails.itinerary || {}).map((dayKey, dayIndex) => {
+          const day = packageDetails.itinerary?.[dayKey]; // Safely access the object
+          return day ? (
+            <div key={dayKey} className="flex items-start mb-8 relative">
+              {/* Connector Dot */}
+              <div className="flex-none mx-4  relative z-10">
+                <div className="w-4 h-4 bg-gray-600 rounded-full"></div>
+              </div>
+
+              {/* Content Section */}
+              <div className="flex-1">
+                {/* Day Heading */}
+                <h3 className="text-xl font-bold text-blue-500 mb-2 uppercase">
+                  {dayKey}
+                </h3>
+
+                {/* Activities */}
+                {day.activities.map((activity, index) => (
+                  <div key={index} className="mb-4">
+                    <h4 className="font-semibold">{activity.time}: <span className="font-light italic text-gray-400">{activity.description}</span></h4>
+                    <p className="text-gray-600"></p>
                   </div>
-                ) : (
-                  <p>Itinerary not available</p>
+                ))}
+
+                {/* Overnight Stay (if any) */}
+                {day.overnightStay && (
+                  <div className="mt-2">
+                    <p className="font-semibold text-gray-400">Overnight Stay: <span className="font-light italic text-blue-400">{day.overnightStay}</span></p>
+                    <p className="text-gray-600"></p>
+                  </div>
                 )}
               </div>
-          
+            </div>
+          ) : null;
+        })}
+      </div>
+    </div>
+  ) : (
+    <p>Itinerary not available</p>
+  )}
+</div>
+
+
+
 
      
 
      
 
-        <h2 className="text-xl font-semibold mt-8 mb-4">Similar Packages</h2>
+        <h2 className="text-xl font-semibold mt-8 mb-4 mx-14">Similar Packages</h2>
         {similarPackages.length > 0 ? (
           <ul className="list-disc pl-5">
             {similarPackages.map((pkg) => (
@@ -194,7 +220,7 @@ export default function PackageDetails() {
             ))}
           </ul>
         ) : (
-          <p>No similar packages found.</p>
+          <p className="mx-14">No similar packages found.</p>
         )}
          </div>
     </>
