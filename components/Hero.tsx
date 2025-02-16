@@ -132,12 +132,18 @@ const Hero = ({
 
   const dayNightOptions = ['5D/4N', '6D/5N', '10D/9N', 'Not decided']
   const monthYearOptions = [
-    'December 2024',
-    'January 2025',
-    'February 2025',
-    'March 2025',
-    'April 2025',
-    'May 2025'
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
   ]
 
   useEffect(() => {
@@ -376,13 +382,13 @@ const Hero = ({
             <select
               required
               defaultValue=''
-              className='w-1/5 bg-white text-gray-800 text-sm px-4 py-2 rounded-lg border border-gray-300 hidden md:flex'
+              className='w-1/5 bg-white text-gray-800 text-sm px-4 py-2 rounded-lg border border-gray-300 hidden md:flex '
             >
               <option value='' disabled>
                 Select Month
               </option>
               {monthYearOptions.map((option, index) => (
-                <option key={index} value={option}>
+                <option key={index} value={option} >
                   {option}
                 </option>
               ))}
@@ -520,7 +526,7 @@ const Hero = ({
                             <span className='mr-1'>
                               <IoLocationOutline />
                             </span>
-                            {pkg?.startingCity} to {pkg?.endingCity}
+                            {pkg?.state?.name}
                           </p>
                           <div className='flex justify-between items-center'>
                             <div className='flex items-center space-x-4 mt-5'>
