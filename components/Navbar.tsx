@@ -8,13 +8,14 @@ import {
   FaChevronDown,
   FaChevronUp,
   FaArrowRight,
-  FaBars,
-  FaTimes
+  FaBars
 } from 'react-icons/fa'
-import { RiMenu3Fill } from 'react-icons/ri'
-import { IoMdClose } from 'react-icons/io'
+import { IoMdClose, IoIosArrowDown } from 'react-icons/io'
 import logo from '../public/assets/logo.png' // Logo placed in 'public/assets'
 import CustomizeTripForm from './CustomizeTripForm'
+import { auth, db } from '../firebaseConfig'
+import { doc, getDoc } from 'firebase/firestore'
+import { useRouter } from 'next/navigation'
 
 const Navbar: React.FC = () => {
   const [dropdowns, setDropdowns] = useState({
@@ -23,32 +24,83 @@ const Navbar: React.FC = () => {
     themes: false
   })
 
-  const [dropdownAlignment, setDropdownAlignment] = useState<'left' | 'right'>('right');
-  const holidayDropdownRef = useRef<HTMLDivElement | null>(null);
+  const [dropdownAlignment, setDropdownAlignment] = useState<'left' | 'right'>(
+    'right'
+  )
+  const holidayDropdownRef = useRef<HTMLDivElement | null>(null)
+  const [userInitials, setUserInitials] = useState<string | null>(null)
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false)
+  const userDropdownRef = useRef<HTMLDivElement | null>(null)
+  const router = useRouter()
+
+  useEffect(() => {
+    const fetchUserData = async (uid: string) => {
+      const userDoc = await getDoc(doc(db, 'users', uid))
+      if (userDoc.exists()) {
+        const fullName = userDoc.data().fullName || ''
+        const initials = fullName
+          .split(' ')
+          .map((n: string) => n[0])
+          .join('')
+          .toUpperCase()
+        setUserInitials(initials)
+      }
+    }
+
+    const unsubscribe = auth.onAuthStateChanged(async user => {
+      if (user) {
+        await fetchUserData(user.uid)
+      } else {
+        setUserInitials(null)
+      }
+    })
+
+    return () => unsubscribe()
+  }, [])
+
+  const handleLogout = async () => {
+    await auth.signOut()
+    setUserInitials(null)
+    router.push('/login')
+  }
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        userDropdownRef.current &&
+        !userDropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsUserDropdownOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
 
   useEffect(() => {
     const handleDropdownAlignment = () => {
-      const dropdown = holidayDropdownRef.current;
+      const dropdown = holidayDropdownRef.current
 
       if (dropdown) {
-        const rect = dropdown.getBoundingClientRect();
+        const rect = dropdown.getBoundingClientRect()
 
         if (rect.right > window.innerWidth) {
-          setDropdownAlignment('left');
+          setDropdownAlignment('left')
         } else {
-          setDropdownAlignment('right');
+          setDropdownAlignment('right')
         }
       }
-    };
+    }
 
-    window.addEventListener('resize', handleDropdownAlignment);
-    handleDropdownAlignment(); // Check alignment initially
+    window.addEventListener('resize', handleDropdownAlignment)
+    handleDropdownAlignment() // Check alignment initially
 
     return () => {
-      window.removeEventListener('resize', handleDropdownAlignment);
-    };
-  }, []);
-
+      window.removeEventListener('resize', handleDropdownAlignment)
+    }
+  }, [])
 
   const [isFormOpen, setIsFormOpen] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -112,13 +164,13 @@ const Navbar: React.FC = () => {
           {/* Logo Section */}
           <div className='text-2xl font-semibold '>
             <Link href='/'>
-            <Image
-  src={logo}
-  alt="Logo"
-  width={192}
-  height={96}
-  className="w-36 pl-2"
-/>
+              <Image
+                src={logo}
+                alt='Logo'
+                width={192}
+                height={96}
+                className='w-36 pl-2'
+              />
             </Link>
           </div>
 
@@ -156,12 +208,33 @@ const Navbar: React.FC = () => {
                 >
                   About Us
                 </Link>
-                <Link
-                  href='/login'
-                  className='bg-blue-600 px-4 py-2 rounded hover:bg-blue-700'
-                >
-                  Login
-                </Link>
+                {userInitials ? (
+                  <div className='relative' ref={userDropdownRef}>
+                    <button
+                      onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
+                      className='bg-blue-600 text-white p-2 rounded-full w-10 h-10 flex items-center justify-center font-bold uppercase'
+                    >
+                      {userInitials}
+                    </button>
+                    {isUserDropdownOpen && (
+                      <div className='absolute right-0 mt-2 w-40 bg-white text-black rounded shadow-md z-50'>
+                        <button
+                          onClick={handleLogout}
+                          className='block w-full text-left px-4 py-2 hover:bg-gray-200'
+                        >
+                          Logout
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    href='/signup'
+                    className='bg-blue-600 px-4 py-2 rounded hover:bg-blue-700'
+                  >
+                    Sign Up
+                  </Link>
+                )}
               </div>
             </div>
 
@@ -197,9 +270,11 @@ const Navbar: React.FC = () => {
                       )}
                     </div>
                     {dropdowns[item.name as keyof typeof dropdowns] && (
-                      <div className={`absolute ${
-                        dropdownAlignment === 'right' ? 'right-0' : 'left-0'
-                      } mt-4 bg-white border border-gray-300 font-medium text-sm rounded shadow-lg z-50 w-[500px] h-[400px]`}>
+                      <div
+                        className={`absolute ${
+                          dropdownAlignment === 'right' ? 'right-0' : 'left-0'
+                        } mt-4 bg-white border border-gray-300 font-medium text-sm rounded shadow-lg z-50 w-[500px] h-[400px]`}
+                      >
                         {item.name === 'themes' ? (
                           <div className='p-8 grid grid-cols-2 pt-8  gap-y-4  '>
                             <div>
