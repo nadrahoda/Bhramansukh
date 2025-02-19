@@ -6,6 +6,9 @@ import { GrAchievement } from 'react-icons/gr'
 import { FiPhoneCall } from 'react-icons/fi'
 import { FaArrowCircleRight, FaMapMarkerAlt } from 'react-icons/fa'
 import { MdClose } from 'react-icons/md'
+import emailjs from 'emailjs-com'
+import { toASCII } from 'node:punycode'
+
 interface CustomizeTripFormProps {
   onClose: () => void
   destination: string // Add 'destination' to the props interface
@@ -24,6 +27,11 @@ const CustomizeTripForm: React.FC<CustomizeTripFormProps> = ({
   const [selectedYear, setSelectedYear] = useState<string>('')
   // For flexible month selection
   const [numberOfDays, setNumberOfDays] = useState<number>(0) // For anytime option
+  const [email, setEmail] = useState<string>('')
+  const [contact, setContact] = useState<string>('')
+  const [specialRequests, setSpecialRequests] = useState<string>('')
+  const [from, setFrom] = useState<string>('');  // State for "From" location
+const [to, setTo] = useState<string>(destination);  // State for "To" location
 
   const handleOptionClick = (option: 'fixed' | 'flexible' | 'anytime') => {
     setDateOption(option)
@@ -37,12 +45,36 @@ const CustomizeTripForm: React.FC<CustomizeTripFormProps> = ({
   const handleNextStep = () => setStep(prev => prev + 1)
   const handlePreviousStep = () => setStep(prev => prev - 1)
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
-    // Handle form submission logic here
-    alert('Form submitted!')
-    onClose()
-  }
+
+    const formData = {
+      from: from, // Adjust this field as needed
+      to: to,
+      departureDate: selectedDate?.toISOString() || 'Not specified',
+      numberOfDays,
+      specialRequests: specialRequests || 'None',
+      email: email,
+      contact: contact,
+    };
+  
+    try {
+      const result = await emailjs.send(
+        'service_sx86ci6', // Your service ID
+        'template_a11oos6', // Your template ID
+        formData,
+        'o8kuezP2x3T2WxIZm' // Your public key
+      );
+      alert('Your trip request has been submitted successfully!');
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        alert('Error submitting the form: ' + error.message);
+      } else {
+        alert('An unknown error occurred.');
+      }
+    }
+  };
+
   return (
     <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50'>
       <div className='bg-white w-[90%] max-w-4xl p-6 rounded-lg shadow-lg flex relative'>
@@ -105,6 +137,8 @@ const CustomizeTripForm: React.FC<CustomizeTripFormProps> = ({
                     type='text'
                     className='w-full border border-gray-300 rounded px-3 py-2 pl-10 placeholder-gray-500 focus:outline-none'
                     placeholder='To'
+                    value={to}  // Bind the "To" field to the `to` state
+  onChange={(e) => setTo(e.target.value)} 
                   />
                 </div>
               </div>
@@ -121,6 +155,8 @@ const CustomizeTripForm: React.FC<CustomizeTripFormProps> = ({
                     type='text'
                     className='w-full border border-gray-300 rounded px-3 py-2 pl-10 placeholder-gray-500 focus:outline-none'
                     placeholder='From'
+                    value={from}
+                    onChange={(e) => setFrom(e.target.value)}
                   />
                 </div>
               </div>
@@ -345,6 +381,8 @@ const CustomizeTripForm: React.FC<CustomizeTripFormProps> = ({
                 </label>
                 <input
                   type='email'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)} 
                   className='w-full border border-gray-300 rounded px-3 py-2'
                   placeholder='Enter your Email Id'
                 />
@@ -355,6 +393,9 @@ const CustomizeTripForm: React.FC<CustomizeTripFormProps> = ({
                 </label>
                 <input
                   type='number'
+                  value={contact}
+                  onChange={(e) => setContact(e.target.value)} 
+
                   className='w-full border border-gray-300 rounded px-3 py-2'
                   placeholder='Enter your Contact Number'
                 />
@@ -386,6 +427,7 @@ const CustomizeTripForm: React.FC<CustomizeTripFormProps> = ({
                   Special Requests
                 </label>
                 <textarea
+                onChange={(e) => setSpecialRequests(e.target.value)} 
                   className='w-full border border-gray-300 rounded px-3 py-2'
                   rows={4}
                   placeholder='Enter any special requests or preferences'
