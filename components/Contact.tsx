@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import { db } from "../firebaseConfig"; // Import Firestore instance
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import sibApiV3Sdk from "sib-api-v3-sdk";
 import {
   FaPhoneAlt,
   FaAddressBook,
@@ -48,14 +49,24 @@ const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
+  
     try {
-      // Add data to Firestore
+      // Save form data to Firestore
       await addDoc(collection(db, "contacts"), {
         ...formData,
         timestamp: serverTimestamp(),
       });
-
+  
+      // Call Next.js API route
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+  
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Email sending failed");
+  
       setSuccess(true);
       setFormData({
         name: "",
@@ -72,7 +83,8 @@ const Contact: React.FC = () => {
       setLoading(false);
     }
   };
-
+  
+  
 
   return (
     <div className="w-full mx-auto p-6 bg-gray-800 text-white shadow-lg">
