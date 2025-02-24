@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
-import teamMember1 from '../public/assets/shabab.jpg'
-import teamMember2 from '../public/assets/nadra.png'
+import teamMember1 from '../public/assets/Goa.jpg'
+import teamMember2 from '../public/assets/Goa.png'
 import teamMember3 from '../public/assets/Goa.jpg'
 import teamMember4 from '../public/assets/Himachal.jpg'
 import teamMember5 from '../public/assets/Karnataka.jpg'
@@ -30,7 +30,7 @@ const Team = () => {
             />
           </div>
           <h2 className='text-xl font-semibold text-white mt-4'>
-            Md Shabab Uddin
+          User 1
           </h2>
           <p className='text-gray-400'>CEO & Founder</p>
         </div>
@@ -47,7 +47,7 @@ const Team = () => {
               height={192}
             />
           </div>
-          <h2 className='text-xl font-semibold text-white mt-4'>Nadra Hoda</h2>
+          <h2 className='text-xl font-semibold text-white mt-4'>User 2</h2>
           <p className='text-gray-400'>Lead Developer</p>
         </div>
 
