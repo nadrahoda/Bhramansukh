@@ -1,13 +1,13 @@
 import React from 'react';
 import { IoClose } from 'react-icons/io5';
-import Signup from '../app/signup/page';
+import Signup from '../components/Signup';
 
 const SignupModal: React.FC<{ isOpen:boolean; onClose:()=> void }> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
-  const handleSignupSuccess = () => {
-    onClose(); // Close modal when signup is successful
-  };
+  // const handleSignupSuccess = () => {
+  //   onClose(); // Close modal when signup is successful
+  // };
 
 
   return (
@@ -20,7 +20,7 @@ const SignupModal: React.FC<{ isOpen:boolean; onClose:()=> void }> = ({ isOpen, 
 
         {/* Signup Form */}
         <div className='max-h-[90vh] overflow-y-auto'>
-        <Signup onSignupSuccess={handleSignupSuccess} hideBackground/>
+        <Signup onSignupSuccess={onClose} hideBackground/>
         </div>
       
       </div>
