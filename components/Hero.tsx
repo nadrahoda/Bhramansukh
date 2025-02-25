@@ -341,7 +341,7 @@ useEffect(() => {
           } items-center h-full text-white text-center`}
         >
           {!search && (
-            <h1 className='text-2xl md:text-5xl font-bold mb-4'>
+            <h1 className='text-2xl md:text-6xl font-bold mb-4'>
               {displayedText}
             </h1>
           )}
@@ -660,7 +660,7 @@ useEffect(() => {
         </div>
       )}
       {showForm && <CustomizeTripForm onClose={handleCloseForm} destination={''} />}
-      <LoginModal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} />
+      <LoginModal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)}  />
 
     </>
   )

@@ -1,12 +1,14 @@
 import React from 'react';
 import { IoClose } from 'react-icons/io5';
 import Signup from '../app/login/page';
+import LoginForm from './LoginForm';
 
 interface LoginModalProps {
-    onSwitchToSignup: () => void;
+  isOpen:boolean;
+  onClose:() => void;
   }
 
-const LoginModal: React.FC<{ isOpen:boolean; onClose:()=> void }> = ({ isOpen, onClose }) => {
+const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   const handleLoginSuccess = () => {
@@ -22,9 +24,9 @@ const LoginModal: React.FC<{ isOpen:boolean; onClose:()=> void }> = ({ isOpen, o
           <IoClose size={24} />
         </button>
 
-        {/* Signup Form */}
+       
         <div className='max-h-[90vh] overflow-y-auto'>
-        <Signup onLoginSuccess={handleLoginSuccess} hideBackground/>
+        <LoginForm onLoginSuccess={handleLoginSuccess} hideBackground/>
         </div>
       
       </div>
