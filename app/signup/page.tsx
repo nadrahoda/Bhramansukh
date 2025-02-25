@@ -16,7 +16,13 @@ import Image from 'next/image'
 import { doc, setDoc } from 'firebase/firestore'
 import { auth, db } from '../../firebaseConfig'
 
-const Signup: React.FC = () => {
+interface SignupProps{
+  onSignupSuccess?:()=> void;
+  hideBackground?:boolean;
+}
+
+const Signup: React.FC<SignupProps> = ({onSignupSuccess, hideBackground}) => {
+  const [loading, setLoading] = useState(false);
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [contactNo, setContactNo] = useState('')
@@ -27,6 +33,9 @@ const Signup: React.FC = () => {
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
+    setLoading(true);
+    setError('')
+
     // Get form values
     const fullName = `${firstName} ${lastName}`.trim()
 
@@ -53,20 +62,29 @@ const Signup: React.FC = () => {
 
       await signInWithEmailAndPassword(auth, email, password)
 
+      if(onSignupSuccess){
+        onSignupSuccess()
+      }
+
       router.push('/') // Redirect to login after successful signup
     } catch (error: any) {
       setError(error.message)
+    }finally{
+      setLoading(false)
     }
   }
   return (
-    <div className='relative flex h-screen items-center justify-center bg-gray-900  '>
+    <div className={`relative flex items-center justify-center ${hideBackground ? '' : 'h-screen bg-gray-900'}  `}>
       {/* Background Image */}
-      <div
-        className='absolute inset-0 bg-cover bg-center opacity-40'
-        style={{
-          backgroundImage: `url('/assets/login.jpg')` // Replace with your image path
-        }}
-      ></div>
+      {!hideBackground && (
+  <div
+  className='absolute inset-0 bg-cover bg-center opacity-40'
+  style={{
+    backgroundImage: `url('/assets/login.jpg')` // Replace with your image path
+  }}
+></div>
+      )}
+    
 
       {/* Content */}
       <div className='relative w-full max-w-md p-8 bg-white rounded-lg shadow-lg'>
@@ -154,9 +172,9 @@ const Signup: React.FC = () => {
             {/* Sign Up Button */}
             <button
               type='submit'
-              className='w-full bg-blue-600 text-white py-2 rounded-full hover:bg-blue-700 uppercase tracking-wider font-bold'
+              className='w-full bg-blue-600 text-white py-2 rounded-full hover:bg-blue-700 uppercase tracking-wider font-bold' disabled={loading}
             >
-              Sign Up
+              {loading ? 'Signing up...': 'Sign Up'}
             </button>
 
             <p className='flex justify-center text-blue-500 text-sm italic mt-4'>

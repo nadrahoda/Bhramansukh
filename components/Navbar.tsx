@@ -17,7 +17,13 @@ import { auth, db } from '../firebaseConfig'
 import { doc, getDoc } from 'firebase/firestore'
 import { useRouter } from 'next/navigation'
 
-const Navbar: React.FC = () => {
+interface Props {
+  selectedOption: string;
+  setSelectedOption: React.Dispatch<React.SetStateAction<string>>;
+}
+
+
+const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption}) => {
   const [dropdowns, setDropdowns] = useState({
     holiday: false,
     guides: false,
@@ -278,81 +284,83 @@ const Navbar: React.FC = () => {
                         {item.name === 'themes' ? (
                           <div className='p-8 grid grid-cols-2 pt-8  gap-y-4  '>
                             <div>
-                              <Link
-                                href='/strangers-unite'
+                              <button
+                               
                                 className='block p-2 hover:text-blue-500 text-black'
+                                onClick={() => setSelectedOption('Strangers Unite')}
                               >
                                 Strangers Unite
-                              </Link>
-                              <Link
-                                href='/therapy-travels'
+                              </button>
+                              <button
+                                onClick={() => setSelectedOption('Therapy Travels')}
                                 className='block p-2 hover:text-blue-500 text-black'
                               >
                                 Therapy Travels
-                              </Link>
-                              <Link
-                                href='/exposure-camps'
+                              </button>
+                              <button
+                                onClick={() => setSelectedOption('Exposure Camps')}
                                 className='block p-2 hover:text-blue-500 text-black'
                               >
                                 Exposure Camps
-                              </Link>
-                              <Link
-                                href='/seasonal-packages'
+                              </button>
+                              <button
+                                
                                 className='block p-2 hover:text-blue-500 text-black'
+                                onClick={() => setSelectedOption('Seasonal Packages')}
                               >
                                 Seasonal Packages
-                              </Link>
-                              <Link
-                                href='/adventure'
+                              </button>
+                              <button
+                                onClick={() => setSelectedOption('Adventure')}
                                 className='block p-2 hover:text-blue-500 text-black'
                               >
                                 Adventure
-                              </Link>
-                              <Link
-                                href='/family'
+                              </button>
+                              <button
+                                onClick={() => setSelectedOption('Family')}
                                 className='block p-2 hover:text-blue-500 text-black'
                               >
                                 Family
-                              </Link>
+                              </button>
                             </div>
 
                             <div className='pl-8 border-l border-blue-500'>
-                              <Link
-                                href='/nature'
+                              <button
+                                onClick={() => setSelectedOption('Nature')}
                                 className='block p-2 hover:text-blue-500 text-black'
                               >
                                 Nature
-                              </Link>
-                              <Link
-                                href='/honeymoon'
+                              </button>
+                              <button
+                                onClick={() => setSelectedOption('Honeymoon')}
                                 className='block p-2 hover:text-blue-500 text-black'
                               >
                                 Honeymoon
-                              </Link>
-                              <Link
-                                href='/wildlife'
+                              </button>
+                              <button
+                                onClick={() => setSelectedOption('Wildlife')}
                                 className='block p-2 hover:text-blue-500 text-black'
                               >
                                 Wildlife
-                              </Link>
-                              <Link
-                                href='/friends'
+                              </button>
+                              <button
+                                onClick={() => setSelectedOption('Friends')}
                                 className='block p-2 hover:text-blue-500 text-black'
                               >
                                 Friends
-                              </Link>
-                              <Link
-                                href='/water-activities'
+                              </button>
+                              <button
+                                onClick={() => setSelectedOption('Water Activities')}
                                 className='block p-2 hover:text-blue-500 text-black'
                               >
                                 Water Activities
-                              </Link>
-                              <Link
-                                href='/religious'
+                              </button>
+                              <button
+                                onClick={() => setSelectedOption('Religious')}
                                 className='block p-2 hover:text-blue-500 text-black'
                               >
                                 Religious
-                              </Link>
+                              </button>
                             </div>
                           </div>
                         ) : (

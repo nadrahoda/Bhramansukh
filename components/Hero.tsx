@@ -39,6 +39,8 @@ import Link from 'next/link'
 import indiaLocations from '../public/data/india_locations.json'
 import Image from 'next/image'
 import CustomizeTripForm from './CustomizeTripForm'
+import LoginModal from './LoginModal'
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 const Hero = ({
   search,
   setSearch
@@ -57,6 +59,7 @@ const Hero = ({
   const [loading, setLoading] = useState<boolean | null>(null)
   const [tourPackages, setTourPackages] = useState<TourPackage[]>()
   const [showForm, setShowForm] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const handleOpenForm = () => {
     setShowForm(true);
@@ -110,7 +113,24 @@ const Hero = ({
     packagesRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
 
+  const [user, setUser] = useState<any>(null); 
+
+useEffect(() => {
+  const auth = getAuth();
+  const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+  });
+
+  return () => unsubscribe(); // Cleanup on unmount
+}, []);
+
   const handleExploreClick = async (cityname: string) => {
+    
+    if (!user) {
+      // If not logged in, show login modal
+      setShowLoginModal(true);
+      return;
+    }
     setLoading(true)
     try {
       const response = await fetch(
@@ -396,6 +416,10 @@ const Hero = ({
 
             <button
               onClick={() => {
+                if(!inputValue.trim()){
+                  alert('Please enter a destination before exploring.');
+                  return;
+                }
                 handleExploreClick(inputValue.split(',')[0].trim())
                 setSearch(true)
               }}
@@ -636,6 +660,8 @@ const Hero = ({
         </div>
       )}
       {showForm && <CustomizeTripForm onClose={handleCloseForm} destination={''} />}
+      <LoginModal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} />
+
     </>
   )
 }

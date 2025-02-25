@@ -16,14 +16,16 @@ import whatsapp from '../public/assets/whatsapp.png'
 
 export default function Home() {
   const [search, setSearch] = useState<boolean>(false);
+  const [selectedOption, setSelectedOption] =
+  useState<string>('Strangers Unite')
 
   return (
     <>
-      <Navbar />
+      <Navbar selectedOption={selectedOption} setSelectedOption={setSelectedOption}/>
       <Hero search={search} setSearch={setSearch} />
       {!search && (
      <>
-          <FilterTrips />
+          <FilterTrips selectedOption={selectedOption} setSelectedOption={setSelectedOption}/>
           <StrangersUnite />
           {/* <TreksCarousel /> */}
           <StatesCarousel />

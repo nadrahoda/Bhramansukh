@@ -43,9 +43,14 @@ type CardData = {
   }[]
 }
 
-const FilterTrips: React.FC = () => {
-  const [selectedOption, setSelectedOption] =
-    useState<string>('Strangers Unite')
+interface Props {
+  selectedOption: string;
+  setSelectedOption: React.Dispatch<React.SetStateAction<string>>;
+}
+
+
+const FilterTrips: React.FC<Props> = ({selectedOption, setSelectedOption}) => {
+ 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [modalContent, setModalContent] = useState<string | null>(null)
 
