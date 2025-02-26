@@ -60,6 +60,8 @@ export default function PackageDetails() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<ApiResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [selectedOption, setSelectedOption] =
+  useState<string>('Strangers Unite')
 
   useEffect(() => {
     const fetchPackageDetails = async () => {
@@ -94,7 +96,7 @@ export default function PackageDetails() {
 
   return (
     <>
-      <Navbar />
+      <Navbar selectedOption={selectedOption} setSelectedOption={setSelectedOption}/>
       <div className="bg-gray-900 text-white pt-8">
         <div className="flex justify-between mx-12 rounded-xl  p-5 bg-gray-800 ">
          
