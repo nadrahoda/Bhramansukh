@@ -1,4 +1,7 @@
 "use client";
+import { useSearchParams, useParams } from "next/navigation";
+import React, { useEffect, useState, useRef } from "react";
+import { FaArrowLeftLong } from "react-icons/fa6";
 export interface TourPackage {
   id: number;
   name: string;
@@ -30,25 +33,23 @@ export interface TourPackage {
     cityId: number;
   } | null;
 }
-import React, { useState, useEffect, useRef } from "react";
-import { FaArrowLeftLong, FaLocationDot } from "react-icons/fa6";
+
 import { IoLocationOutline } from "react-icons/io5";
 import { FaRegBuilding, FaBinoculars } from "react-icons/fa";
 import { GiMeal } from "react-icons/gi";
 import Link from "next/link";
-import indiaLocations from "../public/data/india_locations.json";
+import indiaLocations from "../../../public/data/india_locations.json";
 import Image from "next/image";
-import CustomizeTripForm from "./CustomizeTripForm";
-import LoginModal from "./LoginModal";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Loader from "./Loader";
-const Hero = ({
-  search,
-  setSearch,
-}: {
-  search: boolean;
-  setSearch: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import Loader from "@/components/Loader";
+const page = () => {
+  const params = useParams();
+  const stateid = params.stateid;
+  useEffect(() => {
+    handleExploreClick(stateid as string);
+  }, [stateid]);
   const videoRef = useRef<HTMLVideoElement>(null);
   const packagesRef = useRef<HTMLDivElement>(null);
   const [suggestions, setSuggestions] = useState<string[]>([]);
@@ -61,7 +62,12 @@ const Hero = ({
   const [tourPackages, setTourPackages] = useState<TourPackage[]>();
   const [showForm, setShowForm] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
-
+  const [categories, setCategories] = useState<string[]>([
+    "Honeymoon",
+    "Family",
+    "Solo",
+    "Friends",
+  ]);
   const handleOpenForm = () => {
     setShowForm(true);
   };
@@ -74,13 +80,6 @@ const Hero = ({
     const match = duration.match(/^(\d+)\s*(Days|Day)/i);
     return match ? parseInt(match[1], 10) : 0; // Return the number of days if found, else 0
   };
-
-  const [categories, setCategories] = useState<string[]>([
-    "Honeymoon",
-    "Family",
-    "Solo",
-    "Friends",
-  ]);
 
   const [durations, setDurations] = useState<string[]>([
     "1 to 3",
@@ -115,40 +114,6 @@ const Hero = ({
   };
 
   const [user, setUser] = useState<any>(null);
-
-  useEffect(() => {
-    const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-
-    return () => unsubscribe(); // Cleanup on unmount
-  }, []);
-
-  const handleExploreClick = async (cityname: string) => {
-    if (!user) {
-      // If not logged in, show login modal
-      setShowLoginModal(true);
-      return;
-    }
-    setLoading(true);
-    try {
-      const response = await fetch(
-        `/api/searchPackages?searchTerm=${cityname}&categories=${selectedCategories.join(
-          ","
-        )}&durations=${selectedDurations.join(
-          ","
-        )}&budgets=${selectedBudgets.join(",")}`
-      );
-      const data = await response.json();
-      console.log("data", data);
-      setLoading(false);
-      setTourPackages(data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      setLoading(false);
-    }
-  };
 
   const dayNightOptions = ["5D/4N", "6D/5N", "10D/9N", "Not decided"];
   const monthYearOptions = [
@@ -185,7 +150,30 @@ const Hero = ({
     }
   }, []);
 
-  // Track selected filters
+  const handleExploreClick = async (cityname: string) => {
+    // if (!user) {
+    //   // If not logged in, show login modal
+
+    //   return;
+    // }
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `/api/searchPackages?searchTerm=${cityname}&categories=${selectedCategories.join(
+          ","
+        )}&durations=${selectedDurations.join(
+          ","
+        )}&budgets=${selectedBudgets.join(",")}`
+      );
+      const data = await response.json();
+      console.log("data", data);
+      setLoading(false);
+      setTourPackages(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      //   setLoading(false);
+    }
+  };
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedDurations, setSelectedDurations] = useState<string[]>([]);
   const [selectedBudgets, setSelectedBudgets] = useState<string[]>([]);
@@ -305,139 +293,26 @@ const Hero = ({
     setInputValue(suggestion);
     setSuggestions([]);
   };
-
   return (
-    <>
-      <div
-        className={`relative w-full ${
-          search
-            ? "bg-gray-900 py-10"
-            : "md:h-screen h-[500px] overflow-hidden "
-        } hero`}
-      >
-        {/* Hero section */}
-        {!search && (
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute top-0 left-0 w-full h-full object-cover"
-          >
-            <source src="/assets/hero.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        )}
-
-        {!search && (
-          <div className="absolute inset-0 bg-black opacity-50"></div>
-        )}
-
-        {/* Search section */}
-        <div
-          className={`relative z-10 flex flex-col ${
-            search ? "mt-10" : "mt-48"
-          } items-center h-full text-white text-center`}
-        >
-          {!search && (
-            <h1 className="text-2xl md:text-6xl font-bold mb-4">
-              {displayedText}
-            </h1>
-          )}
-
-          <div
-            className={`flex justify-center items-center ${
-              search ? "w-full md:w-3/5" : "w-11/12 md:w-4/6"
-            } space-x-2 bg-gray-200 p-3 rounded-xl`}
-          >
-            {/* Search input */}
-            <div className="relative flex md:w-1/2 w-full">
-              <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
-                <FaLocationDot className="text-blue-500 mr-2" size={18} />
-              </span>
-              <input
-                type="text"
-                placeholder="Search your destination"
-                value={inputValue}
-                onChange={handleInputChange}
-                autoComplete="off"
-                className="pl-10 pr-3 py-2 border border-gray-300 rounded-lg w-full text-black text-sm"
-              />
-
-              {suggestions.length > 0 && (
-                <div className="absolute z-10 bg-white border border-gray-300 rounded-lg mt-10 w-full max-h-60 overflow-y-auto">
-                  {suggestions.map((suggestion, index) => (
-                    <div
-                      key={index}
-                      onClick={() => handleSuggestionClick(suggestion)}
-                      className="p-2 hover:bg-gray-200 cursor-pointer text-black flex items-center pl-2"
-                    >
-                      <FaLocationDot className="text-gray-400 mr-2" size={16} />
-                      <span className="whitespace-normal text-sm">
-                        {suggestion}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Filter Dropdowns */}
-            <select
-              required
-              defaultValue=""
-              className="w-1/5 bg-white text-gray-800 text-sm px-4 py-2 rounded-lg border border-gray-300 hidden md:flex"
-            >
-              <option value="" disabled>
-                Duration
-              </option>
-              {dayNightOptions.map((option, index) => (
-                <option key={index} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-
-            <select
-              required
-              defaultValue=""
-              className="w-1/5 bg-white text-gray-800 text-sm px-4 py-2 rounded-lg border border-gray-300 hidden md:flex "
-            >
-              <option value="" disabled>
-                Select Month
-              </option>
-              {monthYearOptions.map((option, index) => (
-                <option key={index} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-
-            <button
-              onClick={() => {
-                if (!inputValue.trim()) {
-                  alert("Please enter a destination before exploring.");
-                  return;
-                }
-                handleExploreClick(inputValue.split(",")[0].trim());
-                setSearch(true);
-              }}
-              className="w-1/5 bg-blue-600 text-white rounded-lg px-4 py-2 text-sm h-full flex items-center justify-center w-1/5"
-            >
-              Explore
-            </button>
-          </div>
+    <div className="">
+      <Navbar
+        selectedOption={""}
+        setSelectedOption={function (
+          value: React.SetStateAction<string>
+        ): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
+      {loading ? (
+        <div className="h-screen w-screen bg-gray-900 flex items-center justify-center">
+          <Loader />
         </div>
-      </div>
-
-      {/* Searched Section */}
-      {search && (
-        <div className="flex bg-gray-900 text-white h-auto">
+      ) : (
+        <div className="flex bg-gray-900 text-white ">
           <div className="w-1/5 p-4 border-r border-gray-700 pl-10 ">
             {/* Back Button */}
-            <button
-              onClick={() => setSearch(false)}
+            <Link
+              href={"/"}
               className="text-white px-4 py-2 rounded-lg mb-4 font-semibold inline-flex items-center underline"
             >
               <FaArrowLeftLong
@@ -446,7 +321,7 @@ const Hero = ({
                 color="white"
               />{" "}
               Back to Home
-            </button>
+            </Link>
             <h2 className="text-lg font-bold mb-4 text-blue-500">Categories</h2>
             <form className="grid grid-cols-2 gap-x-4 gap-y-2 ">
               {categories.map((category, index) => (
@@ -515,9 +390,7 @@ const Hero = ({
           <div className="w-3/5 px-4 pb-10 pl-16">
             <div ref={packagesRef}>
               {loading ? (
-                <div className="h-[600px]  bg-gray-900 flex items-center justify-center">
-                  <Loader />
-                </div>
+                <div>Searching...</div>
               ) : (
                 <div className="flex flex-col space-y-4">
                   {filteredPackages?.map((pkg) => (
@@ -668,15 +541,9 @@ const Hero = ({
           </div>
         </div>
       )}
-      {showForm && (
-        <CustomizeTripForm onClose={handleCloseForm} destination={""} />
-      )}
-      <LoginModal
-        isOpen={showLoginModal}
-        onClose={() => setShowLoginModal(false)}
-      />
-    </>
+      <Footer />
+    </div>
   );
 };
 
-export default Hero;
+export default page;
