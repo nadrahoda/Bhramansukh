@@ -293,6 +293,9 @@ const page = () => {
     setInputValue(suggestion);
     setSuggestions([]);
   };
+  const [selectedPackage, setSelectedPackage] =
+  useState<string>('')
+
   return (
     <div className="">
       <Navbar
@@ -301,7 +304,7 @@ const page = () => {
           value: React.SetStateAction<string>
         ): void {
           throw new Error("Function not implemented.");
-        }}
+        }} selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage}
       />
       {loading ? (
         <div className="h-screen w-screen bg-gray-900 flex items-center justify-center">
