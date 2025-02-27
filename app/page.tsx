@@ -1,17 +1,21 @@
 "use client"
-import Footer from "@/components/Footer";
-import Hero from "@/components/Hero";
-import Navbar from "@/components/Navbar";
+
 import { useState } from "react";
+import dynamic from "next/dynamic"
 import Image from "next/image";
-import FilterTrips from "@/components/FilterTrips";
-import StrangersUnite from "@/components/StrangersUnite";
-// import TreksCarousel from "../components/TreksCarousel"
-import StatesCarousel from "@/components/StatesCarousel";
-import Testimonial from "@/components/Testimonial";
-import WhyChooseUs from "@/components/WhyUs";
-import FAQ from "@/components/FAQ";
-import Contact from "@/components/Contact";
+
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import Footer from "@/components/Footer";
+
+const FilterTrips = dynamic(() => import("@/components/FilterTrips"));
+const StrangersUnite = dynamic(() => import("@/components/StrangersUnite"));
+const StatesCarousel = dynamic(() => import("@/components/StatesCarousel"));
+const Testimonial = dynamic(() => import("@/components/Testimonial"));
+const WhyChooseUs = dynamic(() => import("@/components/WhyUs"));
+const FAQ = dynamic(() => import("@/components/FAQ"));
+const Contact = dynamic(() => import("@/components/Contact"));
+
 import whatsapp from '../public/assets/whatsapp.png'
 
 export default function Home() {

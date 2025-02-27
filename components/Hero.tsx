@@ -180,9 +180,35 @@ const Hero = ({
   }, []);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play();
-    }
+    const video = videoRef.current;
+    if (!video) return;
+  
+    const handlePlay = async () => {
+      try {
+        await video.play();
+      } catch (error) {
+        console.warn("Video autoplay blocked. Retrying on interaction.");
+      }
+    };
+  
+    // Play the video initially
+    handlePlay();
+  
+    // Observe visibility changes
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          handlePlay();
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.5 }
+    );
+  
+    observer.observe(video);
+  
+    return () => observer.disconnect();
   }, []);
 
   // Track selected filters
