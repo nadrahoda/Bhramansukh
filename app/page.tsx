@@ -22,17 +22,19 @@ export default function Home() {
   const [search, setSearch] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] =
   useState<string>('Strangers Unite')
+  const [selectedPackage, setSelectedPackage] =
+  useState<string>('')
 
   return (
     <>
-      <Navbar selectedOption={selectedOption} setSelectedOption={setSelectedOption}/>
+      <Navbar selectedOption={selectedOption} setSelectedOption={setSelectedOption} selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage}/>
       <Hero search={search} setSearch={setSearch} />
       {!search && (
      <>
           <FilterTrips selectedOption={selectedOption} setSelectedOption={setSelectedOption}/>
           <StrangersUnite />
           {/* <TreksCarousel /> */}
-          <StatesCarousel />
+          <StatesCarousel selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage}/>
           <Testimonial />
           <WhyChooseUs />
           <FAQ />

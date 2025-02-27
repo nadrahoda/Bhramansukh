@@ -20,10 +20,12 @@ import { useRouter } from 'next/navigation'
 interface Props {
   selectedOption: string;
   setSelectedOption: React.Dispatch<React.SetStateAction<string>>;
+  selectedPackage: string;
+  setSelectedPackage:React.Dispatch<React.SetStateAction<string>>;
 }
 
 
-const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption}) => {
+const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPackage, setSelectedPackage}) => {
   const [dropdowns, setDropdowns] = useState({
     holiday: false,
     guides: false,
@@ -159,6 +161,25 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption}) => {
   const handleToggleMenu = () => setIsMenuOpen(!isMenuOpen)
   const handleCloseMenu = () => setIsMenuOpen(false)
 
+  const handleSelectOption = (option: string) => {
+    setSelectedOption(option);
+  
+    // Scroll to FilterTrips
+    const filterTripsSection = document.getElementById("filter-trips");
+    if (filterTripsSection) {
+      filterTripsSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+  const handleSelectPackage = (state: string) => {
+    setSelectedPackage(state); // Set selected state (if needed)
+  
+    // Scroll to the statecarousel section
+    const stateCarouselSection = document.getElementById("statecarousel");
+    if (stateCarouselSection) {
+      stateCarouselSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+  
   return (
     <div className={isFormOpen || isMenuOpen ? 'relative overflow-hidden' : ''}>
       <nav
@@ -191,20 +212,21 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption}) => {
             {/* First Row */}
             <div className='flex justify-end'>
               <div className='flex space-x-6 mb-1 text-xs'>
-                <a
-                  href='tel:+919953786506'
-                  className='hover:text-gray-400 flex items-center'
+                <span
+                
+                  className='hover:text-gray-400 flex items-center cursor-pointer'
                 >
                   <FaPhoneAlt className='mr-2' />
                   +91 9953786506
-                </a>
-                <button className='hover:text-gray-400 flex items-center'>
+                </span>
+                <button className='hover:text-gray-400 pointer-events-none opacity-50 flex items-center' disabled>
                   <FaUserPlus className='mr-2' />
                   Travel Agent? Join Us
                 </button>
                 <Link
                   href='/blogs'
-                  className='hover:text-gray-400 flex items-center'
+                  className='hover:text-gray-400 flex items-center pointer-events-none opacity-50'
+                  aria-disabled="true"
                 >
                   Blogs
                 </Link>
@@ -287,18 +309,18 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption}) => {
                               <button
                                
                                 className='block p-2 hover:text-blue-500 text-black'
-                                onClick={() => setSelectedOption('Strangers Unite')}
+                                onClick={() => handleSelectOption('Strangers Unite')}
                               >
                                 Strangers Unite
                               </button>
                               <button
-                                onClick={() => setSelectedOption('Therapy Travels')}
+                                onClick={() => handleSelectOption('Therapy Travels')}
                                 className='block p-2 hover:text-blue-500 text-black'
                               >
                                 Therapy Travels
                               </button>
                               <button
-                                onClick={() => setSelectedOption('Exposure Camps')}
+                                onClick={() => handleSelectOption('Exposure Camps')}
                                 className='block p-2 hover:text-blue-500 text-black'
                               >
                                 Exposure Camps
@@ -306,18 +328,18 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption}) => {
                               <button
                                 
                                 className='block p-2 hover:text-blue-500 text-black'
-                                onClick={() => setSelectedOption('Seasonal Packages')}
+                                onClick={() => handleSelectOption('Seasonal Packages')}
                               >
                                 Seasonal Packages
                               </button>
                               <button
-                                onClick={() => setSelectedOption('Adventure')}
+                                onClick={() => handleSelectOption('Adventure')}
                                 className='block p-2 hover:text-blue-500 text-black'
                               >
                                 Adventure
                               </button>
                               <button
-                                onClick={() => setSelectedOption('Family')}
+                                onClick={() => handleSelectOption('Family')}
                                 className='block p-2 hover:text-blue-500 text-black'
                               >
                                 Family
@@ -326,37 +348,37 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption}) => {
 
                             <div className='pl-8 border-l border-blue-500'>
                               <button
-                                onClick={() => setSelectedOption('Nature')}
+                                onClick={() => handleSelectOption('Nature')}
                                 className='block p-2 hover:text-blue-500 text-black'
                               >
                                 Nature
                               </button>
                               <button
-                                onClick={() => setSelectedOption('Honeymoon')}
+                                onClick={() => handleSelectOption('Honeymoon')}
                                 className='block p-2 hover:text-blue-500 text-black'
                               >
                                 Honeymoon
                               </button>
                               <button
-                                onClick={() => setSelectedOption('Wildlife')}
+                                onClick={() => handleSelectOption('Wildlife')}
                                 className='block p-2 hover:text-blue-500 text-black'
                               >
                                 Wildlife
                               </button>
                               <button
-                                onClick={() => setSelectedOption('Friends')}
+                                onClick={() => handleSelectOption('Friends')}
                                 className='block p-2 hover:text-blue-500 text-black'
                               >
                                 Friends
                               </button>
                               <button
-                                onClick={() => setSelectedOption('Water Activities')}
+                                onClick={() => handleSelectOption('Water Activities')}
                                 className='block p-2 hover:text-blue-500 text-black'
                               >
                                 Water Activities
                               </button>
                               <button
-                                onClick={() => setSelectedOption('Religious')}
+                                onClick={() => handleSelectOption('Religious')}
                                 className='block p-2 hover:text-blue-500 text-black'
                               >
                                 Religious
@@ -371,53 +393,54 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption}) => {
                               </h4>
                               <ul className='list-disc pl-5 text-black'>
                                 <li>
-                                  <Link
-                                    href='/rajasthan'
+                                  <button
+                                   
                                     className='hover:text-blue-400 block p-2'
+                                    onClick={() => handleSelectPackage('Rajasthan')}
                                   >
                                     Rajasthan
-                                  </Link>
+                                  </button>
                                 </li>
                                 <li>
-                                  <Link
-                                    href='/kerala'
+                                  <button
+                                    onClick={() => handleSelectPackage('Kerala')}
                                     className='hover:text-blue-400 block p-2'
                                   >
                                     Kerala
-                                  </Link>
+                                  </button>
                                 </li>
                                 <li>
-                                  <Link
-                                    href='/goa'
+                                  <button
+                                    onClick={() => handleSelectPackage('Goa')}
                                     className='hover:text-blue-400 block p-2'
                                   >
                                     Goa
-                                  </Link>
+                                  </button>
                                 </li>
                                 <li>
-                                  <Link
-                                    href='/himachal-pradesh'
+                                  <button
+                                   onClick={() => handleSelectPackage('Himachal Pradesh')}
                                     className='hover:text-blue-400 block p-2'
                                   >
                                     Himachal Pradesh
-                                  </Link>
+                                  </button>
                                 </li>
                                 <li>
-                                  <Link
-                                    href='/tamil-nadu'
+                                  <button
+                                    onClick={() => handleSelectPackage('Tamil Nadu')}
                                     className='hover:text-blue-400 block p-2'
                                   >
                                     Tamil Nadu
-                                  </Link>
+                                  </button>
                                 </li>
                               </ul>
-                              <Link
-                                href='/indian-destinations'
+                              <button
+                                onClick={() => handleSelectPackage('Indian Destination')}
                                 className='block mt-2 pl-6 text-blue-500 underline flex items-center '
                               >
                                 View All{' '}
                                 <FaArrowRight className='ml-1 ' size={10} />
-                              </Link>
+                              </button>
                             </div>
                             <div className='border-l border-blue-500 pl-4'>
                               <h4 className='text-blue-500 font-bold mb-2 '>
@@ -428,6 +451,7 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption}) => {
                                   <Link
                                     href='/maldives'
                                     className='hover:text-blue-400 block p-2'
+                                    aria-disabled="true"
                                   >
                                     Maldives
                                   </Link>
@@ -436,6 +460,7 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption}) => {
                                   <Link
                                     href='/singapore'
                                     className='hover:text-blue-400 block p-2'
+                                    aria-disabled="true"
                                   >
                                     Singapore
                                   </Link>
@@ -444,6 +469,7 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption}) => {
                                   <Link
                                     href='/thailand'
                                     className='hover:text-blue-400 block p-2'
+                                    aria-disabled="true"
                                   >
                                     Thailand
                                   </Link>
@@ -452,6 +478,7 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption}) => {
                                   <Link
                                     href='/dubai'
                                     className='hover:text-blue-400 block p-2'
+                                    aria-disabled="true"
                                   >
                                     Dubai
                                   </Link>
@@ -460,6 +487,7 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption}) => {
                                   <Link
                                     href='/switzerland'
                                     className='hover:text-blue-400 block p-2'
+                                    aria-disabled="true"
                                   >
                                     Switzerland
                                   </Link>

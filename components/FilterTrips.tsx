@@ -1,6 +1,6 @@
 // components/FilterTrips.tsx
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { FaArrowRightLong, FaClock } from "react-icons/fa6";
 import { IoLocationSharp } from "react-icons/io5";
@@ -46,6 +46,7 @@ type CardData = {
 interface Props {
   selectedOption: string;
   setSelectedOption: React.Dispatch<React.SetStateAction<string>>;
+  
 }
 
 const FilterTrips: React.FC<Props> = ({
@@ -59,6 +60,14 @@ const FilterTrips: React.FC<Props> = ({
   const [modalDetails, setModalDetails] = useState<
     { subtitle: string; content: string }[] | null
   >(null);
+  const [hasUserSelected, setHasUserSelected] = useState(false);
+
+  const filterTripsRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    if (hasUserSelected && selectedOption && filterTripsRef.current) {
+      filterTripsRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [selectedOption, hasUserSelected]);
 
   const openModal = (
     title: string,
@@ -2655,10 +2664,11 @@ const FilterTrips: React.FC<Props> = ({
 
   const handleOptionChange = (option: string) => {
     setSelectedOption(option);
+    setHasUserSelected(true);
   };
 
   return (
-    <div className="hidden md:flex bg-gray-900 py-20 ">
+    <div id="filter-trips" ref={filterTripsRef} className="hidden md:flex bg-gray-900 py-10 ">
       {/* Left section (1/4) */}
       <div className="w-1/4 p-8 border-r bg-white rounded-2xl">
         <h2 className="text-2xl font-semibold mb-4 text-left">

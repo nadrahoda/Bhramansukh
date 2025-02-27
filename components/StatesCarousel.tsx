@@ -27,6 +27,12 @@ interface State {
   prices: string;
 }
 
+interface Props {
+  selectedPackage: string;
+  setSelectedPackage: React.Dispatch<React.SetStateAction<string>>;
+  
+}
+
 const statesData: State[] = [
   { id: 1, name: "Goa", image: state1, packages: "6", prices: "15,600" },
   {
@@ -71,7 +77,8 @@ const statesData: State[] = [
   },
 ];
 
-const StatesCarousel: React.FC = () => {
+const StatesCarousel: React.FC<Props> = ({selectedPackage,
+  setSelectedPackage,}) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const statesToShow = 4; // Number of states to show at a time
 
@@ -102,7 +109,7 @@ const StatesCarousel: React.FC = () => {
 
   return (
     <>
-      <div className="bg-gray-800 py-10 md:block hidden">
+      <div id="statecarousel" className="bg-gray-800 py-10 md:block hidden">
         <div className="flex flex-col items-center justify-center">
           <h3 className="text-gray-400 text-lg uppercase flex tracking-widest">
             Destinations
