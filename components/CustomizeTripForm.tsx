@@ -35,6 +35,8 @@ const CustomizeTripForm: React.FC<CustomizeTripFormProps> = ({
   const [to, setTo] = useState<string>(destination) // State for "To" location
   const [emailError, setEmailError] = useState<string>('');
 const [contactError, setContactError] = useState<string>('');
+const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleOptionClick = (option: 'fixed' | 'flexible' | 'anytime') => {
     setDateOption(option)
@@ -76,6 +78,8 @@ const [contactError, setContactError] = useState<string>('');
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
+    setSubmitting(true);
+   
 
     const formData = {
       from, // Adjust this field as needed
@@ -101,8 +105,11 @@ const [contactError, setContactError] = useState<string>('');
       })
   
       if (response.ok) {
-        alert("Form submitted successfully!")
-        onClose() // Close modal after successful submission
+        setSubmitted(true); // Show success message inside form
+        setTimeout(() => {
+          setSubmitted(false);
+          onClose(); // Close modal after short delay
+        }, 2000);
         setFrom('')
         setTo(destination)
         setSelectedDate(null)
@@ -120,6 +127,8 @@ const [contactError, setContactError] = useState<string>('');
     } catch (error) {
       console.error("Error submitting form:", error)
       alert("An error occurred. Please try again later.")
+    }finally{
+      setSubmitting(false);
     }
   
   }
@@ -501,11 +510,20 @@ const [contactError, setContactError] = useState<string>('');
                 </button>
                 <button
                   type='submit'
-                  className='bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700'
+                  disabled={submitting}
+                  className={` py-2 px-4 rounded bg-blue-500 text-white ${
+                    submitting ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-600"
+                  }`}
                 >
-                  Submit
+                 {submitting ? "Submitting..." : "Submit"}
                 </button>
               </div>
+
+              {submitted && (
+        <p className="mt-3 text-green-600 text-center text-blue-600">
+          Form submitted successfully!
+        </p>
+      )}
             </form>
           )}
         </div>
