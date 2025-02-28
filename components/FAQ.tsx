@@ -91,7 +91,7 @@ const FAQ: React.FC = () => {
   const displayedQuestions = showMore ? questions : questions.slice(0, 5);
 
   return (
-    <div className='w-full mx-auto p-6 bg-gray-900 text-white shadow-lg'>
+    <div className='w-full mx-auto p-6 bg-gray-800 text-white shadow-lg'>
       <h2 className='text-gray-400 text-lg uppercase tracking-widest text-center'>FAQ</h2>
       <h4 className='text-white text-2xl md:text-4xl font-bold tracking-wide text-center'>
         Have Any Doubts

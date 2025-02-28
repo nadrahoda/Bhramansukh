@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { name, email, contactNo, query, destination, person } =
+    const { firstName, lastName, email, contactNo, query } =
       await req.json();
 
     const brevoApiKey = process.env.NEXT_PUBLIC_BREVO_API_KEY;
@@ -22,11 +22,10 @@ export async function POST(req: Request) {
         subject: "New Contact Form Submission",
         htmlContent: `
           <h3>New Contact Inquiry</h3>
-          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Name:</strong> ${firstName}</p>
+           <p><strong>Name:</strong> ${lastName}</p>
           <p><strong>Email:</strong> ${email}</p>
           <p><strong>Contact No:</strong> ${contactNo}</p>
-          <p><strong>Destination:</strong> ${destination}</p>
-          <p><strong>Persons:</strong> ${person}</p>
           <p><strong>Query:</strong> ${query}</p>
         `,
       }),

@@ -1,185 +1,276 @@
 'use client'
 import React, { useState } from 'react'
-import { db } from "../firebaseConfig"; // Import Firestore instance
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import sibApiV3Sdk from "sib-api-v3-sdk";
+import { db } from '../firebaseConfig' // Import Firestore instance
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
+
 import {
   FaPhoneAlt,
-  FaAddressBook,
   FaUser,
   FaEnvelope,
-  FaMapMarkerAlt,
-  FaUsers
+  FaCheckCircle,
+  FaFacebook,
+  FaInstagram,
+  FaLinkedinIn,
+  FaTwitter
 } from 'react-icons/fa'
+
+
 import { IoMail } from 'react-icons/io5'
 import { MdPhoneIphone } from 'react-icons/md'
+
 interface FormData {
-  name: string
+  firstName: string
+  lastName:string
   contactNo: string
   email: string
   query: string
-  person: string
-  destination: string
 }
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
-    name: '',
+    firstName: '',
+    lastName: '',
     contactNo: '',
     email: '',
     query: '',
-    destination: '',
-    person: ''
   })
 
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
 
   // Handle input change event for each field
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement
+    >
   ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
 
   // Handle form submission
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-  
+    e.preventDefault()
+    setLoading(true)
+
     try {
       // Save form data to Firestore
-      await addDoc(collection(db, "contacts"), {
+      await addDoc(collection(db, 'contacts'), {
         ...formData,
-        timestamp: serverTimestamp(),
-      });
-  
+        timestamp: serverTimestamp()
+      })
+
       // Call Next.js API route
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-  
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Email sending failed");
-  
-      setSuccess(true);
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      })
+
+      // const data = await res.json();
+      if (!res.ok) throw new Error('Email sending failed')
+
+      setSuccess(true)
+      setTimeout(() => setSuccess(false), 3000)
       setFormData({
-        name: "",
-        contactNo: "",
-        email: "",
-        query: "",
-        destination: "",
-        person: "",
-      });
+        firstName: '',
+        lastName: '',
+        contactNo: '',
+        email: '',
+        query: '',
+      })
     } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("Failed to submit. Please try again.");
+      console.error('Error submitting form:', error)
+      alert('Failed to submit. Please try again.')
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
-  
-  
+  }
 
   return (
-    <div className="w-full mx-auto p-6 bg-gray-800 text-white shadow-lg">
-      <h2 className="text-gray-400 text-lg uppercase mt-10 tracking-widest text-center">
+    <div className='w-full mx-auto p-6 py-10 bg-gray-900 text-white shadow-lg'>
+      <h2 className='text-gray-400 text-lg uppercase tracking-widest text-center'>
         Contact
       </h2>
-      <h4 className="text-white text-3xl font-bold tracking-wide text-center">
+      <h4 className='text-white text-3xl font-bold tracking-wide text-center'>
         Don't Think Just Ask
       </h4>
-      <div className="flex flex-col lg:flex-row gap-8 mt-10">
+      <div className='flex flex-col lg:flex-row gap-8 mt-6'>
         {/* Left Section */}
-        <div className="lg:w-1/3 md:flex hidden flex-col space-y-6 mt-4 items-center justify-center ">
-          <h3 className="text-2xl font-semibold text-white">Get In Touch</h3>
-          <div className="space-y-8 w-[70%] shadow-xl py-4 rounded-xl">
-            <div className="flex flex-col items-center justify-center">
-              <p className="text-base font-bold py-6 text-blue-500">For any queries:</p>
-              <MdPhoneIphone className="text-blue-500 w-6 h-6" />
-              <p className="text-gray-300">+91 1234567890</p>
-            </div>
-            <div className="flex flex-col items-center justify-center">
-              <IoMail className="text-blue-500 w-6 h-6" />
-              <p className="text-gray-300">sales@bhramansukh.in</p>
-            </div>
-            <div className="flex items-center flex-col">
-              <FaAddressBook className="text-blue-500 w-6 h-6" />
-              <p className="text-gray-300 w-[60%] mx-auto text-center">
-                Aman Vihar, Haroon Nagar Sector 2, Phulwari Sharif, Patna
+        <div className='lg:w-1/2 md:flex hidden flex-col space-y-6 mt-4 items-center justify-center'>
+          <div className='bg-gradient-to-r from-blue-900 to-blue-500 px-8 py-12 flex flex-col space-y-8 rounded-xl text-white shadow-xl w-[60%]'>
+            <h3 className='text-xl font-semibold'>Get In Touch</h3>
+
+            <div className='flex flex-col '>
+              <h3 className='font-semibold text-base pb-1'>Visit us</h3>
+              <p className='text-sm'>Come say hello at our office HQ.</p>
+              <p className='text-sm font-semibold italic'>
+                Aman Vihar, Haroon Nagar Sector-2, Phulwari Sharif, Patna 801505
               </p>
+            </div>
+            <div className='flex flex-col '>
+              <h3 className='font-semibold text-base pb-1'>Chat to us</h3>
+              <p className='text-sm'>Our friendly team is here to help.</p>
+              <p className='text-sm font-semibold italic'>
+                sales@bhramansukh.in
+              </p>
+            </div>
+            <div className='flex flex-col '>
+              <h3 className='font-semibold text-base pb-1'>Call us</h3>
+              <p className='text-sm'>Mon-Sat from 8am to 5pm</p>
+              <p className='text-sm font-semibold italic'>(+91) 9953 786 506</p>
+            </div>
+            {/* Social Media Icons */}
+            <div className='flex  flex-col'>
+              <div className='flex'>
+                <h3 className='font-semibold text-base pb-3'>Social Media</h3>
+              </div>
+              <div className='flex space-x-2'>
+                <a
+                  href='https://www.facebook.com/people/Bhramansukh-Tour-and-Travels/61554540670580/'
+                  className='hover:text-gray-300 transition duration-300'
+                  target='_blank'
+                >
+                  <FaFacebook className='text-white w-6 h-6' />
+                </a>
+                <a
+                  href='https://www.instagram.com/bhramansukh/'
+                  className='hover:text-gray-300 transition duration-300'
+                  target='_blank'
+                >
+                  <FaInstagram className='text-white w-6 h-6' />
+                </a>
+                <a
+                  href='https://www.linkedin.com/company/bhramansukh/posts/?feedView=all'
+                  className='hover:text-gray-300 transition duration-300'
+                  target='_blank'
+                >
+                  <FaLinkedinIn className='text-white w-6 h-6' />
+                </a>
+                <a
+                  href='https://x.com/BhramanSukh'
+                  className='hover:text-gray-300 transition duration-300'
+                  target='_blank'
+                >
+                  <FaTwitter className='text-white w-6 h-6' />
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Right Section */}
-        <div className="lg:w-1/3 flex flex-col space-y-6 p-6 mx-auto">
-          <form onSubmit={handleSubmit}>
-            <div className="relative mb-4">
-              <FaUser className="absolute left-0 top-1/2 transform -translate-y-1/2 text-blue-500 w-5 h-5" />
+        <div className='lg:w-1/2 flex flex-col items-center justify-center space-y-6 p-6 mx-auto'>
+          <form onSubmit={handleSubmit} className='space-y-4 w-[80%]'>
+            <div className='flex gap-4'>
+              <div className='w-1/2'>
+              <label className="text-sm">First Name</label>
+            <div className='relative mt-1'>
+              <FaUser className='absolute left-2 top-1/2 transform -translate-y-1/2 text-blue-500 w-5 h-5' />
               <input
-                type="text"
-                name="name"
-                value={formData.name}
+                type='text'
+                name='firstName'
+                value={formData.firstName}
                 onChange={handleChange}
-                className="w-full py-2 pl-8 bg-transparent border-b-2 border-gray-300 text-white focus:outline-none"
-                placeholder="Name"
+                className='w-full py-2 pl-10 bg-transparent border border-white rounded-md text-white focus:outline-none placeholder-gray-300 border-opacity-50'
+                placeholder='First Name'
                 required
               />
             </div>
-            <div className="relative mb-4">
-              <FaPhoneAlt className="absolute left-0 top-1/2 transform -translate-y-1/2 text-blue-500 w-5 h-5" />
-              <input
-                type="number"
-                name="contactNo"
-                value={formData.contactNo}
-                onChange={handleChange}
-                className="w-full py-2 pl-8 bg-transparent border-b-2 border-gray-300 text-white focus:outline-none"
-                placeholder="Contact Number"
-                required
-              />
             </div>
-            <div className="relative mb-4">
-              <FaEnvelope className="absolute left-0 top-1/2 transform -translate-y-1/2 text-blue-500 w-5 h-5" />
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full py-2 pl-8 bg-transparent border-b-2 border-gray-300 text-white focus:outline-none"
-                placeholder="Email Address"
-                required
-              />
+            <div className="w-1/2">
+                <label className="text-sm">Last Name</label>
+                <div className="relative mt-1">
+                  <FaUser className='absolute left-2 top-1/2 transform -translate-y-1/2 text-blue-500 w-5 h-5' />
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    className="w-full py-2 pl-10 bg-transparent border border-white rounded-md text-white focus:outline-none placeholder-gray-300 border-opacity-50"
+                    placeholder="Last Name"
+                    required
+                  />
+                </div>
+              </div>
+              </div>
+          {/* Email */}
+          <div>
+              <label className="text-sm">Email Address</label>
+              <div className="relative mt-1">
+                <FaEnvelope className='absolute left-2 top-1/2 transform -translate-y-1/2 text-blue-500 w-5 h-5' />
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full py-2 pl-10 bg-transparent border border-white rounded-md text-white focus:outline-none placeholder-gray-300 border-opacity-50"
+                  placeholder="Email Address"
+                  required
+                />
+              </div>
             </div>
-            <div className="mb-4">
+            {/* Contact Number */}
+            <div>
+              <label className="text-sm">Contact Number</label>
+              <div className="relative mt-1">
+                <FaPhoneAlt className='absolute left-2 top-1/2 transform -translate-y-1/2 text-blue-500 w-5 h-5' />
+                <input
+                  type="number"
+                  name="contactNo"
+                  value={formData.contactNo}
+                  onChange={handleChange}
+                  className="w-full py-2 pl-10 bg-transparent border border-white rounded-md text-white focus:outline-none placeholder-gray-300 border-opacity-50"
+                  placeholder="Contact Number"
+                  required
+                />
+              </div>
+            </div>
+            {/* Message */}
+            <div>
+              <label className="text-sm">Your Query</label>
               <textarea
                 name="query"
                 value={formData.query}
                 onChange={handleChange}
-                className="w-full py-2 bg-transparent border-b-2 border-gray-300 text-white focus:outline-none"
+                className="w-full py-2 px-2 bg-transparent border border-white rounded-md text-white focus:outline-none placeholder-gray-300 border-opacity-50"
                 rows={4}
-                placeholder="Your Query"
+                placeholder="Write your message here..."
                 required
               />
             </div>
-            <div className="text-center">
+
+          
+            
+           {/* Submit Button */}
+           <div className="text-center">
               <button
                 type="submit"
                 className="w-full py-2 px-6 bg-blue-600 text-white rounded-md text-lg font-semibold hover:bg-blue-500 focus:outline-none"
                 disabled={loading}
               >
-                {loading ? "Submitting..." : "Submit"}
+                {loading ? 'Submitting...' : 'Send Message'}
               </button>
             </div>
-            {success && <p className="text-green-500 mt-3 text-center">Form submitted successfully!</p>}
           </form>
         </div>
       </div>
+
+      {/* Success Modal */}
+      {success && (
+        <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
+          <div className='bg-white p-10 rounded-xl shadow-xl text-center'>
+            <FaCheckCircle className='text-blue-500 w-12 h-12 mx-auto' />
+            <p className='text-gray-800 text-lg font-semibold mt-2'>
+              Your journey begins here! 🌍✈️
+            </p>
+            <p className='text-gray-600 text-sm mt-1'>
+              We've received your query and will get back to you soon. Get ready
+              to explore!
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

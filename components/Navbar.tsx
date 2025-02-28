@@ -398,7 +398,7 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPac
                                     className='hover:text-blue-400 block p-2'
                                     onClick={() => handleSelectPackage('Rajasthan')}
                                   >
-                                    Rajasthan
+                                    Goa
                                   </button>
                                 </li>
                                 <li>
@@ -406,7 +406,7 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPac
                                     onClick={() => handleSelectPackage('Kerala')}
                                     className='hover:text-blue-400 block p-2'
                                   >
-                                    Kerala
+                                   Arunachal Pradesh
                                   </button>
                                 </li>
                                 <li>
@@ -414,7 +414,7 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPac
                                     onClick={() => handleSelectPackage('Goa')}
                                     className='hover:text-blue-400 block p-2'
                                   >
-                                    Goa
+                                   Andaman & Nicobar
                                   </button>
                                 </li>
                                 <li>
@@ -430,7 +430,7 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPac
                                     onClick={() => handleSelectPackage('Tamil Nadu')}
                                     className='hover:text-blue-400 block p-2'
                                   >
-                                    Tamil Nadu
+                                 Karnataka
                                   </button>
                                 </li>
                               </ul>
@@ -450,8 +450,9 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPac
                                 <li>
                                   <Link
                                     href='/maldives'
-                                    className='hover:text-blue-400 block p-2'
-                                    aria-disabled="true"
+                                    className='hover:text-blue-400 block p-2 pointer-events-none opacity-50'
+                                    onClick={(e) => e.preventDefault()}
+    aria-disabled="true"
                                   >
                                     Maldives
                                   </Link>
@@ -459,8 +460,9 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPac
                                 <li>
                                   <Link
                                     href='/singapore'
-                                    className='hover:text-blue-400 block p-2'
-                                    aria-disabled="true"
+                                    className='hover:text-blue-400 block p-2 pointer-events-none opacity-50'
+                                   onClick={(e) => e.preventDefault()}
+    aria-disabled="true"
                                   >
                                     Singapore
                                   </Link>
@@ -468,8 +470,9 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPac
                                 <li>
                                   <Link
                                     href='/thailand'
-                                    className='hover:text-blue-400 block p-2'
-                                    aria-disabled="true"
+                                    className='hover:text-blue-400 block p-2 pointer-events-none opacity-50'
+                                    onClick={(e) => e.preventDefault()}
+    aria-disabled="true"
                                   >
                                     Thailand
                                   </Link>
@@ -477,8 +480,9 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPac
                                 <li>
                                   <Link
                                     href='/dubai'
-                                    className='hover:text-blue-400 block p-2'
-                                    aria-disabled="true"
+                                    className='hover:text-blue-400 block p-2 pointer-events-none opacity-50'
+                                    onClick={(e) => e.preventDefault()}
+    aria-disabled="true"
                                   >
                                     Dubai
                                   </Link>
@@ -486,8 +490,9 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPac
                                 <li>
                                   <Link
                                     href='/switzerland'
-                                    className='hover:text-blue-400 block p-2'
-                                    aria-disabled="true"
+                                    className='hover:text-blue-400 block p-2 pointer-events-none opacity-50'
+                                   onClick={(e) => e.preventDefault()}
+    aria-disabled="true"
                                   >
                                     Switzerland
                                   </Link>

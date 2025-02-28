@@ -8,7 +8,7 @@ import { MdMail } from "react-icons/md";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-900 text-gray-300 py-8">
+    <footer className="bg-gray-800 text-gray-300 py-8">
     {/* Main Links Section */}
     <div className="max-w-7xl mx-auto px-4">
       <div className="flex flex-col md:flex-row justify-between items-start space-y-6 md:space-y-0">

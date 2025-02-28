@@ -44,7 +44,7 @@ export default function Home() {
       <Footer />
        {/* WhatsApp Floating Button */}
        <a
-        href="https://wa.me/919155746888" // Replace with your WhatsApp number
+        href="https://wa.me/919953786506" // Replace with your WhatsApp number
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-4 bg-white right-6 z-50  p-3 rounded-full shadow-lg  transition"
