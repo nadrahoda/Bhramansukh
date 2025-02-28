@@ -10,6 +10,13 @@ export async function POST(req: Request) {
       throw new Error("Brevo API key is missing");
     }
 
+    const departureInfo =
+  departureDate === "Date flexible"
+    ? departureMonth && departureYear
+      ? `${departureMonth} ${departureYear}`
+      : "Date flexible"
+    : departureDate;
+
     
 
     const response = await fetch("https://api.brevo.com/v3/smtp/email", {
@@ -44,10 +51,12 @@ export async function POST(req: Request) {
                 <td style="padding: 10px; border: 1px solid #ddd;"><strong>Contact No:</strong></td>
                 <td style="padding: 10px; border: 1px solid #ddd;">${contactNo}</td>
               </tr>
-              <tr style="background-color: #f1f1f1;">
-                <td style="padding: 10px; border: 1px solid #ddd;"><strong>Departure Date:</strong></td>
-                <td style="padding: 10px; border: 1px solid #ddd;">${departureDate} ${departureMonth} ${departureYear}</td>
-              </tr>
+           <tr style="background-color: #f1f1f1;">
+  <td style="padding: 10px; border: 1px solid #ddd;"><strong>Departure Date:</strong></td>
+  <td style="padding: 10px; border: 1px solid #ddd;">${departureInfo}</td>
+</tr>
+
+
               <tr>
                 <td style="padding: 10px; border: 1px solid #ddd;"><strong>Number of Days:</strong></td>
                 <td style="padding: 10px; border: 1px solid #ddd;">${numberOfDays}</td>
