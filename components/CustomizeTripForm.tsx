@@ -6,8 +6,9 @@ import { GrAchievement } from 'react-icons/gr'
 import { FiPhoneCall } from 'react-icons/fi'
 import { FaArrowCircleRight, FaMapMarkerAlt } from 'react-icons/fa'
 import { MdClose } from 'react-icons/md'
-import emailjs from 'emailjs-com'
-import { toASCII } from 'node:punycode'
+import { db } from '../firebaseConfig' // Import Firestore instance
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
+
 
 interface CustomizeTripFormProps {
   onClose: () => void
@@ -30,8 +31,10 @@ const CustomizeTripForm: React.FC<CustomizeTripFormProps> = ({
   const [email, setEmail] = useState<string>('')
   const [contact, setContact] = useState<string>('')
   const [specialRequests, setSpecialRequests] = useState<string>('')
-  const [from, setFrom] = useState<string>('');  // State for "From" location
-const [to, setTo] = useState<string>(destination);  // State for "To" location
+  const [from, setFrom] = useState<string>('') // State for "From" location
+  const [to, setTo] = useState<string>(destination) // State for "To" location
+  const [emailError, setEmailError] = useState<string>('');
+const [contactError, setContactError] = useState<string>('');
 
   const handleOptionClick = (option: 'fixed' | 'flexible' | 'anytime') => {
     setDateOption(option)
@@ -42,38 +45,84 @@ const [to, setTo] = useState<string>(destination);  // State for "To" location
     setSelectedDate(date)
   }
 
-  const handleNextStep = () => setStep(prev => prev + 1)
+  const handleNextStep = () => {
+    if(step === 2){
+      let isValid = true;
+
+      if(!email.includes("@")){
+        setEmailError('Please enter a valid email address.');
+        isValid = false;
+      
+    }
+    else{
+      setEmailError('');
+    }
+
+    if (!/^\d{10}$/.test(contact)) {
+      setContactError('Please enter a valid 10-digit contact number.');
+      isValid = false;
+    } else {
+      setContactError('');
+    }
+
+    if (!isValid) return;
+    
+
+  }
+    
+    setStep(prev => prev + 1)
+};
   const handlePreviousStep = () => setStep(prev => prev - 1)
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
 
     const formData = {
-      from: from, // Adjust this field as needed
-      to: to,
-      departureDate: selectedDate?.toISOString() || 'Not specified',
+      from, // Adjust this field as needed
+      to,
+      departureDate: selectedDate?.toISOString() || 'Date flexible',
+      departureMonth: selectedMonth || 'Not specified',
+      departureYear: selectedYear || 'Not specified',
       numberOfDays,
       specialRequests: specialRequests || 'None',
       email: email,
-      contact: contact,
-    };
-  
-    try {
-      const result = await emailjs.send(
-        'service_sx86ci6', // Your service ID
-        'template_a11oos6', // Your template ID
-        formData,
-        'o8kuezP2x3T2WxIZm' // Your public key
-      );
-      alert('Your trip request has been submitted successfully!');
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        alert('Error submitting the form: ' + error.message);
-      } else {
-        alert('An unknown error occurred.');
-      }
+      contactNo: contact,
+      timestamp: serverTimestamp(),
     }
-  };
+    try {
+      await addDoc(collection(db, 'custom_trips'), formData)
+      
+      const response = await fetch("/api/customize-trip", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+  
+      if (response.ok) {
+        alert("Form submitted successfully!")
+        onClose() // Close modal after successful submission
+        setFrom('')
+        setTo(destination)
+        setSelectedDate(null)
+        setSelectedMonth('')
+        setSelectedYear('')
+        setNumberOfDays(0)
+        setSpecialRequests('')
+        setEmail('')
+        setContact('')
+      } else {
+        alert("Failed to submit form. Please try again.")
+      }
+
+
+    } catch (error) {
+      console.error("Error submitting form:", error)
+      alert("An error occurred. Please try again later.")
+    }
+  
+  }
 
   return (
     <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50'>
@@ -109,7 +158,10 @@ const [to, setTo] = useState<string>(destination);  // State for "To" location
           <hr className='border-t-2 border-blue-500  mt-3' />
           <div className='flex flex-col items-center mt-2'>
             <p className='flex items-center font-semibold text-sm'>
-              <FiPhoneCall className='mr-2' /> Call us for details
+              
+            <span className="mr-2">
+    <FiPhoneCall />
+  </span> Call us for details
             </p>
             <p className='text-4xl mt-3 font-bold text-blue-500'>
               +91 9953 786 506
@@ -137,8 +189,8 @@ const [to, setTo] = useState<string>(destination);  // State for "To" location
                     type='text'
                     className='w-full border border-gray-300 rounded px-3 py-2 pl-10 placeholder-gray-500 focus:outline-none'
                     placeholder='To'
-                    value={to}  // Bind the "To" field to the `to` state
-  onChange={(e) => setTo(e.target.value)} 
+                    value={to} // Bind the "To" field to the `to` state
+                    onChange={e => setTo(e.target.value)}
                   />
                 </div>
               </div>
@@ -156,7 +208,7 @@ const [to, setTo] = useState<string>(destination);  // State for "To" location
                     className='w-full border border-gray-300 rounded px-3 py-2 pl-10 placeholder-gray-500 focus:outline-none'
                     placeholder='From'
                     value={from}
-                    onChange={(e) => setFrom(e.target.value)}
+                    onChange={e => setFrom(e.target.value)}
                   />
                 </div>
               </div>
@@ -366,7 +418,10 @@ const [to, setTo] = useState<string>(destination);  // State for "To" location
                   className='bg-blue-600 text-white px-4 py-2 w-full flex justify-center items-center rounded hover:bg-blue-700'
                 >
                   Next
-                  <FaArrowRightLong className='ml-2' />
+                  <span className='ml-2 '>
+   <FaArrowRightLong  />
+                  </span>
+               
                 </button>
               </div>
             </form>
@@ -382,10 +437,12 @@ const [to, setTo] = useState<string>(destination);  // State for "To" location
                 <input
                   type='email'
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)} 
-                  className='w-full border border-gray-300 rounded px-3 py-2'
+                  onChange={e => setEmail(e.target.value)}
+                  className={`w-full border ${emailError ? 'border-red-500' : 'border-gray-300'}  rounded px-3 py-2`}
                   placeholder='Enter your Email Id'
+                  required
                 />
+                {emailError && <p className='text-red-500 text-sm mt-1'>{emailError}</p>}
               </div>
               <div className='mb-4'>
                 <label className='block text-gray-700 mb-2 font-semibold'>
@@ -394,11 +451,12 @@ const [to, setTo] = useState<string>(destination);  // State for "To" location
                 <input
                   type='number'
                   value={contact}
-                  onChange={(e) => setContact(e.target.value)} 
-
-                  className='w-full border border-gray-300 rounded px-3 py-2'
+                  onChange={e => setContact(e.target.value)}
+                  className={`w-full border ${contactError ? 'border-red-500' : 'border-gray-300'} rounded px-3 py-2`}
                   placeholder='Enter your Contact Number'
+                  required
                 />
+                 {contactError && <p className='text-red-500 text-sm mt-1'>{contactError}</p>}
               </div>
               <div className='flex justify-between'>
                 <button
@@ -427,7 +485,7 @@ const [to, setTo] = useState<string>(destination);  // State for "To" location
                   Special Requests
                 </label>
                 <textarea
-                onChange={(e) => setSpecialRequests(e.target.value)} 
+                  onChange={e => setSpecialRequests(e.target.value)}
                   className='w-full border border-gray-300 rounded px-3 py-2'
                   rows={4}
                   placeholder='Enter any special requests or preferences'

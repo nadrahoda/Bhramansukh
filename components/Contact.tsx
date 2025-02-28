@@ -131,28 +131,37 @@ const Contact: React.FC = () => {
                   className='hover:text-gray-300 transition duration-300'
                   target='_blank'
                 >
-                  <FaFacebook className='text-white w-6 h-6' />
+                  <span className='text-white w-6 h-6'>
+                  <FaFacebook />
+                  </span>
+                
                 </a>
                 <a
                   href='https://www.instagram.com/bhramansukh/'
                   className='hover:text-gray-300 transition duration-300'
                   target='_blank'
                 >
-                  <FaInstagram className='text-white w-6 h-6' />
+                  <span className='text-white w-6 h-6'>
+                  <FaInstagram  />
+                  </span>
+                 
                 </a>
                 <a
                   href='https://www.linkedin.com/company/bhramansukh/posts/?feedView=all'
                   className='hover:text-gray-300 transition duration-300'
                   target='_blank'
-                >
-                  <FaLinkedinIn className='text-white w-6 h-6' />
+                ><span className='text-white w-6 h-6'>
+  <FaLinkedinIn  />
+                </span>
+                
                 </a>
                 <a
                   href='https://x.com/BhramanSukh'
                   className='hover:text-gray-300 transition duration-300'
                   target='_blank'
                 >
-                  <FaTwitter className='text-white w-6 h-6' />
+                  <span className='text-white w-6 h-6'>  <FaTwitter  /></span>
+                
                 </a>
               </div>
             </div>
@@ -166,7 +175,10 @@ const Contact: React.FC = () => {
               <div className='w-1/2'>
               <label className="text-sm">First Name</label>
             <div className='relative mt-1'>
-              <FaUser className='absolute left-2 top-1/2 transform -translate-y-1/2 text-blue-500 w-5 h-5' />
+              <span className='absolute left-2 top-1/2 transform -translate-y-1/2 text-blue-500 w-5 h-5'>
+              <FaUser  />
+              </span>
+             
               <input
                 type='text'
                 name='firstName'
@@ -181,7 +193,10 @@ const Contact: React.FC = () => {
             <div className="w-1/2">
                 <label className="text-sm">Last Name</label>
                 <div className="relative mt-1">
-                  <FaUser className='absolute left-2 top-1/2 transform -translate-y-1/2 text-blue-500 w-5 h-5' />
+                  <span className='absolute left-2 top-1/2 transform -translate-y-1/2 text-blue-500 w-5 h-5'>
+                  <FaUser />
+                  </span>
+                 
                   <input
                     type="text"
                     name="lastName"
@@ -198,7 +213,10 @@ const Contact: React.FC = () => {
           <div>
               <label className="text-sm">Email Address</label>
               <div className="relative mt-1">
-                <FaEnvelope className='absolute left-2 top-1/2 transform -translate-y-1/2 text-blue-500 w-5 h-5' />
+                <span className='absolute left-2 top-1/2 transform -translate-y-1/2 text-blue-500 w-5 h-5'>
+                <FaEnvelope  />
+                </span>
+               
                 <input
                   type="email"
                   name="email"
@@ -214,7 +232,10 @@ const Contact: React.FC = () => {
             <div>
               <label className="text-sm">Contact Number</label>
               <div className="relative mt-1">
-                <FaPhoneAlt className='absolute left-2 top-1/2 transform -translate-y-1/2 text-blue-500 w-5 h-5' />
+                <span className='absolute left-2 top-1/2 transform -translate-y-1/2 text-blue-500 w-5 h-5'>
+                <FaPhoneAlt  />
+                </span>
+              
                 <input
                   type="number"
                   name="contactNo"
@@ -240,8 +261,6 @@ const Contact: React.FC = () => {
               />
             </div>
 
-          
-            
            {/* Submit Button */}
            <div className="text-center">
               <button
@@ -259,8 +278,10 @@ const Contact: React.FC = () => {
       {/* Success Modal */}
       {success && (
         <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
-          <div className='bg-white p-10 rounded-xl shadow-xl text-center'>
-            <FaCheckCircle className='text-blue-500 w-12 h-12 mx-auto' />
+          <div className='bg-white p-10 rounded-xl flex items-center flex-col shadow-xl text-center'>
+            <span className='text-blue-500  mx-auto'>  
+                <FaCheckCircle  size={40}/></span>
+        
             <p className='text-gray-800 text-lg font-semibold mt-2'>
               Your journey begins here! 🌍✈️
             </p>

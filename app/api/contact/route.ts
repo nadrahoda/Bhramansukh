@@ -17,18 +17,42 @@ export async function POST(req: Request) {
         "api-key": brevoApiKey, // Use API key from environment variable
       },
       body: JSON.stringify({
-        sender: { email: "bhramansukh4@gmail.com", name: "Your Website" },
-        to: [{ email: "bhramansukh4@gmail.com", name: "Sales Team" }], // Change this
-        subject: "New Contact Form Submission",
+        sender: { email: "bhramansukh4@gmail.com", name: "bhramansukh.in" },
+        to: [{ email: "bhramansukh4@gmail.com", name: "Sales Team" }], // Change this if needed
+        subject: "📩 New Contact Form Submission",
         htmlContent: `
-          <h3>New Contact Inquiry</h3>
-          <p><strong>Name:</strong> ${firstName}</p>
-           <p><strong>Name:</strong> ${lastName}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Contact No:</strong> ${contactNo}</p>
-          <p><strong>Query:</strong> ${query}</p>
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+            <h2 style="text-align: center; color: #2C3E50;">📩 New Contact Inquiry</h2>
+            <p style="font-size: 16px; color: #555;">A new contact form submission has been received. Below are the details:</p>
+      
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr style="background-color: #f1f1f1;">
+                <td style="padding: 10px; border: 1px solid #ddd;"><strong>Name:</strong></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">${firstName} ${lastName}</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><strong>Email:</strong></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">${email}</td>
+              </tr>
+              <tr style="background-color: #f1f1f1;">
+                <td style="padding: 10px; border: 1px solid #ddd;"><strong>Contact No:</strong></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">${contactNo}</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><strong>Query:</strong></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">${query}</td>
+              </tr>
+            </table>
+      
+            <p style="text-align: center; margin-top: 20px;">
+              <a href="mailto:${email}" style="background-color: #3498db; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;">Reply to Inquiry</a>
+            </p>
+      
+            <p style="font-size: 14px; color: #777; text-align: center; margin-top: 20px;">This is an automated message. Please do not reply directly to this email.</p>
+          </div>
         `,
       }),
+      
     });
 
     if (!response.ok) {
