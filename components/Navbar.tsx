@@ -22,10 +22,11 @@ interface Props {
   setSelectedOption: React.Dispatch<React.SetStateAction<string>>;
   selectedPackage: string;
   setSelectedPackage:React.Dispatch<React.SetStateAction<string>>;
+  setSearch: React.Dispatch<React.SetStateAction<boolean>>; // Accept setSearch
 }
 
 
-const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPackage, setSelectedPackage}) => {
+const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPackage, setSelectedPackage, setSearch}) => {
   const [dropdowns, setDropdowns] = useState({
     holiday: false,
     guides: false,
@@ -189,17 +190,19 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPac
       >
         <div className='container mx-auto flex items-center justify-between'>
           {/* Logo Section */}
-          <div className='text-2xl font-semibold '>
-            <Link href='/'>
-              <Image
-                src={logo}
-                alt='Logo'
-                width={192}
-                height={96}
-                className='w-36 pl-2'
-              />
-            </Link>
-          </div>
+          <div className="text-2xl font-semibold cursor-pointer">
+  <Image
+    src={logo}
+    alt="Logo"
+    width={192}
+    height={96}
+    className="w-36 pl-2"
+    onClick={() => {
+      setSearch(false);  // Hide the search section
+      router.push("/");   // Navigate to the landing page
+    }}
+  />
+</div>
 
           {/* Hamburger Menu */}
           <div className='md:hidden'>

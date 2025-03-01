@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <>
-      <Navbar selectedOption={selectedOption} setSelectedOption={setSelectedOption} selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage}/>
+      <Navbar selectedOption={selectedOption} setSelectedOption={setSelectedOption} selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage} setSearch={setSearch}/>
       <Hero search={search} setSearch={setSearch} />
       {!search && (
      <>

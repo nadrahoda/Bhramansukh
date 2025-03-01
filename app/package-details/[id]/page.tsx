@@ -65,6 +65,7 @@ export default function PackageDetails() {
     useState<string>("Strangers Unite");
      const [selectedPackage, setSelectedPackage] =
       useState<string>('')
+      const [search, setSearch] = useState<boolean>(false);
 
 
   useEffect(() => {
@@ -107,6 +108,7 @@ export default function PackageDetails() {
       <Navbar
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption} selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage}
+        setSearch={setSearch}
       />
       <div className="bg-gray-900 text-white pt-8">
         <div className="flex justify-between mx-12 rounded-xl  p-5 bg-gray-800 ">

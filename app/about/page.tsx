@@ -13,9 +13,10 @@ const page = () => {
     useState<string>('Strangers Unite');
     const [selectedPackage, setSelectedPackage] =
   useState<string>('')
+  const [search, setSearch] = useState<boolean>(false);
   return (
     <>
-      <Navbar selectedOption={selectedOption} setSelectedOption={setSelectedOption} selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage}/>
+      <Navbar selectedOption={selectedOption} setSelectedOption={setSelectedOption} selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage} setSearch={setSearch}/>
       <AboutUs/>
       <Team/>
       <Hiring/>

@@ -62,6 +62,7 @@ const page = () => {
   const [tourPackages, setTourPackages] = useState<TourPackage[]>();
   const [showForm, setShowForm] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [search, setSearch] = useState<boolean>(false);
   const [categories, setCategories] = useState<string[]>([
     "Honeymoon",
     "Family",
@@ -304,7 +305,7 @@ const page = () => {
           value: React.SetStateAction<string>
         ): void {
           throw new Error("Function not implemented.");
-        }} selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage}
+        }} selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage} setSearch={setSearch}
       />
       {loading ? (
         <div className="h-screen w-screen bg-gray-900 flex items-center justify-center">

@@ -42,6 +42,8 @@ import CustomizeTripForm from "./CustomizeTripForm";
 import LoginModal from "./LoginModal";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Loader from "./Loader";
+import { useRouter } from "next/navigation"; 
+
 const Hero = ({
   search,
   setSearch,
@@ -62,6 +64,11 @@ const Hero = ({
   const [showForm, setShowForm] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [pendingSearch, setPendingSearch] = useState<string | null>(null);
+
+  const router = useRouter();
+  const handleBackToHome = () => {
+    router.push("/"); // Redirect to the main landing page
+  };
 
   const handleOpenForm = () => {
     setShowForm(true);
@@ -476,8 +483,8 @@ const Hero = ({
         <div className="flex bg-gray-900 text-white h-auto">
           <div className="w-1/5 p-4 border-r border-gray-700 pl-10 ">
             {/* Back Button */}
-            <button
-              onClick={() => setSearch(false)}
+            {/* <button
+               onClick={handleBackToHome}
               className="text-white px-4 py-2 rounded-lg mb-4 font-semibold inline-flex items-center underline"
             >
               <FaArrowLeftLong
@@ -486,7 +493,7 @@ const Hero = ({
                 color="white"
               />{" "}
               Back to Home
-            </button>
+            </button> */}
             <h2 className="text-lg font-bold mb-4 text-blue-500">Categories</h2>
             <form className="grid grid-cols-2 gap-x-4 gap-y-2 ">
               {categories.map((category, index) => (
