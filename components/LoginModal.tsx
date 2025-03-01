@@ -20,9 +20,9 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
     <div className="fixed inset-0 bg-black bg-opacity-10 flex justify-center items-center backdrop-blur-sm z-50">
       <div className="relative bg-white p-6 rounded-lg shadow-xl w-[450px] max-w-full">
         {/* Close Button */}
-        <button className="absolute top-3 right-3 text-gray-600 hover:text-gray-800 z-50" onClick={onClose}>
+        {/* <button className="absolute top-3 right-3 text-gray-600 hover:text-gray-800 z-50" onClick={onClose}>
           <IoClose size={24} />
-        </button>
+        </button> */}
 
        
         <div className='max-h-[90vh] overflow-y-auto'>

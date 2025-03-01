@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { FaRegUser } from 'react-icons/fa'
 import { RiLockPasswordLine } from 'react-icons/ri'
 import { IoIosPhonePortrait } from 'react-icons/io' // Icon for phone number
@@ -43,6 +43,8 @@ const Signup: React.FC<SignupProps> = ({onSignupSuccess, hideBackground}) => {
       return
     }
 
+    const { createUserWithEmailAndPassword, signInWithEmailAndPassword } = await import('firebase/auth');
+
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -61,10 +63,7 @@ const Signup: React.FC<SignupProps> = ({onSignupSuccess, hideBackground}) => {
 
       await signInWithEmailAndPassword(auth, email, password)
 
-      if(onSignupSuccess){
-        onSignupSuccess()
-      }
-
+      onSignupSuccess?.();
       router.push('/') // Redirect to login after successful signup
     } catch (error: any) {
       setError(error.message)
@@ -72,6 +71,11 @@ const Signup: React.FC<SignupProps> = ({onSignupSuccess, hideBackground}) => {
       setLoading(false)
     }
   }
+
+  const handleInputChange = useCallback((setter: React.Dispatch<React.SetStateAction<string>>) => 
+    (e: React.ChangeEvent<HTMLInputElement>) => setter(e.target.value), []);
+
+  
   return (
     <div className={`relative flex items-center justify-center ${hideBackground ? '' : 'h-screen bg-gray-900'}  `}>
       {/* Background Image */}
@@ -79,7 +83,11 @@ const Signup: React.FC<SignupProps> = ({onSignupSuccess, hideBackground}) => {
   <div
   className='absolute inset-0 bg-cover bg-center opacity-40'
   style={{
-    backgroundImage: `url('/assets/login.jpg')` // Replace with your image path
+    backgroundImage: `url('/assets/login.jpg')`, // Replace with your image path
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    
   }}
 ></div>
       )}
@@ -102,7 +110,7 @@ const Signup: React.FC<SignupProps> = ({onSignupSuccess, hideBackground}) => {
                 <input
                   type='text'
                   value={firstName}
-                  onChange={e => setFirstName(e.target.value)}
+                  onChange={handleInputChange(setFirstName)}
                   className='w-full bg-transparent text-blue-600 px-10 py-2 border border-blue-500 rounded-full focus:outline-none placeholder:text-blue-200'
                   placeholder='First Name'
                 />
@@ -114,7 +122,7 @@ const Signup: React.FC<SignupProps> = ({onSignupSuccess, hideBackground}) => {
                 <input
                   type='text'
                   value={lastName}
-                  onChange={e => setLastName(e.target.value)}
+                  onChange={handleInputChange(setLastName)}
                   className='w-full bg-transparent text-blue-600 px-10 py-2 border border-blue-500 rounded-full focus:outline-none placeholder:text-blue-200'
                   placeholder='Last Name'
                 />
@@ -129,7 +137,7 @@ const Signup: React.FC<SignupProps> = ({onSignupSuccess, hideBackground}) => {
               <input
                 type='tel'
                 value={contactNo}
-                onChange={e => setContactNo(e.target.value)}
+                onChange={handleInputChange(setContactNo)}
                 className='w-full bg-transparent text-blue-600 px-10 py-2 border border-blue-500 rounded-full focus:outline-none placeholder:text-blue-200'
                 placeholder='Contact Number'
                 required
@@ -144,7 +152,7 @@ const Signup: React.FC<SignupProps> = ({onSignupSuccess, hideBackground}) => {
               <input
                 type='email'
                 value={email}
-                onChange={e => setEmail(e.target.value)}
+                onChange={handleInputChange(setEmail)}
                 id='email'
                 className='w-full bg-transparent text-blue-600 px-10 py-2 border border-blue-500 rounded-full focus:outline-none placeholder:text-blue-200'
                 placeholder='Enter your email'
@@ -160,7 +168,7 @@ const Signup: React.FC<SignupProps> = ({onSignupSuccess, hideBackground}) => {
               <input
                 type='password'
                 value={password}
-                onChange={e => setPassword(e.target.value)}
+                onChange={handleInputChange(setPassword)}
                 id='password'
                 className='w-full px-10 bg-transparent text-blue-600 py-2 border border-blue-500 rounded-full focus:outline-none placeholder:text-blue-200'
                 placeholder='Enter your password'

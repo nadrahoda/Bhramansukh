@@ -61,6 +61,7 @@ const Hero = ({
   const [tourPackages, setTourPackages] = useState<TourPackage[]>();
   const [showForm, setShowForm] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [pendingSearch, setPendingSearch] = useState<string | null>(null);
 
   const handleOpenForm = () => {
     setShowForm(true);
@@ -128,10 +129,16 @@ const Hero = ({
   const handleExploreClick = async (cityname: string) => {
     if (!user) {
       // If not logged in, show login modal
+      setPendingSearch(cityname);
       setShowLoginModal(true);
       return;
     }
+    performSearch(cityname);
+    // setLoading(true);
+  };
+  const performSearch = async (cityname: string) => {
     setLoading(true);
+  
     try {
       const response = await fetch(
         `/api/searchPackages?searchTerm=${cityname}&categories=${selectedCategories.join(
@@ -147,6 +154,13 @@ const Hero = ({
     } catch (error) {
       console.error("Error fetching data:", error);
       setLoading(false);
+    }
+  };
+  const handleLoginSuccess = () => {
+    setShowLoginModal(false);
+    if (pendingSearch) {
+      performSearch(pendingSearch); // Re-run the search
+      setPendingSearch(null);
     }
   };
 
@@ -699,7 +713,7 @@ const Hero = ({
       )}
       <LoginModal
         isOpen={showLoginModal}
-        onClose={() => setShowLoginModal(false)}
+        onClose={handleLoginSuccess}
       />
     </>
   );
