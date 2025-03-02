@@ -312,10 +312,10 @@ const page = () => {
           <Loader />
         </div>
       ) : (
-        <div className="flex bg-gray-900 text-white ">
+        <div className="flex bg-gray-900 text-white pt-6">
           <div className="w-1/5 p-4 border-r border-gray-700 pl-10 ">
             {/* Back Button */}
-            <Link
+            {/* <Link
               href={"/"}
               className="text-white px-4 py-2 rounded-lg mb-4 font-semibold inline-flex items-center underline"
             >
@@ -325,7 +325,7 @@ const page = () => {
                 color="white"
               />{" "}
               Back to Home
-            </Link>
+            </Link> */}
             <h2 className="text-lg font-bold mb-4 text-blue-500">Categories</h2>
             <form className="grid grid-cols-2 gap-x-4 gap-y-2 ">
               {categories.map((category, index) => (
