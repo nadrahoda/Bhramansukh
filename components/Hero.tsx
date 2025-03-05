@@ -66,10 +66,7 @@ const Hero = ({
   const [pendingSearch, setPendingSearch] = useState<string | null>(null);
 
   const router = useRouter();
-  const handleBackToHome = () => {
-    router.push("/"); // Redirect to the main landing page
-  };
-
+  
   const handleOpenForm = () => {
     setShowForm(true);
   };
@@ -79,7 +76,7 @@ const Hero = ({
   };
   const extractDays = (duration: string): number => {
     // Regular expression to match the number before "Days" or "Nights"
-    const match = duration.match(/^(\d+)\s*(Days|Day)/i);
+    const match = duration.match(/^(\d+)\s*Days?/i);
     return match ? parseInt(match[1], 10) : 0; // Return the number of days if found, else 0
   };
 
@@ -154,8 +151,10 @@ const Hero = ({
           ","
         )}&budgets=${selectedBudgets.join(",")}`
       );
-      const data = await response.json();
-      console.log("data", data);
+      const text = await response.text();
+      console.log("Raw API response:", text);
+      const data = JSON.parse(text);
+      // console.log("data", data);
       setLoading(false);
       setTourPackages(data);
     } catch (error) {
@@ -494,8 +493,8 @@ const Hero = ({
               />{" "}
               Back to Home
             </button> */}
-            <h2 className="text-lg font-bold mb-4 text-blue-500">Categories</h2>
-            <form className="grid grid-cols-2 gap-x-4 gap-y-2 ">
+            {/* <h2 className="text-lg font-bold mb-4 text-blue-500">Categories</h2> */}
+            {/* <form className="grid grid-cols-2 gap-x-4 gap-y-2 ">
               {categories.map((category, index) => (
                 <label
                   key={index}
@@ -511,7 +510,7 @@ const Hero = ({
                   <span>{category}</span>
                 </label>
               ))}
-            </form>
+            </form> */}
 
             {/* Duration Filter */}
             <h2 className="text-lg font-bold mb-4 mt-6 text-blue-500">

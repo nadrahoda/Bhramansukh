@@ -12,7 +12,7 @@ import img5 from '../public/assets/trip5.jpg'
 
 const WhyChooseUs: React.FC = () => {
   return (
-    <div className='flex md:flex-row flex-col gap-8 p-8 bg-gray-900 text-white py-24'>
+    <div className='flex md:flex-row flex-col gap-8 p-8 bg-gray-800 text-white py-24'>
       {/* Left Section with Images */}
       <div className='w-full md:order-1 order-2 md:w-2/6 grid grid-cols-2 md:gap-4 gap-2'>
         {/* First Column with 2 Images */}

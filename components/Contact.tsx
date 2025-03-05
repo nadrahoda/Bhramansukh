@@ -88,7 +88,7 @@ const Contact: React.FC = () => {
   }
 
   return (
-    <div className='w-full mx-auto p-6 py-10 bg-gray-900 text-white shadow-lg'>
+    <div className='w-full mx-auto p-6 py-10 bg-gray-800 text-white shadow-lg'>
       <h2 className='text-gray-400 text-lg uppercase tracking-widest text-center'>
         Contact
       </h2>

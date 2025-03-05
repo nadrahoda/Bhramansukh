@@ -67,7 +67,7 @@ const StrangersUnite = () => {
   }, [])
 
   return (
-    <div className='flex md:flex-row flex-col  md:space-x-8 bg-gray-800 py-10 px-6 md:px-28'>
+    <div className='flex md:flex-row flex-col  md:space-x-8 bg-gray-900 py-10 px-6 md:px-28'>
       {/* Left Section */}
       <div className='w-full md:w-3/5 flex  justify-center flex-col'>
         <h2 className='text-3xl text-white font-bold'>Strangers Unite Trip</h2>

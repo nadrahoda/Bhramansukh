@@ -88,7 +88,7 @@ const Testimonial: React.FC = () => {
   }
 
   return (
-    <div className='bg-gray-800 py-10 px-4'>
+    <div className='bg-gray-900 py-10 px-4'>
       <div className='flex flex-col items-center justify-center'>
         <h3 className='text-gray-400 text-lg uppercase tracking-widest'>
           REVIEWS

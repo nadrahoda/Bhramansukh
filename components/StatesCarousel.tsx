@@ -109,7 +109,7 @@ const StatesCarousel: React.FC<Props> = ({selectedPackage,
 
   return (
     <>
-      <div id="statecarousel" className="bg-gray-900 py-10 md:block hidden">
+      <div id="statecarousel" className="bg-gray-800 py-10 md:block hidden">
         <div className="flex flex-col items-center justify-center">
           <h3 className="text-gray-400 text-lg uppercase flex tracking-widest">
             Destinations

@@ -2668,7 +2668,7 @@ const FilterTrips: React.FC<Props> = ({
   };
 
   return (
-    <div id="filter-trips" ref={filterTripsRef} className="hidden md:flex bg-gray-900 py-10 ">
+    <div id="filter-trips" ref={filterTripsRef} className="hidden md:flex bg-gray-800 py-10 ">
       {/* Left section (1/4) */}
       <div className="w-1/4 p-8 border-r bg-white rounded-2xl">
         <h2 className="text-2xl font-semibold mb-4 text-left">
