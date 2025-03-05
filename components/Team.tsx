@@ -36,8 +36,8 @@ const Team = () => {
           M Shabab
           </h2>
           <p className='text-blue-400 text-lg font-medium'>Founder & Lead Strategist</p>
-          <p className="text-gray-400 text-center mt-2">
-            Passionate about shaping the future of travel experiences.
+          <p className="text-gray-400 text-center mt-2 ">
+          With a passion for travel, M Shabab crafts unforgettable journeys.
           </p>
         </div>
 
@@ -55,7 +55,7 @@ const Team = () => {
           <h2 className='text-xl font-semibold text-white mt-4'>Nadra Hoda</h2>
           <p className="text-blue-400 text-lg font-medium">Technical Lead</p>
           <p className="text-gray-400 text-center mt-2">
-            Leading innovation and technology to enhance our platform.
+          Expert in web design, enhancing user experiences with innovation.
           </p>
         </div>
 
