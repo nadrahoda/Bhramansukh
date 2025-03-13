@@ -58,10 +58,12 @@ const Footer: React.FC = () => {
               Contact Us
             </h4>
             <p className='flex items-center text-sm mb-2'>
-              <FaPhoneVolume className='mr-2 mt-1 text-blue-500' /> +91 9953 786 506
+              <FaPhoneVolume className='mr-2 mt-1 text-blue-500' /> +91 9953 786
+              506
             </p>
             <p className='flex items-center text-sm'>
-              <MdMail className='mr-2 mt-1 text-blue-500' /> sales@bhramansukh.in
+              <MdMail className='mr-2 mt-1 text-blue-500' />{' '}
+              sales@bhramansukh.in
             </p>
           </div>
 
