@@ -4,7 +4,7 @@ import hire from '../public/assets/hire.jpg'
 const Hiring = () => {
   return (
     <div className='bg-gray-900 w-full flex py-12 justify-center items-center'>
-     <div className='flex w-1/2 justify-center items-center'>
+     <div className='flex w-1/2 justify-center items-center md:flex hidden'>
      <Image src={hire} width={400} height={400} alt='Hiring' className='rounded-xl'/>
      </div>
      <div className='w-1/2 '>

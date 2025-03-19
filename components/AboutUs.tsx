@@ -3,9 +3,9 @@ import Image from "next/image";
 import banner from '../public/assets/banner.jpg'
 const AboutUs = () => {
   return (
-    <div className="bg-gray-900 text-white">
+    <div className="bg-gray-900 text-white ">
     {/* Hero Section */}
-    <div className="relative h-[300px] w-full">
+    <div className="relative h-[300px] w-full md:flex hidden">
       {/* Background Image */}
       <Image
         src={banner}
@@ -26,26 +26,30 @@ const AboutUs = () => {
       </div>
     </div>
 
+    <div className=' px-6  h-full md:hidden pt-10'>
+      <p className='text-white text-2xl font-bold capitalize border-b-2 border-blue-500 inline-block'>About Us</p>
+    </div>
+
     {/* Content Section */}
-    <div className="py-12 px-6 lg:px-20">
+    <div className="md:py-12 py-6 px-6 lg:px-20">
       {/* Our Goal Section */}
-      <section className="mb-12">
-        <h2 className="text-4xl font-bold mb-6 border-b-2 border-blue-500 inline-block">
+      <section className="md:mb-12 mb-6">
+        <h2 className="text-4xl font-bold mb-6 border-b-2 border-blue-500 inline-block md:flex hidden">
           Our Goal
         </h2>
-        <p className="text-lg text-gray-300 leading-relaxed">
-          Bhramansukh Tour and Travels - Bask in Nature’s Lap
+        <p className="md:text-lg text-sm text-gray-300 leading-relaxed">
+          Bhramansukh Tour and Travels - Bask in Nature's Lap
         </p>
-        <p className="text-lg text-gray-300 leading-relaxed mt-4">
+        <p className="md:text-lg text-sm text-gray-300 leading-relaxed mt-4">
           Discover the world with Bhramansukh Tour and Travels, your trusted
           travel companion since 2015. Over the past decade, we have
           redefined the art of travel by creating unique, unforgettable
           experiences for over 2,500+ satisfied customers. Whether it’s an
           adventurous getaway, a tranquil nature retreat, or a culturally
           enriching journey, our customized travel packages and group tours
-          cater to every traveler’s desires.
+          cater to every traveler's desires.
         </p>
-        <p className="text-lg text-gray-300 leading-relaxed mt-4">
+        <p className="text-lg text-gray-300 leading-relaxed mt-4 md:flex hidden">
           We specialize in crafting journeys that go beyond the ordinary,
           blending culture, adventure, and luxury while promoting sustainable
           and responsible tourism. With a diverse range of offerings, from
@@ -55,11 +59,11 @@ const AboutUs = () => {
       </section>
 
       {/* Our Vision Section */}
-      <section className="mb-12">
-        <h2 className="text-4xl font-bold mb-6 border-b-2 border-blue-500 inline-block">
+      <section className="md:mb-12 mb-6">
+        <h2 className="md:text-4xl text-2xl font-bold mb-6 border-b-2 border-blue-500 inline-block">
           Our Vision
         </h2>
-        <p className="text-lg text-gray-300 leading-relaxed">
+        <p className="md:text-lg text-sm text-gray-300 leading-relaxed">
           To inspire and connect people through transformative travel
           experiences while fostering a deep appreciation for nature, culture,
           and diversity. We aim to promote responsible tourism that
@@ -70,10 +74,10 @@ const AboutUs = () => {
 
       {/* Our Mission Section */}
       <section>
-        <h2 className="text-4xl font-bold mb-6 border-b-2 border-blue-500 inline-block">
+        <h2 className="md:text-4xl text-2xl font-bold mb-6 border-b-2 border-blue-500 inline-block">
           Our Mission
         </h2>
-        <ul className="list-disc pl-8 text-lg text-gray-300 leading-relaxed space-y-4">
+        <ul className="list-disc md:pl-8 pl-3 md:text-lg text-sm text-gray-300 leading-relaxed space-y-4">
           <li>
             <strong>To Craft Unforgettable Journeys:</strong> Offer
             personalized, value-packed travel packages that cater to every

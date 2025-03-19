@@ -18,15 +18,20 @@ import { doc, getDoc } from 'firebase/firestore'
 import { useRouter } from 'next/navigation'
 
 interface Props {
-  selectedOption: string;
-  setSelectedOption: React.Dispatch<React.SetStateAction<string>>;
-  selectedPackage: string;
-  setSelectedPackage:React.Dispatch<React.SetStateAction<string>>;
-  setSearch: React.Dispatch<React.SetStateAction<boolean>>; // Accept setSearch
+  selectedOption: string
+  setSelectedOption: React.Dispatch<React.SetStateAction<string>>
+  selectedPackage: string
+  setSelectedPackage: React.Dispatch<React.SetStateAction<string>>
+  setSearch: React.Dispatch<React.SetStateAction<boolean>> // Accept setSearch
 }
 
-
-const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPackage, setSelectedPackage, setSearch}) => {
+const Navbar: React.FC<Props> = ({
+  selectedOption,
+  setSelectedOption,
+  selectedPackage,
+  setSelectedPackage,
+  setSearch
+}) => {
   const [dropdowns, setDropdowns] = useState({
     holiday: false,
     guides: false,
@@ -163,24 +168,24 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPac
   const handleCloseMenu = () => setIsMenuOpen(false)
 
   const handleSelectOption = (option: string) => {
-    setSelectedOption(option);
-  
+    setSelectedOption(option)
+
     // Scroll to FilterTrips
-    const filterTripsSection = document.getElementById("filter-trips");
+    const filterTripsSection = document.getElementById('filter-trips')
     if (filterTripsSection) {
-      filterTripsSection.scrollIntoView({ behavior: "smooth" });
+      filterTripsSection.scrollIntoView({ behavior: 'smooth' })
     }
-  };
+  }
   const handleSelectPackage = (state: string) => {
-    setSelectedPackage(state); // Set selected state (if needed)
-  
+    setSelectedPackage(state) // Set selected state (if needed)
+
     // Scroll to the statecarousel section
-    const stateCarouselSection = document.getElementById("statecarousel");
+    const stateCarouselSection = document.getElementById('statecarousel')
     if (stateCarouselSection) {
-      stateCarouselSection.scrollIntoView({ behavior: "smooth" });
+      stateCarouselSection.scrollIntoView({ behavior: 'smooth' })
     }
-  };
-  
+  }
+
   return (
     <div className={isFormOpen || isMenuOpen ? 'relative overflow-hidden' : ''}>
       <nav
@@ -190,19 +195,19 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPac
       >
         <div className='container mx-auto flex items-center justify-between'>
           {/* Logo Section */}
-          <div className="text-2xl font-semibold cursor-pointer">
-  <Image
-    src={logo}
-    alt="Logo"
-    width={192}
-    height={96}
-    className="w-36 pl-2"
-    onClick={() => {
-      setSearch(false);  // Hide the search section
-      router.push("/");   // Navigate to the landing page
-    }}
-  />
-</div>
+          <div className='text-2xl font-semibold cursor-pointer'>
+            <Image
+              src={logo}
+              alt='Logo'
+              width={192}
+              height={96}
+              className='w-36 pl-2'
+              onClick={() => {
+                setSearch(false) // Hide the search section
+                router.push('/') // Navigate to the landing page
+              }}
+            />
+          </div>
 
           {/* Hamburger Menu */}
           <div className='md:hidden'>
@@ -215,26 +220,27 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPac
             {/* First Row */}
             <div className='flex justify-end'>
               <div className='flex space-x-6 mb-1 text-xs'>
-                <span
-                
-                  className='hover:text-gray-400 flex items-center cursor-pointer'
-                >
+                <span className='hover:text-gray-400 flex items-center cursor-pointer'>
                   <FaPhoneAlt className='mr-2' />
                   +91 9953786506
                 </span>
-                <button className='hover:text-gray-400 pointer-events-none opacity-50 flex items-center' disabled>
+                <button
+                  className='hover:text-gray-400 pointer-events-none opacity-50 flex items-center'
+                  disabled
+                >
                   <FaUserPlus className='mr-2' />
                   Travel Agent? Join Us
                 </button>
                 <Link
                   href='/blogs'
                   className='hover:text-gray-400 flex items-center pointer-events-none opacity-50'
-                  aria-disabled="true"
+                  aria-disabled='true'
                 >
                   Blogs
                 </Link>
                 <Link
                   href='/about'
+                  prefetch={true}
                   className='hover:text-gray-400 flex items-center'
                 >
                   About Us
@@ -310,28 +316,34 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPac
                           <div className='p-8 grid grid-cols-2 pt-8  gap-y-4  '>
                             <div>
                               <button
-                               
                                 className='block p-2 hover:text-blue-500 text-black'
-                                onClick={() => handleSelectOption('Strangers Unite')}
+                                onClick={() =>
+                                  handleSelectOption('Strangers Unite')
+                                }
                               >
                                 Strangers Unite
                               </button>
                               <button
-                                onClick={() => handleSelectOption('Therapy Travels')}
+                                onClick={() =>
+                                  handleSelectOption('Therapy Travels')
+                                }
                                 className='block p-2 hover:text-blue-500 text-black'
                               >
                                 Therapy Travels
                               </button>
                               <button
-                                onClick={() => handleSelectOption('Exposure Camps')}
+                                onClick={() =>
+                                  handleSelectOption('Exposure Camps')
+                                }
                                 className='block p-2 hover:text-blue-500 text-black'
                               >
                                 Exposure Camps
                               </button>
                               <button
-                                
                                 className='block p-2 hover:text-blue-500 text-black'
-                                onClick={() => handleSelectOption('Seasonal Packages')}
+                                onClick={() =>
+                                  handleSelectOption('Seasonal Packages')
+                                }
                               >
                                 Seasonal Packages
                               </button>
@@ -375,7 +387,9 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPac
                                 Friends
                               </button>
                               <button
-                                onClick={() => handleSelectOption('Water Activities')}
+                                onClick={() =>
+                                  handleSelectOption('Water Activities')
+                                }
                                 className='block p-2 hover:text-blue-500 text-black'
                               >
                                 Water Activities
@@ -397,19 +411,22 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPac
                               <ul className='list-disc pl-5 text-black'>
                                 <li>
                                   <button
-                                   
                                     className='hover:text-blue-400 block p-2'
-                                    onClick={() => handleSelectPackage('Rajasthan')}
+                                    onClick={() =>
+                                      handleSelectPackage('Rajasthan')
+                                    }
                                   >
                                     Goa
                                   </button>
                                 </li>
                                 <li>
                                   <button
-                                    onClick={() => handleSelectPackage('Kerala')}
+                                    onClick={() =>
+                                      handleSelectPackage('Kerala')
+                                    }
                                     className='hover:text-blue-400 block p-2'
                                   >
-                                   Arunachal Pradesh
+                                    Arunachal Pradesh
                                   </button>
                                 </li>
                                 <li>
@@ -417,12 +434,14 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPac
                                     onClick={() => handleSelectPackage('Goa')}
                                     className='hover:text-blue-400 block p-2'
                                   >
-                                   Andaman & Nicobar
+                                    Andaman & Nicobar
                                   </button>
                                 </li>
                                 <li>
                                   <button
-                                   onClick={() => handleSelectPackage('Himachal Pradesh')}
+                                    onClick={() =>
+                                      handleSelectPackage('Himachal Pradesh')
+                                    }
                                     className='hover:text-blue-400 block p-2'
                                   >
                                     Himachal Pradesh
@@ -430,15 +449,19 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPac
                                 </li>
                                 <li>
                                   <button
-                                    onClick={() => handleSelectPackage('Tamil Nadu')}
+                                    onClick={() =>
+                                      handleSelectPackage('Tamil Nadu')
+                                    }
                                     className='hover:text-blue-400 block p-2'
                                   >
-                                 Karnataka
+                                    Karnataka
                                   </button>
                                 </li>
                               </ul>
                               <button
-                                onClick={() => handleSelectPackage('Indian Destination')}
+                                onClick={() =>
+                                  handleSelectPackage('Indian Destination')
+                                }
                                 className='block mt-2 pl-6 text-blue-500 underline flex items-center '
                               >
                                 View All{' '}
@@ -454,8 +477,8 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPac
                                   <Link
                                     href='/maldives'
                                     className='hover:text-blue-400 block p-2 pointer-events-none opacity-50'
-                                    onClick={(e) => e.preventDefault()}
-    aria-disabled="true"
+                                    onClick={e => e.preventDefault()}
+                                    aria-disabled='true'
                                   >
                                     Maldives
                                   </Link>
@@ -464,8 +487,8 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPac
                                   <Link
                                     href='/singapore'
                                     className='hover:text-blue-400 block p-2 pointer-events-none opacity-50'
-                                   onClick={(e) => e.preventDefault()}
-    aria-disabled="true"
+                                    onClick={e => e.preventDefault()}
+                                    aria-disabled='true'
                                   >
                                     Singapore
                                   </Link>
@@ -474,8 +497,8 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPac
                                   <Link
                                     href='/thailand'
                                     className='hover:text-blue-400 block p-2 pointer-events-none opacity-50'
-                                    onClick={(e) => e.preventDefault()}
-    aria-disabled="true"
+                                    onClick={e => e.preventDefault()}
+                                    aria-disabled='true'
                                   >
                                     Thailand
                                   </Link>
@@ -484,8 +507,8 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPac
                                   <Link
                                     href='/dubai'
                                     className='hover:text-blue-400 block p-2 pointer-events-none opacity-50'
-                                    onClick={(e) => e.preventDefault()}
-    aria-disabled="true"
+                                    onClick={e => e.preventDefault()}
+                                    aria-disabled='true'
                                   >
                                     Dubai
                                   </Link>
@@ -494,8 +517,8 @@ const Navbar: React.FC<Props> = ({selectedOption, setSelectedOption, selectedPac
                                   <Link
                                     href='/switzerland'
                                     className='hover:text-blue-400 block p-2 pointer-events-none opacity-50'
-                                   onClick={(e) => e.preventDefault()}
-    aria-disabled="true"
+                                    onClick={e => e.preventDefault()}
+                                    aria-disabled='true'
                                   >
                                     Switzerland
                                   </Link>

@@ -38,6 +38,7 @@ import { GiMeal } from "react-icons/gi";
 import Link from "next/link";
 import indiaLocations from "../public/data/india_locations.json";
 import Image from "next/image";
+import heroImage from "../public/assets/hero.jpg"
 import CustomizeTripForm from "./CustomizeTripForm";
 import LoginModal from "./LoginModal";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -363,17 +364,12 @@ const Hero = ({
       >
         {/* Hero section */}
         {!search && (
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute top-0 left-0 w-full h-full object-cover"
-          >
-            <source src="/assets/hero.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+           <Image
+           src={heroImage}
+           alt="Hero Image"
+           className="absolute top-0 left-0 w-full h-full object-cover opacity-80"
+           priority
+         />
         )}
 
         {!search && (
