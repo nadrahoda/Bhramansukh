@@ -146,6 +146,8 @@ const Contact: React.FC = () => {
                   </span>
                  
                 </a>
+
+                
                 <a
                   href='https://www.linkedin.com/company/bhramansukh/posts/?feedView=all'
                   className='hover:text-gray-300 transition duration-300'
