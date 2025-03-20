@@ -38,7 +38,7 @@ import { GiMeal } from "react-icons/gi";
 import Link from "next/link";
 import indiaLocations from "../public/data/india_locations.json";
 import Image from "next/image";
-import heroImage from "../public/assets/hero.jpg"
+import heroImage from "../public/assets/hero1.jpg"
 import CustomizeTripForm from "./CustomizeTripForm";
 import LoginModal from "./LoginModal";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -382,11 +382,14 @@ const Hero = ({
             search ? "mt-10" : "mt-48"
           } items-center h-full text-white text-center`}
         >
-          {!search && (
+          {/* {!search && (
             <h1 className="text-2xl md:text-6xl font-bold mb-4">
               {displayedText}
             </h1>
-          )}
+          )} */}
+            <h1 className="text-2xl md:text-6xl font-bold mb-4">
+            Welcome to भ्रMan Sukh
+            </h1>
 
           <div
             className={`flex justify-center items-center ${
