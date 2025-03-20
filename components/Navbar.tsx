@@ -34,7 +34,6 @@ const Navbar: React.FC<Props> = ({
 }) => {
   const [dropdowns, setDropdowns] = useState({
     holiday: false,
-    guides: false,
     themes: false
   })
 
@@ -168,14 +167,17 @@ const Navbar: React.FC<Props> = ({
   const handleCloseMenu = () => setIsMenuOpen(false)
 
   const handleSelectOption = (option: string) => {
+    
     setSelectedOption(option)
+    
 
     // Scroll to FilterTrips
     const filterTripsSection = document.getElementById('filter-trips')
     if (filterTripsSection) {
       filterTripsSection.scrollIntoView({ behavior: 'smooth' })
     }
-  }
+    setDropdowns({ themes: false, holiday: false });
+  };
   const handleSelectPackage = (state: string) => {
     setSelectedPackage(state) // Set selected state (if needed)
 
@@ -184,6 +186,7 @@ const Navbar: React.FC<Props> = ({
     if (stateCarouselSection) {
       stateCarouselSection.scrollIntoView({ behavior: 'smooth' })
     }
+    setDropdowns({ themes: false, holiday: false });
   }
 
   return (
@@ -537,57 +540,6 @@ const Navbar: React.FC<Props> = ({
               </div>
 
               <div className='flex ml-6 space-x-6 mt-2 items-center'>
-                {/* {[{ name: 'guides', label: 'Destination Guides' }].map(item => (
-                  <div
-                    key={item.name}
-                    className={`relative ${
-                      dropdowns[item.name as keyof typeof dropdowns]
-                        ? 'border-b-4 border-blue-500 '
-                        : ''
-                    }`}
-                    ref={el => {
-                      dropdownRefs.current[item.name] = el
-                    }}
-                  >
-                    <div
-                      className=' flex items-center cursor-pointer'
-                      onClick={e => {
-                        e.preventDefault()
-                        toggleDropdown(item.name as keyof typeof dropdowns)
-                      }}
-                    >
-                      {item.label}
-                      {dropdowns[item.name as keyof typeof dropdowns] ? (
-                        <FaChevronUp className='ml-1' />
-                      ) : (
-                        <FaChevronDown className='ml-1' />
-                      )}
-                    </div>
-                    {dropdowns[item.name as keyof typeof dropdowns] && (
-                      <div className='absolute left-0 w-48 text-xs mt-4 bg-white border border-gray-300 rounded shadow-lg z-10'>
-                        <Link
-                          href='/option1'
-                          className='p-2 hover:text-blue-500 text-black block'
-                        >
-                          Option 1
-                        </Link>
-                        <Link
-                          href='/option2'
-                          className='p-2 hover:text-blue-500 text-black block'
-                        >
-                          Option 2
-                        </Link>
-                        <Link
-                          href='/option3'
-                          className='p-2 hover:text-blue-500 text-black block'
-                        >
-                          Option 3
-                        </Link>
-                      </div>
-                    )}
-                  </div>
-                ))} */}
-
                 {/* Plan My Holiday */}
                 <button
                   onClick={handleOpenForm}
@@ -620,6 +572,21 @@ const Navbar: React.FC<Props> = ({
           <div className='flex flex-col text-left h-screen flex-start space-y-6 text-lg px-8 pt-10'>
             <button
               onClick={() => {
+                router.push('/')
+              }}
+              className='hover:text-blue-500 text-left font-semibold'
+            >
+              Home
+            </button>
+            <Link
+              href='/about'
+              prefetch={true}
+              className='hover:text-blue-500 text-left font-semibold'
+            >
+              About Us
+            </Link>
+            <button
+              onClick={() => {
                 toggleDropdown('themes')
                 handleCloseMenu()
               }}
@@ -636,17 +603,13 @@ const Navbar: React.FC<Props> = ({
             >
               Holiday Packages
             </button>
+
             <button
               onClick={() => {
-                toggleDropdown('guides')
+                handleOpenForm()
                 handleCloseMenu()
+
               }}
-              className='hover:text-blue-500 text-left font-semibold'
-            >
-              Destination Guides
-            </button>
-            <button
-              onClick={handleOpenForm}
               className='bg-blue-600 text-white  px-4 py-2 rounded hover:bg-blue-700 font-semibold'
             >
               Customize My Trip
