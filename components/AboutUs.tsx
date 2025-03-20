@@ -19,8 +19,8 @@ const AboutUs = () => {
       <div className="absolute inset-0 bg-black bg-opacity-60"></div>
 
       {/* Heading */}
-      <div className="relative flex items-center justify-center h-full">
-        <h1 className="text-white text-6xl font-bold capitalize tracking-wider">
+      <div className="relative flex items-center justify-center h-full m-auto">
+        <h1 className="text-white  text-6xl font-bold capitalize tracking-wider">
           About Us
         </h1>
       </div>
@@ -34,7 +34,7 @@ const AboutUs = () => {
     <div className="md:py-12 py-6 px-6 lg:px-20">
       {/* Our Goal Section */}
       <section className="md:mb-12 mb-6">
-        <h2 className="text-4xl font-bold mb-6 border-b-2 border-blue-500 inline-block md:flex hidden">
+        <h2 className="text-4xl font-bold mb-6 border-b-2 border-blue-500 md:inline-block hidden">
           Our Goal
         </h2>
         <p className="md:text-lg text-sm text-gray-300 leading-relaxed">

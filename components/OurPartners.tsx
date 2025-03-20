@@ -25,17 +25,17 @@ const OurPartners = () => {
   return (
     <section className='bg-gray-800 py-12'>
       <div className='container mx-auto px-6'>
-        <h2 className='text-4xl font-bold text-center mb-2 text-white'>
+        <h2 className='md:text-4xl text-2xl font-bold text-center mb-2 text-white'>
           Our Esteemed Partners
         </h2>
-        <p className='text-center text-lg mb-10 text-blue-300 italic '>
+        <p className='text-center md:text-lg text-sm mb-10 text-blue-300 italic '>
           Together, We Create Extraordinary Journeys.
         </p>
 
         {/* Responsive Wrapper */}
-        <div className='w-full flex flex-wrap lg:flex-nowrap py-10  gap-8'>
+        <div className='w-full flex flex-wrap lg:flex-nowrap md:py-10 py-2  gap-8'>
           <div className='w-full lg:w-1/4 flex justify-center items-center  mr-4 lg:border-r px-4'>
-            <h1 className='text-4xl lg:text-5xl font-bold text-white text-center lg:text-left '>
+            <h1 className='text-2xl md:text-4xl lg:text-5xl font-bold text-white text-center lg:text-left '>
               Why Partner with us?
             </h1>
           </div>
@@ -88,7 +88,12 @@ const OurPartners = () => {
 
         {/* CTA Button */}
         <div className='flex items-center justify-center mt-8'>
-          <button className='flex items-center bg-blue-600 text-white px-12 py-3 rounded-lg hover:bg-blue-700 transition-colors'>
+          <button className='flex items-center bg-blue-600 text-white px-12 py-3 rounded-lg hover:bg-blue-700 transition-colors' onClick={() =>
+    window.open(
+      "https://mail.google.com/mail/?view=cm&fs=1&to=sales@bhramansukh.in&su=Partnership Inquiry&body=Dear Team,",
+      "_blank"
+    )
+  }>
             Join Us Now <FaArrowRight className='ml-2 mt-1' />
           </button>
         </div>

@@ -382,14 +382,14 @@ const Hero = ({
             search ? "mt-10" : "mt-48"
           } items-center h-full text-white text-center`}
         >
-          {/* {!search && (
+          {!search && (
             <h1 className="text-2xl md:text-6xl font-bold mb-4">
               {displayedText}
             </h1>
-          )} */}
-            <h1 className="text-2xl md:text-6xl font-bold mb-4">
+          )}
+            {/* <h1 className="text-2xl md:text-6xl font-bold mb-4">
             Welcome to भ्रMan Sukh
-            </h1>
+            </h1> */}
 
           <div
             className={`flex justify-center items-center ${

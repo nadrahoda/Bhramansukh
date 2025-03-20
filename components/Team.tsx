@@ -52,7 +52,7 @@ const Team = () => {
           <h2 className='text-xl font-semibold text-white mt-4'>Nadra Hoda</h2>
           <p className="text-blue-400 text-lg font-medium">Technical Lead</p>
           <p className="text-gray-400 text-center mt-2">
-          Responsible for overseeing technical operations and ensures seamless execution.
+          Responsible for technical operations and ensures seamless execution.
           </p>
         </div>
 
