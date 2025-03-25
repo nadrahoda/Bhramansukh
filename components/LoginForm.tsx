@@ -40,11 +40,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, hideBackground })
   };
 
   return (
-    <div className={`relative flex items-center justify-center ${hideBackground ? '' : 'h-screen bg-gray-900'}`}>
+    <div className={`relative flex items-center justify-center min-h-screen ${hideBackground ? '' : 'bg-gray-900'}`}>
       {/* Background Image */}
       {!hideBackground && (
         <div
-        className="absolute inset-0 bg-cover bg-center opacity-40"
+        className="absolute inset-0 bg-cover bg-center opacity-20 md:opacity-40"
         style={{
           backgroundImage: `url('/assets/login.jpg')`
         }}
@@ -52,8 +52,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, hideBackground })
       )}
 
       {/* Content */}
-      <div className="relative w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
-        <div className="flex flex-col items-center">
+      <div className="relative flex flex-col items-center w-full max-w-md px-6 md:p-8 md:bg-white md:rounded-lg md:shadow-lg">
+        
           <div className="p-2 mb-6 w-44">
             <Image src={logo} alt="Logo" />
           </div>
@@ -66,8 +66,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, hideBackground })
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-transparent text-blue-600 px-10 py-2 border border-blue-500 rounded-full focus:outline-none placeholder:text-blue-200"
-                placeholder="Enter your email"
+                 className="w-full bg-transparent text-white md:text-blue-600 px-10 py-2 border border-white md:border-blue-500 rounded-full focus:outline-none placeholder:text-gray-300 md:placeholder:text-blue-200"
+              placeholder="Enter your email"
               />
             </div>
             <div className="mb-4 relative">
@@ -78,8 +78,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, hideBackground })
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-10 bg-transparent text-blue-600 py-2 border border-blue-500 rounded-full focus:outline-none placeholder:text-blue-200"
-                placeholder="Enter your password"
+                 className="w-full bg-transparent text-white md:text-blue-600 px-10 py-2 border border-white md:border-blue-500 rounded-full focus:outline-none placeholder:text-gray-300 md:placeholder:text-blue-200"
+              placeholder="Enter your password"
               />
             </div>
             {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
@@ -90,14 +90,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, hideBackground })
             >
               {loading ? 'Logging In...' : 'Log In'}
             </button>
-            <p className="flex justify-center mt-4 text-blue-500 text-sm italic">
+            <p className="flex justify-center mt-4 text-white md:text-blue-500 text-sm italic">
               Don't have an account?{' '}
               <Link href="/signup" className="font-semibold underline ml-2">
                 Sign up
               </Link>
             </p>
           </form>
-        </div>
+        
       </div>
     </div>
   );
