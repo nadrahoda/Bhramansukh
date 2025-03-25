@@ -16,6 +16,7 @@ import CustomizeTripForm from './CustomizeTripForm'
 import { auth, db } from '../firebaseConfig'
 import { doc, getDoc } from 'firebase/firestore'
 import { useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 interface Props {
   selectedOption: string
@@ -45,6 +46,8 @@ const Navbar: React.FC<Props> = ({
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false)
   const userDropdownRef = useRef<HTMLDivElement | null>(null)
   const router = useRouter()
+  const themes = usePathname();
+  const isLoginPage = themes === '/login' || themes === '/signup';
 
   useEffect(() => {
     const fetchUserData = async (uid: string) => {
@@ -74,7 +77,7 @@ const Navbar: React.FC<Props> = ({
   const handleLogout = async () => {
     await auth.signOut()
     setUserInitials(null)
-    router.push('/login')
+    router.push('/')
   }
 
   useEffect(() => {
@@ -192,11 +195,11 @@ const Navbar: React.FC<Props> = ({
   return (
     <div className={isFormOpen || isMenuOpen ? 'relative overflow-hidden' : ''}>
       <nav
-        className={`w-full text-white p-2 bg-black ${
+        className={`w-full text-white p-2 bg-gray-900 ${
           isFormOpen || isMenuOpen ? 'blur-sm' : ''
         }`}
       >
-        <div className='container mx-auto flex items-center justify-between'>
+        <div className={`container mx-auto flex items-center justify-between ${isLoginPage ? 'py-4' : ''}`}>
           {/* Logo Section */}
           <div className='text-2xl font-semibold cursor-pointer'>
             <Image
@@ -221,8 +224,8 @@ const Navbar: React.FC<Props> = ({
 
           <div className='hidden md:flex flex-col'>
             {/* First Row */}
-            <div className='flex justify-end'>
-              <div className='flex space-x-6 mb-1 text-xs'>
+            <div className={`flex justify-end `}>
+              <div className={`flex space-x-6 mb-1 text-xs`}>
                 <span className='hover:text-gray-400 flex items-center cursor-pointer'>
                   <FaPhoneAlt className='mr-2' />
                   +91 9953786506
@@ -235,11 +238,11 @@ const Navbar: React.FC<Props> = ({
                   Travel Agent? Join Us
                 </button>
                 <Link
-                  href='/blogs'
-                  className='hover:text-gray-400 flex items-center pointer-events-none opacity-50'
-                  aria-disabled='true'
+                  href='/'
+                  className='hover:text-gray-400 flex items-center'
+                
                 >
-                  Blogs
+                Home
                 </Link>
                 <Link
                   href='/about'
@@ -269,17 +272,21 @@ const Navbar: React.FC<Props> = ({
                   </div>
                 ) : (
                   <Link
-                    href='/signup'
-                    className='bg-blue-600 px-4 py-2 rounded hover:bg-blue-700'
+                    href='/login'
+                    className='bg-blue-600 px-4 py-2 rounded hover:bg-blue-700 text-sm font-semibold'
                   >
-                    Sign Up
+                    Log In
                   </Link>
                 )}
               </div>
             </div>
 
             {/* Second Row */}
+            {themes === '/' && (
+                
+            
             <div className='flex mb-1'>
+            
               <div className='flex space-x-6 mt-2  items-center'>
                 {[
                   { name: 'themes', label: 'Holiday Themes' },
@@ -549,6 +556,7 @@ const Navbar: React.FC<Props> = ({
                 </button>
               </div>
             </div>
+            )}
           </div>
         </div>
       </nav>
@@ -585,41 +593,49 @@ const Navbar: React.FC<Props> = ({
             >
               About Us
             </Link>
-            <button
-              onClick={() => {
-                toggleDropdown('themes')
-                handleCloseMenu()
-              }}
-              className='hover:text-blue-500 text-left font-semibold'
-            >
-              Holiday Themes
-            </button>
-            <button
-              onClick={() => {
-                toggleDropdown('holiday')
-                handleCloseMenu()
-              }}
-              className='hover:text-blue-500 text-left font-semibold'
-            >
-              Holiday Packages
-            </button>
+            {themes === '/' && (
+              <>
+             
+     <button
+     onClick={() => {
+       toggleDropdown('themes')
+       handleCloseMenu()
+     }}
+     className='hover:text-blue-500 text-left font-semibold'
+   >
+     Holiday Themes
+   </button>
+   <button
+     onClick={() => {
+       toggleDropdown('holiday')
+       handleCloseMenu()
+     }}
+     className='hover:text-blue-500 text-left font-semibold'
+   >
+     Holiday Packages
+   </button>
 
-            <button
-              onClick={() => {
-                handleOpenForm()
-                handleCloseMenu()
+   <button
+     onClick={() => {
+       handleOpenForm()
+       handleCloseMenu()
 
-              }}
-              className='bg-blue-600 text-white  px-4 py-2 rounded hover:bg-blue-700 font-semibold'
-            >
-              Customize My Trip
-            </button>
-            <Link
-              href='/login'
-              className='bg-blue-600 px-4 py-2 text-white text-center font-semibold rounded hover:bg-blue-700'
-            >
-              Login
-            </Link>
+     }}
+     className='bg-blue-600 text-white  px-4 py-2 rounded hover:bg-blue-700 font-semibold'
+   >
+     Customize My Trip
+   </button>
+   </>
+            )}
+       
+       <Link
+  href={userInitials ? '#' : '/login'} // Disable link if logged in
+  onClick={userInitials ? handleLogout : undefined} // Handle logout on click
+  className={`px-4 py-2 text-center font-semibold rounded 
+    ${userInitials ? 'bg-red-600 text-white hover:bg-red-700 cursor-pointer' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
+>
+  {userInitials ? 'Logout' : 'Login'}
+</Link>
           </div>
         </div>
       )}

@@ -25,7 +25,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
         </button> */}
 
        
-        <div className='max-h-[90vh] overflow-y-auto'>
+        <div className='max-h-[90vh] overflow-hidden'>
         <LoginForm onLoginSuccess={handleLoginSuccess} hideBackground/>
         </div>
       

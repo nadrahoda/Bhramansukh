@@ -40,7 +40,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, hideBackground })
   };
 
   return (
-    <div className={`relative flex items-center justify-center min-h-screen ${hideBackground ? '' : 'bg-gray-900'}`}>
+    <div className={`relative flex items-start   justify-center   ${hideBackground ? '' : 'py-20 min-h-screen bg-gray-900'}`}>
       {/* Background Image */}
       {!hideBackground && (
         <div
@@ -52,10 +52,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, hideBackground })
       )}
 
       {/* Content */}
-      <div className="relative flex flex-col items-center w-full max-w-md px-6 md:p-8 md:bg-white md:rounded-lg md:shadow-lg">
+      <div className="relative flex flex-col items-center w-full max-w-md px-6 md:p-16 md:bg-white md:rounded-lg md:shadow-lg">
         
           <div className="p-2 mb-6 w-44">
-            <Image src={logo} alt="Logo" />
+            <Image src={logo} alt="Logo" priority/>
           </div>
           <form className="w-full" onSubmit={handleLogin}>
             <div className="relative mb-4">

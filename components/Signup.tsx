@@ -5,15 +5,12 @@ import { FaRegUser } from 'react-icons/fa'
 import { RiLockPasswordLine } from 'react-icons/ri'
 import { IoIosPhonePortrait } from 'react-icons/io' // Icon for phone number
 import { CiMail } from 'react-icons/ci'
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
-} from 'firebase/auth'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { doc, setDoc } from 'firebase/firestore'
 import { auth, db } from '@/firebaseConfig'
+import logo from '../public/assets/logo.png'
 
 interface SignupProps{
   onSignupSuccess?:()=> void;
@@ -77,11 +74,11 @@ const Signup: React.FC<SignupProps> = ({onSignupSuccess, hideBackground}) => {
 
   
   return (
-    <div className={`relative flex items-center justify-center ${hideBackground ? '' : 'h-screen bg-gray-900'}  `}>
+    <div className={`relative flex items-start justify-center py-16  min-h-screen ${hideBackground ? '' : ' bg-gray-900'}  `}>
       {/* Background Image */}
       {!hideBackground && (
   <div
-  className='absolute inset-0 bg-cover bg-center opacity-40'
+  className='absolute inset-0 bg-cover bg-center opacity-20 md:opacity-40'
   style={{
     backgroundImage: `url('/assets/login.jpg')`, // Replace with your image path
     backgroundSize: 'cover',
@@ -94,16 +91,16 @@ const Signup: React.FC<SignupProps> = ({onSignupSuccess, hideBackground}) => {
     
 
       {/* Content */}
-      <div className='relative w-full max-w-md p-8 bg-white rounded-lg shadow-lg'>
+      <div className='relative w-full max-w-md px-6 md:p-16 md:bg-white md:rounded-lg md:shadow-lg'>
         <div className='flex flex-col items-center'>
-          <div className='p-2 mb-6 w-28'>
-          <Image src="/assets/logo.png" alt="Logo" width={176} height={50} priority />
-          </div>
-          {error && <p className='text-red-500 text-sm mb-2'>{error}</p>}
+          <div className="p-2 mb-6 w-44">
+                      <Image src={logo} alt="Logo" priority />
+                    </div>
+          {/* {error && <p className='text-red-500 text-sm mb-2'>{error}</p>} */}
           <form className='w-full' onSubmit={handleSignup}>
             {/* First Name & Last Name */}
-            <div className='flex space-x-4 mb-4'>
-              <div className='relative w-1/2'>
+            <div className='flex flex-col md:flex-row md:space-x-4 mb-4'>
+              <div className='relative w-full md:w-1/2'>
                 <div className='absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-600'>
                   <FaRegUser size={18} />
                 </div>
@@ -111,20 +108,20 @@ const Signup: React.FC<SignupProps> = ({onSignupSuccess, hideBackground}) => {
                   type='text'
                   value={firstName}
                   onChange={handleInputChange(setFirstName)}
-                  className='w-full bg-transparent text-blue-600 px-10 py-2 border border-blue-500 rounded-full focus:outline-none placeholder:text-blue-200'
+                  className='w-full bg-transparent text-white md:text-blue-600 px-10 py-2 border border-white md:border-blue-500 text-sm rounded-full focus:outline-none placeholder:text-gray-300 md:placeholder:text-blue-200'
                   placeholder='First Name'
                 />
               </div>
-              <div className='relative w-1/2'>
-                <div className='absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-600'>
-                  <FaRegUser size={18} />
-                </div>
+              <div className='relative w-full md:w-1/2 mt-4 md:mt-0'>
+              <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-600">
+                <FaRegUser size={18} />
+              </div>
                 <input
                   type='text'
                   value={lastName}
                   onChange={handleInputChange(setLastName)}
-                  className='w-full bg-transparent text-blue-600 px-10 py-2 border border-blue-500 rounded-full focus:outline-none placeholder:text-blue-200'
-                  placeholder='Last Name'
+                   className="w-full bg-transparent text-white md:text-blue-600 px-10 py-2 border border-white md:border-blue-500 text-sm rounded-full focus:outline-none placeholder:text-gray-300 md:placeholder:text-blue-200"
+                placeholder="Last Name"
                 />
               </div>
             </div>
@@ -138,8 +135,8 @@ const Signup: React.FC<SignupProps> = ({onSignupSuccess, hideBackground}) => {
                 type='tel'
                 value={contactNo}
                 onChange={handleInputChange(setContactNo)}
-                className='w-full bg-transparent text-blue-600 px-10 py-2 border border-blue-500 rounded-full focus:outline-none placeholder:text-blue-200'
-                placeholder='Contact Number'
+                className="w-full bg-transparent text-white md:text-blue-600 px-10 py-2 border border-white md:border-blue-500 text-sm rounded-full focus:outline-none placeholder:text-gray-300 md:placeholder:text-blue-200"
+              placeholder="Contact Number"
                 required
               />
             </div>
@@ -154,8 +151,8 @@ const Signup: React.FC<SignupProps> = ({onSignupSuccess, hideBackground}) => {
                 value={email}
                 onChange={handleInputChange(setEmail)}
                 id='email'
-                className='w-full bg-transparent text-blue-600 px-10 py-2 border border-blue-500 rounded-full focus:outline-none placeholder:text-blue-200'
-                placeholder='Enter your email'
+                className="w-full bg-transparent text-white md:text-blue-600 px-10 py-2 border text-sm border-white md:border-blue-500 rounded-full focus:outline-none placeholder:text-gray-300 md:placeholder:text-blue-200"
+              placeholder="Enter your email"
                 required
               />
             </div>
@@ -170,8 +167,8 @@ const Signup: React.FC<SignupProps> = ({onSignupSuccess, hideBackground}) => {
                 value={password}
                 onChange={handleInputChange(setPassword)}
                 id='password'
-                className='w-full px-10 bg-transparent text-blue-600 py-2 border border-blue-500 rounded-full focus:outline-none placeholder:text-blue-200'
-                placeholder='Enter your password'
+              className="w-full px-10 bg-transparent text-white md:text-blue-600 py-2 border text-sm border-white md:border-blue-500 rounded-full focus:outline-none placeholder:text-gray-300 md:placeholder:text-blue-200"
+              placeholder="Enter your password"
                 required
               />
             </div>
@@ -184,7 +181,7 @@ const Signup: React.FC<SignupProps> = ({onSignupSuccess, hideBackground}) => {
               {loading ? 'Signing up...': 'Sign Up'}
             </button>
 
-            <p className='flex justify-center text-blue-500 text-sm italic mt-4'>
+            <p className='flex justify-center text-white md:text-blue-500 text-sm italic mt-4'>
               Already have an account?{' '}
               <Link href='/login' className='underline ml-2 font-bold'>
                 Log In{' '}
