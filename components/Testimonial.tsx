@@ -1,11 +1,11 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 import { RiDoubleQuotesL } from 'react-icons/ri'
 import Image, { StaticImageData } from 'next/image'
 import review1 from '../public/assets/farah.jpg'
 import review2 from '../public/assets/raza.png'
-import review3 from '../public/assets/kamran.png'
+import review3 from '../public/assets/kamran.png' 
 import review4 from '../public/assets/sam.png'
 import review5 from '../public/assets/anisha.png'
 import review6 from '../public/assets/shomail.jpg'
@@ -71,25 +71,44 @@ const testimonialsData: TestimonialData[] = [
 ]
 
 const Testimonial: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState<number>(0)
-  const testimonialsToShow = 4 // Number of testimonials visible at once
-  const maxIndex = testimonialsData.length - testimonialsToShow
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [visibleCards, setVisibleCards] = useState(4)
+
+  const updateVisibleCards = () => {
+    const width = window.innerWidth
+    if(width<640) setVisibleCards(1)
+      else if(width<1024) setVisibleCards(3)
+    else setVisibleCards(4)
+  }
+
+  useEffect(()=> {
+    updateVisibleCards()
+    window.addEventListener('resize', updateVisibleCards)
+    return () => window.removeEventListener('resize', updateVisibleCards)
+  }, [])
+
+  const maxIndex = testimonialsData.length - visibleCards
+
+
+  // const testimonialsToShow = 4 
+  // const maxIndex = testimonialsData.length - testimonialsToShow
 
   const goToNext = () => {
     if (currentIndex < maxIndex) {
-      setCurrentIndex(prevIndex => prevIndex + 1) // Move 1 testimonial at a time
+      setCurrentIndex(prev => prev + 1) // Move 1 testimonial at a time
     }
   }
 
   const goToPrev = () => {
     if (currentIndex > 0) {
-      setCurrentIndex(prevIndex => prevIndex - 1) // Move 1 testimonial at a time
+      setCurrentIndex(prev => prev - 1) // Move 1 testimonial at a time
     }
   }
+  const translatePercent = (100 / testimonialsData.length) * currentIndex
 
   return (
     <div className='bg-gray-900 py-10 px-4'>
-      <div className='flex flex-col items-center justify-center'>
+      <div className='text-center'>
         <h3 className='text-gray-400 text-lg uppercase tracking-widest'>
           REVIEWS
         </h3>
@@ -99,35 +118,41 @@ const Testimonial: React.FC = () => {
       </div>
 
       {/* Testimonials Section */}
-      <div className='relative w-full md:mt-14 mt-10 overflow-hidden'>
+      <div className='relative w-full md:mt-14 mt-10 pt-14 overflow-hidden'>
+        <div className='relative w-full h-full'>
+
         <div
-          className='flex gap-8 transition-transform duration-500'
+          className={`flex transition-transform duration-500  ${visibleCards === 1 ? 'justify-center' : 'justify-start'}`}
           style={{
-            transform: `translateX(-${
-              currentIndex * (100 / testimonialsToShow)
-            }%)`, // Shift by 1 testimonial at a time
-            width: `${(testimonialsData.length / testimonialsToShow) * 100}%`
+            transform: `translateX(-${translatePercent}%)`, // Shift by 1 testimonial at a time
+            width: `${(100 / visibleCards) * testimonialsData.length}%`,
+             gap: visibleCards === 1 ? '0px' : '0.5rem',
+           
           }}
         >
-          {testimonialsData.map(testimonial => (
+          {testimonialsData.map((testimonial, index) => (
             <div
               key={testimonial.id}
-              className='max-w-[350px] bg-white rounded-xl p-5 shadow-lg flex-shrink-0 relative overflow-visible'
+              className=' bg-white rounded-xl pt-16 p-5 shadow-lg flex-shrink-0 relative'
+               style={{ width: `${100 / testimonialsData.length}%`,
+              maxWidth: visibleCards === 1 ? '90%' : 'unset',
+        margin: visibleCards === 1 ? '0 auto' : '0',
+              }}
             >
-              <div className='flex items-center justify-center '>
+              <div className='absolute left-1/2 -top-12 transform -translate-x-1/2 z-10'>
                 <Image
                   src={testimonial.image}
                   alt={testimonial.name}
-                  className='rounded-full object-cover border-4 border-gray-200'
+                  className='rounded-full object-cover border-2  border-white shadow-md'
                   width={96}
                   height={96}
                 />
               </div>
-              <RiDoubleQuotesL size={30} color='red' className='  ' />
-              <p className='text-gray-800 mb-6 font-normal text-black text-pretty text-sm flex text-left'>
+              <RiDoubleQuotesL size={30} color='red' className='mb-2 mt-2' />
+              <p className='text-gray-800 mb-3  lg:text-sm text-xs'>
                 {testimonial.content}
               </p>
-              <h3 className='text-red-500 text-xl font-bold italic absolute bottom-3 right-0 transform -translate-x-1/2 text-center'>
+              <h3 className='text-red-500 text-base font-bold italic absolute bottom-3 right-0 transform -translate-x-1/2 text-center'>
                 {' '}
                 - {testimonial.name}
               </h3>
@@ -135,14 +160,15 @@ const Testimonial: React.FC = () => {
           ))}
         </div>
       </div>
+      </div>
 
       {/* Navigation Buttons */}
       <div className='flex justify-center items-center mt-8 space-x-3'>
         <button
-          className={`text-white p-3 rounded-full ${
+          className={`text-white p-3 rounded-full bg-gray-700 ${
             currentIndex === 0
               ? 'opacity-50 cursor-not-allowed'
-              : 'bg-opacity-50 hover:bg-opacity-100'
+              : 'hover:bg-gray-600'
           }`}
           onClick={goToPrev}
           disabled={currentIndex === 0}
@@ -150,10 +176,10 @@ const Testimonial: React.FC = () => {
           <IoIosArrowBack size={20} />
         </button>
         <button
-          className={`text-white p-3 rounded-full ${
+          className={`text-white p-3 rounded-full bg-gray-700 ${
             currentIndex === maxIndex
               ? 'opacity-50 cursor-not-allowed'
-              : 'bg-opacity-50 hover:bg-opacity-100'
+              : 'hover:bg-gray-600'
           }`}
           onClick={goToNext}
           disabled={currentIndex === maxIndex}

@@ -107,3 +107,12 @@ input[type='number'] {
   justify-content: center;
   align-items: center;
 }
+
+/* globals.css */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

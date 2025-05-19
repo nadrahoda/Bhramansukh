@@ -46,8 +46,8 @@ const Navbar: React.FC<Props> = ({
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false)
   const userDropdownRef = useRef<HTMLDivElement | null>(null)
   const router = useRouter()
-  const themes = usePathname();
-  const isLoginPage = themes === '/login' || themes === '/signup';
+  const themes = usePathname()
+  const isLoginPage = themes === '/login' || themes === '/signup'
 
   useEffect(() => {
     const fetchUserData = async (uid: string) => {
@@ -170,17 +170,15 @@ const Navbar: React.FC<Props> = ({
   const handleCloseMenu = () => setIsMenuOpen(false)
 
   const handleSelectOption = (option: string) => {
-    
     setSelectedOption(option)
-    
 
     // Scroll to FilterTrips
     const filterTripsSection = document.getElementById('filter-trips')
     if (filterTripsSection) {
       filterTripsSection.scrollIntoView({ behavior: 'smooth' })
     }
-    setDropdowns({ themes: false, holiday: false });
-  };
+    setDropdowns({ themes: false, holiday: false })
+  }
   const handleSelectPackage = (state: string) => {
     setSelectedPackage(state) // Set selected state (if needed)
 
@@ -189,7 +187,7 @@ const Navbar: React.FC<Props> = ({
     if (stateCarouselSection) {
       stateCarouselSection.scrollIntoView({ behavior: 'smooth' })
     }
-    setDropdowns({ themes: false, holiday: false });
+    setDropdowns({ themes: false, holiday: false })
   }
 
   return (
@@ -199,7 +197,11 @@ const Navbar: React.FC<Props> = ({
           isFormOpen || isMenuOpen ? 'blur-sm' : ''
         }`}
       >
-        <div className={`container mx-auto flex items-center justify-between ${isLoginPage ? 'py-4' : ''}`}>
+        <div
+          className={`container mx-auto flex items-center justify-between ${
+            isLoginPage ? 'py-4' : ''
+          }`}
+        >
           {/* Logo Section */}
           <div className='text-2xl font-semibold cursor-pointer'>
             <Image
@@ -240,9 +242,8 @@ const Navbar: React.FC<Props> = ({
                 <Link
                   href='/'
                   className='hover:text-gray-400 flex items-center'
-                
                 >
-                Home
+                  Home
                 </Link>
                 <Link
                   href='/about'
@@ -283,279 +284,282 @@ const Navbar: React.FC<Props> = ({
 
             {/* Second Row */}
             {themes === '/' && (
-                
-            
-            <div className='flex mb-1'>
-            
-              <div className='flex space-x-6 mt-2  items-center'>
-                {[
-                  { name: 'themes', label: 'Holiday Themes' },
-                  { name: 'holiday', label: 'Holiday Packages' }
-                ].map(item => (
-                  <div
-                    key={item.name}
-                    className={`relative ${
-                      dropdowns[item.name as keyof typeof dropdowns]
-                        ? 'border-b-4 border-blue-500 '
-                        : ''
-                    }`}
-                    ref={el => {
-                      dropdownRefs.current[item.name] = el // Corrected callback
-                    }}
-                  >
+              <div className='flex mb-1'>
+                <div className='flex space-x-6 mt-2  items-center'>
+                  {[
+                    { name: 'themes', label: 'Holiday Themes' },
+                    { name: 'holiday', label: 'Holiday Packages' }
+                  ].map(item => (
                     <div
-                      className=' flex items-center cursor-pointer'
-                      onClick={() =>
-                        toggleDropdown(item.name as keyof typeof dropdowns)
-                      }
+                      key={item.name}
+                      className={`relative ${
+                        dropdowns[item.name as keyof typeof dropdowns]
+                          ? 'border-b-4 border-blue-500 '
+                          : ''
+                      }`}
+                      ref={el => {
+                        dropdownRefs.current[item.name] = el // Corrected callback
+                      }}
                     >
-                      {item.label}
-                      {dropdowns[item.name as keyof typeof dropdowns] ? (
-                        <FaChevronUp className='ml-1' />
-                      ) : (
-                        <FaChevronDown className='ml-1' />
-                      )}
-                    </div>
-                    {dropdowns[item.name as keyof typeof dropdowns] && (
                       <div
-                        className={`absolute ${
-                          dropdownAlignment === 'right' ? 'right-0' : 'left-0'
-                        } mt-4 bg-white border border-gray-300 font-medium text-sm rounded shadow-lg z-50 w-[500px] h-[400px]`}
+                        className=' flex items-center cursor-pointer'
+                        onClick={() =>
+                          toggleDropdown(item.name as keyof typeof dropdowns)
+                        }
                       >
-                        {item.name === 'themes' ? (
-                          <div className='p-8 grid grid-cols-2 pt-8  gap-y-4  '>
-                            <div>
-                              <button
-                                className='block p-2 hover:text-blue-500 text-black'
-                                onClick={() =>
-                                  handleSelectOption('Strangers Unite')
-                                }
-                              >
-                                Strangers Unite
-                              </button>
-                              <button
-                                onClick={() =>
-                                  handleSelectOption('Therapy Travels')
-                                }
-                                className='block p-2 hover:text-blue-500 text-black'
-                              >
-                                Therapy Travels
-                              </button>
-                              <button
-                                onClick={() =>
-                                  handleSelectOption('Exposure Camps')
-                                }
-                                className='block p-2 hover:text-blue-500 text-black'
-                              >
-                                Exposure Camps
-                              </button>
-                              <button
-                                className='block p-2 hover:text-blue-500 text-black'
-                                onClick={() =>
-                                  handleSelectOption('Seasonal Packages')
-                                }
-                              >
-                                Seasonal Packages
-                              </button>
-                              <button
-                                onClick={() => handleSelectOption('Adventure')}
-                                className='block p-2 hover:text-blue-500 text-black'
-                              >
-                                Adventure
-                              </button>
-                              <button
-                                onClick={() => handleSelectOption('Family')}
-                                className='block p-2 hover:text-blue-500 text-black'
-                              >
-                                Family
-                              </button>
-                            </div>
-
-                            <div className='pl-8 border-l border-blue-500'>
-                              <button
-                                onClick={() => handleSelectOption('Nature')}
-                                className='block p-2 hover:text-blue-500 text-black'
-                              >
-                                Nature
-                              </button>
-                              <button
-                                onClick={() => handleSelectOption('Honeymoon')}
-                                className='block p-2 hover:text-blue-500 text-black'
-                              >
-                                Honeymoon
-                              </button>
-                              <button
-                                onClick={() => handleSelectOption('Wildlife')}
-                                className='block p-2 hover:text-blue-500 text-black'
-                              >
-                                Wildlife
-                              </button>
-                              <button
-                                onClick={() => handleSelectOption('Friends')}
-                                className='block p-2 hover:text-blue-500 text-black'
-                              >
-                                Friends
-                              </button>
-                              <button
-                                onClick={() =>
-                                  handleSelectOption('Water Activities')
-                                }
-                                className='block p-2 hover:text-blue-500 text-black'
-                              >
-                                Water Activities
-                              </button>
-                              <button
-                                onClick={() => handleSelectOption('Religious')}
-                                className='block p-2 hover:text-blue-500 text-black'
-                              >
-                                Religious
-                              </button>
-                            </div>
-                          </div>
+                        {item.label}
+                        {dropdowns[item.name as keyof typeof dropdowns] ? (
+                          <FaChevronUp className='ml-1' />
                         ) : (
-                          <div className='p-2 grid grid-cols-2  pt-8 pl-4'>
-                            <div>
-                              <h4 className='text-blue-500  font-bold mb-2'>
-                                Indian Destinations
-                              </h4>
-                              <ul className='list-disc pl-5 text-black'>
-                                <li>
-                                  <button
-                                    className='hover:text-blue-400 block p-2'
-                                    onClick={() =>
-                                      handleSelectPackage('Rajasthan')
-                                    }
-                                  >
-                                    Goa
-                                  </button>
-                                </li>
-                                <li>
-                                  <button
-                                    onClick={() =>
-                                      handleSelectPackage('Kerala')
-                                    }
-                                    className='hover:text-blue-400 block p-2'
-                                  >
-                                    Arunachal Pradesh
-                                  </button>
-                                </li>
-                                <li>
-                                  <button
-                                    onClick={() => handleSelectPackage('Goa')}
-                                    className='hover:text-blue-400 block p-2'
-                                  >
-                                    Andaman & Nicobar
-                                  </button>
-                                </li>
-                                <li>
-                                  <button
-                                    onClick={() =>
-                                      handleSelectPackage('Himachal Pradesh')
-                                    }
-                                    className='hover:text-blue-400 block p-2'
-                                  >
-                                    Himachal Pradesh
-                                  </button>
-                                </li>
-                                <li>
-                                  <button
-                                    onClick={() =>
-                                      handleSelectPackage('Tamil Nadu')
-                                    }
-                                    className='hover:text-blue-400 block p-2'
-                                  >
-                                    Karnataka
-                                  </button>
-                                </li>
-                              </ul>
-                              <button
-                                onClick={() =>
-                                  handleSelectPackage('Indian Destination')
-                                }
-                                className='block mt-2 pl-6 text-blue-500 underline flex items-center '
-                              >
-                                View All{' '}
-                                <FaArrowRight className='ml-1 ' size={10} />
-                              </button>
-                            </div>
-                            <div className='border-l border-blue-500 pl-4'>
-                              <h4 className='text-blue-500 font-bold mb-2 '>
-                                International Destinations
-                              </h4>
-                              <ul className='list-disc pl-5 text-black'>
-                                <li>
-                                  <Link
-                                    href='/maldives'
-                                    className='hover:text-blue-400 block p-2 pointer-events-none opacity-50'
-                                    onClick={e => e.preventDefault()}
-                                    aria-disabled='true'
-                                  >
-                                    Maldives
-                                  </Link>
-                                </li>
-                                <li>
-                                  <Link
-                                    href='/singapore'
-                                    className='hover:text-blue-400 block p-2 pointer-events-none opacity-50'
-                                    onClick={e => e.preventDefault()}
-                                    aria-disabled='true'
-                                  >
-                                    Singapore
-                                  </Link>
-                                </li>
-                                <li>
-                                  <Link
-                                    href='/thailand'
-                                    className='hover:text-blue-400 block p-2 pointer-events-none opacity-50'
-                                    onClick={e => e.preventDefault()}
-                                    aria-disabled='true'
-                                  >
-                                    Thailand
-                                  </Link>
-                                </li>
-                                <li>
-                                  <Link
-                                    href='/dubai'
-                                    className='hover:text-blue-400 block p-2 pointer-events-none opacity-50'
-                                    onClick={e => e.preventDefault()}
-                                    aria-disabled='true'
-                                  >
-                                    Dubai
-                                  </Link>
-                                </li>
-                                <li>
-                                  <Link
-                                    href='/switzerland'
-                                    className='hover:text-blue-400 block p-2 pointer-events-none opacity-50'
-                                    onClick={e => e.preventDefault()}
-                                    aria-disabled='true'
-                                  >
-                                    Switzerland
-                                  </Link>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
+                          <FaChevronDown className='ml-1' />
                         )}
                       </div>
-                    )}
-                  </div>
-                ))}
+                      {dropdowns[item.name as keyof typeof dropdowns] && (
+                        <div
+                          className={`absolute ${
+                            dropdownAlignment === 'right' ? 'right-0' : 'left-0'
+                          } mt-4 bg-white border border-gray-300 font-medium text-sm rounded shadow-lg z-50 w-[500px] h-[400px]`}
+                        >
+                          {item.name === 'themes' ? (
+                            <div className='p-8 grid grid-cols-2 pt-8  gap-y-4  '>
+                              <div>
+                                <button
+                                  className='block p-2 hover:text-blue-500 text-black'
+                                  onClick={() =>
+                                    handleSelectOption('Strangers Unite')
+                                  }
+                                >
+                                  Strangers Unite
+                                </button>
+                                <button
+                                  onClick={() =>
+                                    handleSelectOption('Therapy Travels')
+                                  }
+                                  className='block p-2 hover:text-blue-500 text-black'
+                                >
+                                  Therapy Travels
+                                </button>
+                                <button
+                                  onClick={() =>
+                                    handleSelectOption('Exposure Camps')
+                                  }
+                                  className='block p-2 hover:text-blue-500 text-black'
+                                >
+                                  Exposure Camps
+                                </button>
+                                <button
+                                  className='block p-2 hover:text-blue-500 text-black'
+                                  onClick={() =>
+                                    handleSelectOption('Seasonal Packages')
+                                  }
+                                >
+                                  Seasonal Packages
+                                </button>
+                                <button
+                                  onClick={() =>
+                                    handleSelectOption('Adventure')
+                                  }
+                                  className='block p-2 hover:text-blue-500 text-black'
+                                >
+                                  Adventure
+                                </button>
+                                <button
+                                  onClick={() => handleSelectOption('Family')}
+                                  className='block p-2 hover:text-blue-500 text-black'
+                                >
+                                  Family
+                                </button>
+                              </div>
 
-                {/* Spacer */}
-                <span className='mx-4 border-l border-gray-500 h-6'></span>
-              </div>
+                              <div className='pl-8 border-l border-blue-500'>
+                                <button
+                                  onClick={() => handleSelectOption('Nature')}
+                                  className='block p-2 hover:text-blue-500 text-black'
+                                >
+                                  Nature
+                                </button>
+                                <button
+                                  onClick={() =>
+                                    handleSelectOption('Honeymoon')
+                                  }
+                                  className='block p-2 hover:text-blue-500 text-black'
+                                >
+                                  Honeymoon
+                                </button>
+                                <button
+                                  onClick={() => handleSelectOption('Wildlife')}
+                                  className='block p-2 hover:text-blue-500 text-black'
+                                >
+                                  Wildlife
+                                </button>
+                                <button
+                                  onClick={() => handleSelectOption('Friends')}
+                                  className='block p-2 hover:text-blue-500 text-black'
+                                >
+                                  Friends
+                                </button>
+                                <button
+                                  onClick={() =>
+                                    handleSelectOption('Water Activities')
+                                  }
+                                  className='block p-2 hover:text-blue-500 text-black'
+                                >
+                                  Water Activities
+                                </button>
+                                <button
+                                  onClick={() =>
+                                    handleSelectOption('Religious')
+                                  }
+                                  className='block p-2 hover:text-blue-500 text-black'
+                                >
+                                  Religious
+                                </button>
+                              </div>
+                            </div>
+                          ) : (
+                            <div className='p-2 grid grid-cols-2  pt-8 pl-4'>
+                              <div>
+                                <h4 className='text-blue-500  font-bold mb-2'>
+                                  Indian Destinations
+                                </h4>
+                                <ul className='list-disc pl-5 text-black'>
+                                  <li>
+                                    <button
+                                      className='hover:text-blue-400 block p-2'
+                                      onClick={() =>
+                                        handleSelectPackage('Rajasthan')
+                                      }
+                                    >
+                                      Goa
+                                    </button>
+                                  </li>
+                                  <li>
+                                    <button
+                                      onClick={() =>
+                                        handleSelectPackage('Kerala')
+                                      }
+                                      className='hover:text-blue-400 block p-2'
+                                    >
+                                      Arunachal Pradesh
+                                    </button>
+                                  </li>
+                                  <li>
+                                    <button
+                                      onClick={() => handleSelectPackage('Goa')}
+                                      className='hover:text-blue-400 block p-2'
+                                    >
+                                      Andaman & Nicobar
+                                    </button>
+                                  </li>
+                                  <li>
+                                    <button
+                                      onClick={() =>
+                                        handleSelectPackage('Himachal Pradesh')
+                                      }
+                                      className='hover:text-blue-400 block p-2'
+                                    >
+                                      Himachal Pradesh
+                                    </button>
+                                  </li>
+                                  <li>
+                                    <button
+                                      onClick={() =>
+                                        handleSelectPackage('Tamil Nadu')
+                                      }
+                                      className='hover:text-blue-400 block p-2'
+                                    >
+                                      Karnataka
+                                    </button>
+                                  </li>
+                                </ul>
+                                <button
+                                  onClick={() =>
+                                    handleSelectPackage('Indian Destination')
+                                  }
+                                  className='block mt-2 pl-6 text-blue-500 underline flex items-center '
+                                >
+                                  View All{' '}
+                                  <FaArrowRight className='ml-1 ' size={10} />
+                                </button>
+                              </div>
+                              <div className='border-l border-blue-500 pl-4'>
+                                <h4 className='text-blue-500 font-bold mb-2 '>
+                                  International Destinations
+                                </h4>
+                                <ul className='list-disc pl-5 text-black'>
+                                  <li>
+                                    <Link
+                                      href='/maldives'
+                                      className='hover:text-blue-400 block p-2 pointer-events-none opacity-50'
+                                      onClick={e => e.preventDefault()}
+                                      aria-disabled='true'
+                                    >
+                                      Maldives
+                                    </Link>
+                                  </li>
+                                  <li>
+                                    <Link
+                                      href='/singapore'
+                                      className='hover:text-blue-400 block p-2 pointer-events-none opacity-50'
+                                      onClick={e => e.preventDefault()}
+                                      aria-disabled='true'
+                                    >
+                                      Singapore
+                                    </Link>
+                                  </li>
+                                  <li>
+                                    <Link
+                                      href='/thailand'
+                                      className='hover:text-blue-400 block p-2 pointer-events-none opacity-50'
+                                      onClick={e => e.preventDefault()}
+                                      aria-disabled='true'
+                                    >
+                                      Thailand
+                                    </Link>
+                                  </li>
+                                  <li>
+                                    <Link
+                                      href='/dubai'
+                                      className='hover:text-blue-400 block p-2 pointer-events-none opacity-50'
+                                      onClick={e => e.preventDefault()}
+                                      aria-disabled='true'
+                                    >
+                                      Dubai
+                                    </Link>
+                                  </li>
+                                  <li>
+                                    <Link
+                                      href='/switzerland'
+                                      className='hover:text-blue-400 block p-2 pointer-events-none opacity-50'
+                                      onClick={e => e.preventDefault()}
+                                      aria-disabled='true'
+                                    >
+                                      Switzerland
+                                    </Link>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  ))}
 
-              <div className='flex ml-6 space-x-6 mt-2 items-center'>
-                {/* Plan My Holiday */}
-                <button
-                  onClick={handleOpenForm}
-                  className='bg-blue-600 px-4 py-2 rounded hover:bg-blue-700'
-                >
-                  Customize My Trip
-                </button>
+                  {/* Spacer */}
+                  <span className='mx-4 border-l border-gray-500 h-6'></span>
+                </div>
+
+                <div className='flex ml-6 space-x-6 mt-2 items-center'>
+                  {/* Plan My Holiday */}
+                  <button
+                    onClick={handleOpenForm}
+                    className='bg-blue-600 px-4 py-2 rounded hover:bg-blue-700'
+                  >
+                    Customize My Trip
+                  </button>
+                </div>
               </div>
-            </div>
             )}
           </div>
         </div>
@@ -595,47 +599,49 @@ const Navbar: React.FC<Props> = ({
             </Link>
             {themes === '/' && (
               <>
-             
-     <button
-     onClick={() => {
-       toggleDropdown('themes')
-       handleCloseMenu()
-     }}
-     className='hover:text-blue-500 text-left font-semibold'
-   >
-     Holiday Themes
-   </button>
-   <button
-     onClick={() => {
-       toggleDropdown('holiday')
-       handleCloseMenu()
-     }}
-     className='hover:text-blue-500 text-left font-semibold'
-   >
-     Holiday Packages
-   </button>
+                <button
+                  onClick={() => {
+                    toggleDropdown('themes')
+                    handleCloseMenu()
+                  }}
+                  className='hover:text-blue-500 text-left font-semibold'
+                >
+                  Holiday Themes
+                </button>
+                <button
+                  onClick={() => {
+                    toggleDropdown('holiday')
+                    handleCloseMenu()
+                  }}
+                  className='hover:text-blue-500 text-left font-semibold'
+                >
+                  Holiday Packages
+                </button>
 
-   <button
-     onClick={() => {
-       handleOpenForm()
-       handleCloseMenu()
-
-     }}
-     className='bg-blue-600 text-white  px-4 py-2 rounded hover:bg-blue-700 font-semibold'
-   >
-     Customize My Trip
-   </button>
-   </>
+                <button
+                  onClick={() => {
+                    handleOpenForm()
+                    handleCloseMenu()
+                  }}
+                  className='bg-blue-600 text-white  px-4 py-2 rounded hover:bg-blue-700 font-semibold'
+                >
+                  Customize My Trip
+                </button>
+              </>
             )}
-       
-       <Link
-  href={userInitials ? '#' : '/login'} // Disable link if logged in
-  onClick={userInitials ? handleLogout : undefined} // Handle logout on click
-  className={`px-4 py-2 text-center font-semibold rounded 
-    ${userInitials ? 'bg-red-600 text-white hover:bg-red-700 cursor-pointer' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
->
-  {userInitials ? 'Logout' : 'Login'}
-</Link>
+
+            <Link
+              href={userInitials ? '#' : '/login'} // Disable link if logged in
+              onClick={userInitials ? handleLogout : undefined} // Handle logout on click
+              className={`px-4 py-2 text-center font-semibold rounded 
+    ${
+      userInitials
+        ? 'bg-red-600 text-white hover:bg-red-700 cursor-pointer'
+        : 'bg-blue-600 text-white hover:bg-blue-700'
+    }`}
+            >
+              {userInitials ? 'Logout' : 'Login'}
+            </Link>
           </div>
         </div>
       )}
