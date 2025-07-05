@@ -15,7 +15,6 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
     onClose(); // Close modal when signup is successful
   };
 
-
   return (
     <div className="fixed inset-0 bg-black bg-opacity-10 flex justify-center items-center backdrop-blur-sm z-50">
       <div className="relative bg-white p-6 rounded-lg shadow-xl w-[450px] max-w-full">
