@@ -11,7 +11,9 @@ interface PromoModalProps {
 
 const PromoModal: React.FC<PromoModalProps> = ({ onClose }) => {
   const [isMobile, setIsMobile] = useState(false)
+  const [mounted, setMounted] = useState(false)
   useEffect(() => {
+    setMounted(true)
     const handleResize = () => setIsMobile(window.innerWidth <= 768)
     handleResize() // initial check
     window.addEventListener('resize', handleResize)
@@ -20,14 +22,15 @@ const PromoModal: React.FC<PromoModalProps> = ({ onClose }) => {
     useEffect(() => {
       const timer = setTimeout(() => {
         onClose(); // Auto close after 10 seconds
-      }, 8000);
+      }, 5000);
 
       return () => clearTimeout(timer); // cleanup
     }, [onClose]);
 
+    if (!mounted) return null // prevent flicker on server
   return (
     <div className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-2'>
-      <div className='relative bg-black p-2 rounded-2xl shadow-xl w-full max-w-4xl w-[95%] overflow-hidden'>
+      <div className='relative bg-black p-2 rounded-2xl shadow-xl w-full max-w-4xl overflow-hidden'>
         {/* Close Button */}
         <button
           onClick={onClose}
