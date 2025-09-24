@@ -44,6 +44,7 @@ import LoginModal from './LoginModal'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import Loader from './Loader'
 import { useRouter } from 'next/navigation'
+import PromoModal from './PromoModal'
 
 const Hero = ({
   search,
@@ -65,6 +66,7 @@ const Hero = ({
   const [showForm, setShowForm] = useState(false)
   const [showLoginModal, setShowLoginModal] = useState(false)
   const [pendingSearch, setPendingSearch] = useState<string | null>(null)
+  const [showPromo, setShowPromo] = useState(true);
 
   const router = useRouter()
 
@@ -355,6 +357,7 @@ const Hero = ({
 
   return (
     <>
+    {showPromo && <PromoModal onClose={() => setShowPromo(false)} />}
       <div
         className={`relative w-full ${
           search
