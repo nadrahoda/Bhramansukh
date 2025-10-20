@@ -19,13 +19,14 @@ interface TestimonialData {
 }
 
 const testimonialsData: TestimonialData[] = [
-  {
+    {
     id: 1,
-    name: 'Farah Rizwan',
-    image: review1,
+    name: 'Anisha Singh',
+    image: review5,
     content:
-      'We had an amazing and safe experience in Uttarakhand with Bhramansukh Tours & Travels! The 3D/2N stay (Jan 25-28, 2024) was perfectly organized. The owner was extremely kind and knowledgeable, providing customized itineraries for all types of groups-family, friends, or couples. Highly recommended for a seamless travel experience! 😊'
+      'Thank you so much, Bhramansukh, for organizing an amazing, memorable, adventurous, and truly enjoyable trip. This experience will forever be one of my best, filled with unforgettable memories. We all started as strangers, but returned as friends, like family—brothers, sisters, and best friends. I hope for many more trips like this in the future.'
   },
+
   {
     id: 2,
     name: 'Raza Karim',
@@ -49,10 +50,10 @@ const testimonialsData: TestimonialData[] = [
   },
   {
     id: 5,
-    name: 'Anisha Singh',
-    image: review5,
+    name: 'Farah Rizwan',
+    image: review1,
     content:
-      'Thank you so much, Bhramansukh, for organizing an amazing, memorable, adventurous, and truly enjoyable trip. This experience will forever be one of my best, filled with unforgettable memories. We all started as strangers, but returned as friends, like family—brothers, sisters, and best friends. I hope for many more trips like this in the future.'
+      'We had an amazing and safe experience in Uttarakhand with Bhramansukh Tours & Travels! The 3D/2N stay (Jan 25-28, 2024) was perfectly organized. The owner was extremely kind and knowledgeable, providing customized itineraries for all types of groups-family, friends, or couples. Highly recommended for a seamless travel experience! 😊'
   },
   {
     id: 6,

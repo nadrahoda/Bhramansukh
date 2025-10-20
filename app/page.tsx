@@ -32,7 +32,7 @@ export default function Home() {
       {!search && (
      <>
           <FilterTrips selectedOption={selectedOption} setSelectedOption={setSelectedOption}/>
-          <StrangersUnite />
+          {/* <StrangersUnite /> */}
           {/* <TreksCarousel /> */}
           <StatesCarousel selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage}/>
           <Testimonial />

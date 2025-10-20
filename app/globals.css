@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Yesteryear&display=swap');
+
 body {
   overflow-x: hidden;
 }
@@ -115,4 +117,10 @@ input[type='number'] {
 .no-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #ff7eb3, #ff758c, #ffb199);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

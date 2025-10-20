@@ -46,6 +46,13 @@ import Loader from './Loader'
 import { useRouter } from 'next/navigation'
 import PromoModal from './PromoModal'
 
+import { Yesteryear } from 'next/font/google'
+
+const yesteryear = Yesteryear({
+  weight: '400',
+  subsets: ['latin'],
+})
+
 const Hero = ({
   search,
   setSearch
@@ -357,7 +364,7 @@ const Hero = ({
 
   return (
     <>
-    {showPromo && <PromoModal onClose={() => setShowPromo(false)} />}
+    {/* {showPromo && <PromoModal onClose={() => setShowPromo(false)} />} */}
       <div
         className={`relative w-full ${
           search
@@ -386,9 +393,20 @@ const Hero = ({
           } items-center h-full text-white text-center`}
         >
           {!search && (
-            <h1 className='text-2xl md:text-6xl font-bold mb-4'>
-              {displayedText}
-            </h1>
+           <h1 className="text-2xl md:text-6xl font-bold mb-4">
+  {displayedText.includes('Welcome to भ्रMan Sukh') ? (
+    <>
+      {displayedText.replace('Welcome to भ्रMan Sukh', '')}
+      <span
+  className={`${yesteryear.className} text-4xl md:text-7xl text-white drop-shadow-lg`}
+>
+ Welcome to भ्रMan Sukh
+</span>
+    </>
+  ) : (
+    displayedText
+  )}
+</h1>
           )}
           {/* <h1 className="text-2xl md:text-6xl font-bold mb-4">
             Welcome to भ्रMan Sukh
